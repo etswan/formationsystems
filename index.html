@@ -4,38 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Body of Christ Model</title>
+<meta name="description" content="An interactive model of the Body of Christ as a self-renewing system, at the scale of a parish and of the universal Church.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap">
 <style>
 /* VOICE everyday study tool, reverent and calm
    IDEA a night nave: one body lit from a single light at its centre, tinted by the liturgical season
    PICTURE live 3D model of the body at two scales, a parish and the universal Church
-   COLOUR aubergine night ground, pale gold-white light, season colour as accent, five component hues
+   COLOUR aubergine night ground, pale gold-white light, season colour as accent, component and age hues
    TYPE EB Garamond for title and season, Source Sans 3 for text
    LAYOUT laptop: model left, panel right; phone: model 58svh on top, panel below */
-:root{color-scheme:dark;--bg:#120e18;--panel:#19141f;--ink:#ece8f2;--mute:#aaa3b8;--line:#2f2839;--btn:#231d2c;--season:#4fa36b;--sac:#ef8a6f;--role:#f2c862;--group:#62c6cc;--order:#b69cf2;--mem:#e9e6f2;--cat:#8fd6c0;--inq:#8a849b}
+:root{color-scheme:dark;--bg:#120e18;--panel:#19141f;--ink:#ece8f2;--mute:#aaa3b8;--line:#2f2839;--btn:#231d2c;--season:#4fa36b;--sac:#ef8a6f;--role:#f2c862;--group:#62c6cc;--order:#b69cf2}
 :root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3",system-ui,sans-serif;overflow-x:clip}
-.app{display:grid;grid-template-columns:minmax(0,1fr) 370px;height:100%}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 390px;height:100%}
 .stage{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 48%,#241c2f 0,var(--bg) 68%)}
 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
 .lab{position:absolute;left:0;top:0;font-size:13px;line-height:1.2;background:rgba(18,14,24,.78);border:1px solid var(--line);padding:3px 7px;border-radius:5px;pointer-events:none;white-space:nowrap}
-.tip{position:absolute;max-width:260px;font-size:14px;line-height:1.35;background:#1f1927;border:1px solid #453c52;padding:8px 10px;border-radius:7px;pointer-events:none;display:none}
+.tip{position:absolute;max-width:280px;font-size:14px;line-height:1.35;background:#1f1927;border:1px solid #453c52;padding:8px 10px;border-radius:7px;pointer-events:none;display:none}
 .tip b{display:block;font-weight:600;margin-bottom:2px}
-.hint{position:absolute;left:16px;right:16px;bottom:12px;font-size:13px;color:var(--mute);pointer-events:none}
+.hint{position:absolute;left:16px;right:16px;bottom:12px;font-size:13px;color:var(--mute);pointer-events:none;margin:0}
 .panel{background:var(--panel);border-left:1px solid var(--line);overflow-y:auto;padding:22px 20px 28px}
-h1{font:600 36px/1.05 "EB Garamond",Georgia,serif;letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance}
+h1{font:600 36px/1.05 "EB Garamond",Georgia,serif;letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance}
 h2{font-size:15px;font-weight:600;margin:24px 0 8px}
+.ver{font-size:13px;color:var(--mute);margin:0 0 8px}
 .lede{color:var(--mute);margin:0 0 16px;font-size:15px}
 button{font:inherit;font-size:15px;color:var(--ink);background:var(--btn);border:1px solid var(--line);border-radius:8px;min-height:44px;padding:8px 12px;cursor:pointer;text-align:left}
 button:hover{border-color:#5a5068}
 button:focus-visible,input:focus-visible{outline:2px solid var(--season);outline-offset:2px}
 button[aria-pressed=true]{background:color-mix(in srgb,var(--season) 24%,var(--btn));border-color:var(--season)}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:4px}
-.seg3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.seg button{border-color:transparent;background:transparent;text-align:center}
+button small{display:block;font-size:13px;color:var(--mute)}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:4px}
+.seg button{border-color:transparent;background:transparent;text-align:center;font-size:14px;padding:8px 6px}
 .seg button[aria-pressed=true]{background:#2d2638;border-color:#4a4157}
 .season{font:600 28px/1.1 "EB Garamond",Georgia,serif;color:var(--season);margin:2px 0 0}
 .when{color:var(--mute);font-size:14px}
@@ -44,15 +46,20 @@ button[aria-pressed=true]{background:color-mix(in srgb,var(--season) 24%,var(--b
 .cal .bar i{display:block;height:100%}
 .cal .mk{position:absolute;top:-4px;width:4px;height:18px;margin-left:-2px;border-radius:2px;background:var(--ink);box-shadow:0 0 0 2px var(--panel)}
 .run{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;margin-top:12px}
-.run label{font-size:14px;color:var(--mute);display:grid;gap:2px}
+.run label,.ctl label{font-size:14px;color:var(--mute);display:grid;gap:2px}
 input[type=range]{width:100%;accent-color:var(--season);height:28px}
-.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:15px}
+.ctl{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:15px}
 .row b{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row em{grid-column:1/-1;font-style:normal;font-size:13px;color:var(--mute);margin-top:-2px}
 .meter{grid-column:1/-1;height:6px;border-radius:3px;background:#2a2333}
-.meter i{display:block;height:100%;border-radius:3px;background:var(--season);transition:width .3s}
+.meter i{display:block;height:100%;border-radius:3px;background:var(--season)}
+.pyr{display:grid;gap:5px;margin:4px 0 8px}
+.pyr div{display:grid;grid-template-columns:9.5em minmax(0,1fr) 3.2em;gap:8px;align-items:center;font-size:14px}
+.pyr span.b{height:12px;border-radius:3px}
+.pyr b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
 .acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .acts button{font-size:14px;line-height:1.25}
-.acts .wide{grid-column:1/-1}
 .note{font-size:14px;color:var(--mute);margin:8px 0 0}
 .leg{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14px}
 .leg li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:8px;align-items:start}
@@ -60,10 +67,20 @@ input[type=range]{width:100%;accent-color:var(--season);height:28px}
 .log{list-style:none;padding:0;margin:0;font-size:14px;display:grid;gap:6px}
 .log li{border-left:2px solid var(--line);padding-left:8px}
 .log small{display:block;color:var(--mute);font-size:13px}
-details{margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+details{margin-top:20px;border-top:1px solid var(--line);padding-top:12px}
 summary{cursor:pointer;font-weight:600;min-height:32px}
-details p{font-size:15px;margin:8px 0}
+details p,details li{font-size:15px}
+details ul{padding-left:18px;margin:6px 0}
+.tag{display:inline-block;font-size:12px;padding:0 6px;border-radius:4px;margin-left:4px;vertical-align:1px}
+.t-cal{background:#1f3a2a;color:#9fe3b4}.t-part{background:#3a321b;color:#f0d38a}.t-hyp{background:#3a2233;color:#f0a8cf}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:5px 6px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:600;color:var(--mute)}
 .small{font-size:13px;color:var(--mute)}
+a{color:#c9b6ff}
+.foot{margin-top:24px;border-top:1px solid var(--line);padding-top:12px;font-size:13px;color:var(--mute)}
 @media(max-width:760px){html,body{height:auto}.app{grid-template-columns:minmax(0,1fr);height:auto}.stage{height:58svh;min-height:340px}.panel{border-left:0;border-top:1px solid var(--line);padding:18px 16px 28px}h1{font-size:32px}}
 </style>
 </head>
@@ -71,73 +88,97 @@ details p{font-size:15px;margin:8px 0}
 <div class="app">
   <div class="stage" id="stage">
     <div class="tip" id="tip"></div>
-    <p class="hint" id="hint">Drag to turn, scroll or pinch to zoom. Click empty space to strike the body. Hover a node to read it.</p>
+    <p class="hint" id="hint">Drag to turn, scroll or pinch to zoom. Click empty space to strike the body. Hover a node or dot to read it.</p>
   </div>
   <aside class="panel">
     <h1>Body of Christ Model</h1>
+    <p class="ver">Version 2 · each dot is one person</p>
     <p class="lede">One self-renewing body at two scales. The scale you are viewing is shown in detail; the other stays simple.</p>
 
     <div class="seg" role="group" aria-label="Scale">
       <button id="v-parish" aria-pressed="true">A single parish</button>
-      <button id="v-uni" aria-pressed="false">All churches</button>
+      <button id="v-uni" aria-pressed="false">The whole Church</button>
     </div>
 
     <h2>Liturgical calendar</h2>
     <p class="season" id="season">Ordinary Time</p>
-    <div class="when" id="when">Year 1, week 1</div>
+    <div class="when" id="when">Year 1</div>
     <div class="cal"><div class="bar" id="calbar"></div><div class="mk" id="calmk"></div></div>
     <div class="run">
       <button id="play" aria-pressed="false">Pause</button>
-      <label for="speed"><span id="speedl">7 days per second</span><input id="speed" type="range" min="1" max="28" value="7"></label>
+      <label for="speed"><span id="speedl">7 days per second</span><input id="speed" type="range" min="0" max="7" step="1" value="2"></label>
     </div>
 
-    <h2 id="stath">This parish</h2>
     <div id="stats"></div>
 
     <h2>Perturb the body</h2>
-    <div class="acts">
-      <button id="p-pandemic" aria-pressed="false">Pandemic</button>
-      <button id="p-scandal" aria-pressed="false">Scandal</button>
-      <button id="p-closed" aria-pressed="false">Closed leadership</button>
-      <button id="p-cal" aria-pressed="false">Drop the shared calendar</button>
-      <button id="p-short" aria-pressed="false">Vocations shortage</button>
-      <button id="p-restore">Restore</button>
+    <div class="seg" role="group" aria-label="Perturbation mode" id="mode">
+      <button data-v="timed" aria-pressed="true">Timed events</button>
+      <button data-v="hold" aria-pressed="false">Hold until switched off</button>
     </div>
-    <h2>Remove or restore a component</h2>
+    <div class="acts" id="pbtns" style="margin-top:8px"></div>
+    <p class="note" id="pnote">Timed events last a realistic length of time. In hold mode, a perturbation stays in force until you switch it off.</p>
+
+    <h2>Remove or restore a group</h2>
     <div class="acts" id="gbtns"></div>
-    <p class="note">A removed group stops meeting. Its members look for another group, and its effects ripple through roles, sacraments and the wider Church.</p>
-    <h2>Baptisms this liturgical year</h2>
-    <div class="seg seg3" role="group" aria-label="Baptisms this year" id="bap">
-      <button data-v="1" aria-pressed="true">As usual</button>
-      <button data-v="0.5" aria-pressed="false">Fewer</button>
-      <button data-v="0" aria-pressed="false">None</button>
+    <p class="note">A removed group stops meeting. Its members look for another group, and the effects ripple through roles, sacraments, ages and newcomers.</p>
+
+    <h2>Settings</h2>
+    <div class="ctl">
+      <div><div class="small" style="margin-bottom:4px">Baptisms this liturgical year</div>
+        <div class="seg" role="group" aria-label="Baptisms this year" id="bap"><button data-v="1" aria-pressed="true">As usual</button><button data-v="0.5" aria-pressed="false">Fewer</button><button data-v="0" aria-pressed="false">None</button></div></div>
+      <div><div class="small" style="margin-bottom:4px">Climate for newcomers</div>
+        <div class="seg" role="group" aria-label="Climate for newcomers" id="clim"><button data-v="1" aria-pressed="true">2023 baseline</button><button data-v="1.38" aria-pressed="false">2026 surge (+38%)</button></div></div>
+      <label for="digital"><span id="digl">Reach of Catholic digital content: as in 2026</span><input id="digital" type="range" min="0" max="2" step=".25" value="1"></label>
+      <label for="rev"><span id="revl">Reverent liturgy effect (hypothesis): none</span><input id="rev" type="range" min="0" max="1" step=".25" value="0"></label>
+      <div><div class="small" style="margin-bottom:4px">Parish size (restarts the parish)</div>
+        <div class="seg" role="group" aria-label="Parish size" id="size"><button data-v="300" aria-pressed="false">300</button><button data-v="600" aria-pressed="true">600</button><button data-v="1000" aria-pressed="false">1,000</button></div></div>
     </div>
-    <p class="note">Applies to infant baptisms and the Easter Vigil, in every parish, until Advent begins a new year.</p>
-    <p class="note" id="pnote">Each perturbation acts on both scales. Watch what the body loses and what it conserves.</p>
 
     <h2>What happened</h2>
     <ul class="log" id="log"></ul>
 
-    <h2>Components</h2>
+    <h2>Key</h2>
     <ul class="leg">
-      <li><span style="background:var(--sac)"></span>Sacraments: produce and renew relations</li>
-      <li><span style="background:var(--role)"></span>Roles: pastor, deacon, catechists, musicians, directors</li>
-      <li><span style="background:var(--group)"></span>Groups: family faith formation, OCIA, choir, young adults, Bible study, service</li>
-      <li><span style="background:var(--order)"></span>Religious orders: a local community, and orders linking parishes</li>
-      <li><span style="background:linear-gradient(90deg,#8a5cc7,#f1ead8,#4fa36b,#d8453a)"></span>Liturgical calendar: the ring that keeps every church on the same days</li>
-      <li><span style="background:var(--mem)"></span>Members, with <span style="display:inline-block;background:var(--cat);margin:0 2px -1px"></span> catechumens and <span style="display:inline-block;background:var(--inq);margin:0 2px -1px"></span> inquirers outside</li>
+      <li><span style="background:#a8e6a1"></span>Children 0–12</li>
+      <li><span style="background:#7fd3ff"></span>Youth 13–19</li>
+      <li><span style="background:#ff9fc6"></span>Young adults 20–35</li>
+      <li><span style="background:#f4f1ea"></span>Adults 36–60</li>
+      <li><span style="background:#9aa7ff"></span>Older members 61+</li>
+      <li><span style="background:#8a849b"></span>Inquirers outside; <span style="display:inline-block;background:#8fd6c0;margin:0 2px -1px"></span> catechumens and candidates</li>
+      <li><span style="background:var(--sac)"></span>Sacraments, which produce and renew relations</li>
+      <li><span style="background:var(--role)"></span>Roles, from pastor to school principal</li>
+      <li><span style="background:var(--group)"></span>Groups; bright when meeting in person, dim when online, small when dormant</li>
+      <li><span style="background:var(--order)"></span>Religious life: the local community, and orders across the Church</li>
+      <li><span style="background:linear-gradient(90deg,#8a5cc7,#f1ead8,#4fa36b,#d8453a)"></span>The liturgical calendar ring</li>
       <li><span style="background:#fff3d6;box-shadow:0 0 8px #fff3d6"></span>Christ: the light at the centre, not one of the components</li>
     </ul>
 
-    <details open>
+    <details>
       <summary>How to read it</summary>
-      <p>Strike the body and members scatter, then their relations draw them back. That is homeostasis: the form springs back.</p>
-      <p>Leave it running for a year and the parish remakes itself. Members leave, and new ones come through infant baptism, OCIA and the Easter Vigil. Links fade unless the Eucharist and group life renew them. The members change while the organisation persists: that is autopoiesis.</p>
+      <p>Strike the body and members scatter, then their relations draw them back: homeostasis. Leave it running for decades and the parish remakes itself: people are born, age, join groups, leave, die and are replaced by births, converts and people moving in. The members change while the organisation persists: autopoiesis.</p>
+      <p>Watch the age pyramid and the regeneration ratio. A parish can hold its numbers for years while ageing towards a point where it can no longer replace itself.</p>
       <p>Christ is the light at the centre. Every relation is lit by it, but it is not a component the system produces, which is where the autopoietic description reaches its limit.</p>
-      <p>Try Closed leadership. Leaders stop renewing their ties to groups, groups fall dormant, members held by one group drift out, and the boundary hardens. Then drop the shared calendar and switch to all churches: Sundays stop lighting up together.</p>
-      <p>Remove a group to test regeneration. Losing the choir changes the parish’s structure, but members find other groups and the parish stays itself. Losing OCIA or family faith formation removes the processes that produce new members, so the parish slowly cannot regenerate its own components.</p>
-      <p class="small">An illustrative model: all rates and numbers are simulated, not drawn from data.</p>
     </details>
+
+    <details>
+      <summary>Data and sources</summary>
+      <p>Each rule is tagged by how well it is grounded: <span class="tag t-cal">calibrated</span> to published data, <span class="tag t-part">partly grounded</span>, or a <span class="tag t-hyp">hypothesis</span>.</p>
+      <ul>
+        <li>Weekly Mass attendance: 28% of cradle Catholics, 38% of converts; Communion at every Mass: 34% and 58% <span class="tag t-cal">calibrated</span> <a href="https://www.pewresearch.org/religion/2025/06/16/profile-of-us-converts-to-catholicism/">Pew 2025</a></li>
+        <li>Starting age structure of adult members <span class="tag t-cal">calibrated</span> <a href="https://www.pewresearch.org/religious-landscape-study/religious-tradition/catholic/">Pew Religious Landscape Study 2023–24</a>; share of children assumed at about one in five <span class="tag t-part">partly grounded</span></li>
+        <li>Infant baptisms about 7.4 per 1,000 Catholics a year <span class="tag t-cal">calibrated</span> <a href="https://www.ncronline.org/print/pdf/node/297271">Vatican yearbook via NCR</a></li>
+        <li>Adults received about 1.3 per 1,000 Catholics a year (2023 U.S. adult baptisms and receptions), +38% in the 2026 setting <span class="tag t-part">partly grounded</span> <a href="https://www.catholicregister.org/item/3686-easter-boom-a-catholic-revival">Official Catholic Directory via Catholic Register</a>, <a href="https://hallow.com/blog/catholic-church-sees-massive-growth-in-new-members/">Hallow 2026</a></li>
+        <li>Pathways in: relational (family, friends, marriage) and content or experience (liturgy, digital); two-thirds cite digital content <span class="tag t-part">partly grounded</span> <a href="https://www.ncronline.org/node/333441">2026 OCIA survey</a></li>
+        <li>Leaving: tuned so that about 1.1% of members leave a year, consistent with Pew's 8.4 leavers per convert <span class="tag t-part">partly grounded</span> <a href="https://www.pewresearch.org/religion/2025/02/26/religious-switching/">Pew 2025</a></li>
+        <li>Deaths by age: approximate U.S. life-table rates <span class="tag t-part">partly grounded</span>; moving in and out at about 1% a year each <span class="tag t-hyp">assumption</span></li>
+        <li>Pandemic: attendance falls to about 60% of normal for about three years, then recovers <span class="tag t-cal">calibrated</span> <a href="https://aleteia.org/2025/02/09/has-mass-attendance-finally-recovered-from-the-pandemic/">CARA via Aleteia</a></li>
+        <li>Scandal: raises leaving for about two years; 39% of former Catholics cite scandal as an important reason they left <span class="tag t-part">partly grounded</span> <a href="https://www.pewresearch.org/?p=282647">Pew 2025</a></li>
+        <li>Closed leadership, the dropped calendar, the reverent liturgy effect and all group renewal rates <span class="tag t-hyp">hypothesis</span></li>
+        <li>Whole-Church figures: Catholics, priests and growth by continent for 2024 <span class="tag t-cal">calibrated</span> <a href="https://www.vaticannews.va/en/church/news/2026-10/fides-agency-2026-annual-church-statistics.html">Fides 2026</a>, <a href="https://www.vaticannews.va/en/vatican-city/news/2026-03/new-data-from-annuario-pontificio-2026-shows-catholics-growing.print.html">Annuarium 2024</a>; priests in Africa, Europe and Oceania derived from reported ratios <span class="tag t-part">partly grounded</span></li>
+      </ul>
+    </details>
+    <p class="foot">Body of Christ Model, version 2 (November 2026). formationsystems.org. An illustrative research model: simulated numbers are not predictions.</p>
   </aside>
 </div>
 
@@ -154,163 +195,296 @@ function main(){
   let seed = 11; const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
   const rv = () => new V(rnd() * 2 - 1, rnd() * 2 - 1, rnd() * 2 - 1);
   const fib = (i, n, r) => { const y = 1 - 2 * (i + .5) / n, q = Math.sqrt(1 - y * y), t = i * 2.39996; return new V(Math.cos(t) * q * r, y * r, Math.sin(t) * q * r); };
-  const COL = { sac:'#ef8a6f', role:'#f2c862', group:'#62c6cc', order:'#b69cf2', mem:'#e9e6f2', cat:'#8fd6c0', inq:'#8a849b' };
+  const COL = { sac:'#ef8a6f', role:'#f2c862', group:'#62c6cc', order:'#b69cf2', inq:'#8a849b', cat:'#8fd6c0' };
+  const BANDS = [
+    { n:'Children 0–12', lo:0, c:'#a8e6a1' }, { n:'Youth 13–19', lo:13, c:'#7fd3ff' }, { n:'Young adults 20–35', lo:20, c:'#ff9fc6' },
+    { n:'Adults 36–60', lo:36, c:'#f4f1ea' }, { n:'Older 61+', lo:61, c:'#9aa7ff' } ];
+  const bandOf = a => a < 13 ? 0 : a < 20 ? 1 : a < 36 ? 2 : a < 61 ? 3 : 4;
   const SEASONS = [
     { n:'Advent', s:0, e:28, c:'#8a5cc7' }, { n:'Christmas', s:28, e:49, c:'#f1ead8' }, { n:'Ordinary Time', s:49, e:91, c:'#4fa36b' },
     { n:'Lent', s:91, e:133, c:'#8a5cc7' }, { n:'Easter', s:133, e:182, c:'#f1ead8' }, { n:'Pentecost', s:182, e:189, c:'#d8453a' },
     { n:'Ordinary Time', s:189, e:364, c:'#4fa36b' } ];
   const seasonOf = d => SEASONS.find(s => d >= s.s && d < s.e);
 
-  /* ---------- the parish: components and relations ---------- */
+  /* ---------- calibration constants ---------- */
+  const K = {
+    decay:.00274,                 // bond relaxes with a time constant of about one year
+    infant:.0074,                 // infant baptisms per Catholic per year (Vatican world average)
+    adult:.0013,                  // adults received per Catholic per year (U.S. 2023)
+    inq:1.4,                      // inquirers per adult received
+    moveIn:.021, moveOut:.010,    // in-migration includes immigration; set so the baseline parish is roughly stable
+    leave:.0185,                  // tuned so about 1.1% of members leave per year at baseline
+    leaveAge:[0, 1.0, 2.2, .8, .35],
+  };
+  const qDeath = a => a < 13 ? .0002 : a < 20 ? .0005 : a < 36 ? .0012 : a < 61 ? .0045 : a < 76 ? .02 : a < 86 ? .06 : .16;
+
+  /* ---------- the parish: components ---------- */
   const SAC = [
-    ['Eucharist','Celebrated every Sunday. Renews the relations of everyone who takes part.'],
-    ['Baptism','Brings new members into the body, through infant baptism and the Easter Vigil.'],
+    ['Eucharist','Celebrated every Sunday. Renews the bond of everyone who attends, more for those who receive Communion.'],
+    ['Baptism','Brings new members into the body: infants, and adults at the Easter Vigil.'],
     ['Confirmation','Completes adult initiation at the Easter Vigil.'],
-    ['Reconciliation','In Lent, and after a scandal, it repairs weakened relations.'],
+    ['Reconciliation','In Lent, and during a scandal, it repairs weakened bonds.'],
     ['Marriage','Joins households to the parish’s family life.'],
-    ['Holy Orders','Supplies priests. Across the Church, seminaries send new priests to vacant parishes.'],
+    ['Holy Orders','Supplies priests. A vacancy lasts longer in a vocations shortage.'],
     ['Anointing of the Sick','Accompanies members at the end of life.'] ];
   const ROLES = [
     ['Pastor','Celebrates the sacraments and calls the assembly into its own priesthood.'],
-    ['Deacon','Baptises, marries, leads Bible study and helps form OCIA candidates.'],
+    ['Deacon','Baptises, marries, leads Bible study and helps with OCIA and the sick.'],
     ['Catechist','Leads family faith formation and OCIA.'],
     ['Music director','Leads the choir and the assembly’s singing.'],
     ['Spiritual director','Accompanies young adults and the religious community.'],
-    ['Lay ministers','Distribute communion, visit the sick and lead service.'],
-    ['Parish council','Shares in the parish’s decisions.'] ];
+    ['Lay ministers','Distribute Communion, lead service and visit the sick.'],
+    ['Parish council','Shares in the parish’s decisions.'],
+    ['School principal','Leads the parish school.'] ];
   const GROUPS = [
-    { n:'Family faith formation', k:'group', day:3, lead:[2], w:30, info:'Forms children and parents together. Its households bring infants to baptism.' },
-    { n:'OCIA', k:'group', day:2, lead:[2,1], w:0, info:'Order of Christian Initiation of Adults. Inquirers become catechumens here, then are baptised at the Easter Vigil.' },
-    { n:'Choir', k:'group', day:4, lead:[3], w:12, sun:.2, cal:.8, info:'Rehearses weekly and leads the assembly in song.' },
-    { n:'Young adults', k:'group', day:5, lead:[4], w:12, info:'Draws newcomers. Its vitality raises the flow of inquirers.' },
-    { n:'Bible study', k:'group', day:1, lead:[1], w:14, sun:.08, cal:.5, info:'Reads the Sunday readings ahead of Mass.' },
-    { n:'Service ministry', k:'group', day:6, lead:[5], w:16, info:'Serves the neighbourhood. Its outreach brings inquirers.' },
-    { n:'Religious community', k:'order', day:-1, lead:[4], w:5, info:'A house of a religious order. It prays the Hours daily, so its ties renew most steadily.' } ];
+    { n:'Family faith formation', k:'group', day:3, lead:[2], info:'Children and their parents. Infant baptisms fall when it is lost.' },
+    { n:'OCIA', k:'group', day:2, lead:[2,1], info:'Order of Christian Initiation of Adults. Inquirers become catechumens and candidates here, then are received at the Easter Vigil.' },
+    { n:'Choir', k:'group', day:4, lead:[3], sun:.15, cal:.8, info:'Leads the assembly in song; it strengthens every Sunday and draws people through the beauty of the liturgy.' },
+    { n:'Young adults', k:'group', day:5, lead:[4], info:'Ages 20 to 35. Draws newcomers through friendship and marriage.' },
+    { n:'Bible study', k:'group', day:1, lead:[1], sun:.06, cal:.5, info:'Reads the Sunday readings ahead of Mass.' },
+    { n:'Service ministry', k:'group', day:6, lead:[5], info:'Food pantry, St Vincent de Paul, prison ministry. Its witness draws inquirers.' },
+    { n:'Ministry to the sick', k:'group', day:5, lead:[5,1], info:'Visits the homebound and those near the end of life, renewing the bonds of older members who cannot attend Mass.' },
+    { n:'Parish school', k:'group', day:1, lead:[7], info:'Forms children through the week and keeps families connected.' },
+    { n:'Religious community', k:'order', day:-1, lead:[4], info:'A house of a religious order that prays the Hours daily; its ties renew most steadily.' } ];
+  const G = { family:0, ocia:1, choir:2, ya:3, bible:4, service:5, sick:6, school:7, rel:8 };
 
   const nodes = [];
-  const mk = (name, kind, p, info, size) => { const n = { name, kind, p, info, size, active:true }; nodes.push(n); return n; };
+  const mk = (name, kind, p, info, size) => { const n = { name, kind, p, info, size, state:'in person' }; nodes.push(n); return n; };
   const sac = SAC.map((a, i) => mk(a[0], 'sac', fib(i, 7, 3.6), a[1], .5));
-  const roles = ROLES.map((a, i) => mk(a[0], 'role', fib(i, 7, 7.6).applyAxisAngle(new V(0, 1, 0), 1.1), a[1], .62));
-  const groups = GROUPS.map((g, i) => Object.assign(mk(g.n, g.k, fib(i, 7, 12.4), g.info, .95), { day:g.day, leadIdx:g.lead, w:g.w, sun:g.sun || 0, cal:g.cal || 1, removed:false }));
-  const pastor = roles[0], family = groups[0], ocia = groups[1], young = groups[3], service = groups[5];
+  const roles = ROLES.map((a, i) => mk(a[0], 'role', fib(i, 8, 7.6).applyAxisAngle(new V(0, 1, 0), 1.1), a[1], .6));
+  const groups = GROUPS.map((g, i) => Object.assign(mk(g.n, g.k, fib(i, 9, 12.6), g.info, .9), { day:g.day, leadIdx:g.lead, sun:g.sun || 0, cal:g.cal || 1, removed:false, i }));
+  const pastor = roles[0];
   const rs = [];
-  [[0,[0,1,3,4,5,6]],[1,[1,4,5]],[2,[1,2]],[3,[0]],[4,[3]],[5,[0,6]],[6,[0]]].forEach(([r, ss]) => ss.forEach(s => rs.push({ a:roles[r], b:sac[s], r:roles[r], s:.8 })));
+  [[0,[0,1,3,4,5,6]],[1,[1,4,5]],[2,[1,2]],[3,[0]],[4,[3]],[5,[0,6]],[6,[0]],[7,[0]]].forEach(([r, ss]) => ss.forEach(s => rs.push({ a:roles[r], b:sac[s], r:roles[r], s:.8 })));
   const rg = [];
   groups.forEach(g => g.leadIdx.forEach(r => rg.push({ a:roles[r], b:g, r:roles[r], g, s:.8 })));
+  const groupLead = g => { let t = 0, c = 0; for (const l of rg) if (l.g === g) { t += l.s; c++; } return c ? t / c : 0; };
 
-  const CAP = 320, members = [];
-  const homeNear = (g, r) => g.p.clone().normalize().add(rv().multiplyScalar(.42)).normalize().multiplyScalar(r + rnd() * 3.2);
-  const link = (m, g, s) => ({ a:g, b:m, g, m, s });
-  const pickGroup = () => { let t = 0; for (const g of groups) if (!g.removed) t += g.w; if (!t) return null; let x = rnd() * t; for (const g of groups) { if (g.removed) continue; x -= g.w; if (x <= 0) return g; } return null; };
-  function addMember(st, g, s, at){
+  /* ---------- members ---------- */
+  const CAP = 1500;
+  let members = [];
+  const JOIN = [ // probability of joining each group, by age band
+    [[G.family,1],[G.school,.35]],
+    [[G.family,.45],[G.choir,.08],[G.service,.06]],
+    [[G.ya,.35],[G.service,.1],[G.choir,.08],[G.bible,.06],[G.family,.1]],
+    [[G.family,.3],[G.bible,.15],[G.service,.15],[G.choir,.07],[G.sick,.05]],
+    [[G.bible,.18],[G.sick,.1],[G.service,.08],[G.choir,.08]] ];
+  function assignGroups(m){
+    m.groups = [];
+    if (m.rel) { m.groups = [groups[G.rel]]; return; }
+    for (const [gi, p] of JOIN[m.band]) {
+      const g = groups[gi];
+      if (g.removed || m.groups.length >= 2) continue;
+      if (gi === G.family && m.band >= 2 && (m.age < 24 || m.age > 52)) continue;
+      if (rnd() < p) m.groups.push(g);
+    }
+  }
+  function homeFor(m){
+    if (m.st === 'inquirer') return rv().normalize().multiplyScalar(25 + rnd() * 3);
+    if (m.st === 'catechumen') return groups[G.ocia].p.clone().normalize().add(rv().multiplyScalar(.3)).normalize().multiplyScalar(16 + rnd() * 2);
+    const g = m.groups[0];
+    const dir = g ? g.p.clone().normalize().add(rv().multiplyScalar(.42)) : rv();
+    return dir.normalize().multiplyScalar((g ? 15 : 17) + rnd() * 3);
+  }
+  function newMember(o){
     if (members.length >= CAP) return null;
-    const m = { stage:st, links:[], low:0, age:0, v:new V() };
-    if (g) m.links.push(link(m, g, s));
-    m.home = st === 'inquirer' ? rv().normalize().multiplyScalar(25 + rnd() * 3) : homeNear(g, st === 'catechumen' ? 16 : 15);
-    m.p = at ? at.clone() : m.home.clone().multiplyScalar(st === 'inquirer' ? 1.2 : 1);
+    const m = Object.assign({ st:'member', age:30, b:.5, a:.1, c:false, convert:false, rel:false, groups:[], fade:0, wait:0, path:null, v:new V() }, o);
+    m.band = bandOf(m.age); if (m.age < 20 && o.kid === undefined && m.st === 'member' && !m.rel) m.kid = true;
+    if (m.st === 'member') assignGroups(m);
+    m.home = homeFor(m);
+    m.p = o.at ? o.at.clone() : m.home.clone().multiplyScalar(m.st === 'inquirer' ? 1.2 : 1);
     members.push(m); return m;
   }
-  for (let i = 0; i < 118; i++) { const g = pickGroup(), m = addMember('member', g, .5 + rnd() * .35); const g2 = pickGroup(); if (rnd() < .35 && g2 !== g) m.links.push(link(m, g2, .5 + rnd() * .3)); }
-  for (let i = 0; i < 6; i++) addMember('catechumen', ocia, .55);
-  for (let i = 0; i < 5; i++) addMember('inquirer', null, 0);
+  const practice = conv => { const reg = rnd() < (conv ? .45 : .30); return { a: reg ? .5 + rnd() * .3 : .02 + rnd() * .1, c: rnd() < (reg ? (conv ? .88 : .8) : (conv ? .3 : .08)) }; };
+  function sampleAge(){
+    const u = rnd();
+    if (u < .15) return rnd() * 13;
+    if (u < .22) return 13 + rnd() * 5;
+    const v = rnd() * 98;            // Pew 2023-24 adult distribution
+    if (v < 14) return 18 + rnd() * 12;
+    if (v < 41) return 30 + rnd() * 20;
+    if (v < 70) return 50 + rnd() * 15;
+    return 65 + Math.pow(rnd(), 1.6) * 30;
+  }
+  function initParish(N){
+    members = [];
+    for (let i = 0; i < N; i++) {
+      const conv = rnd() < .08, pr = practice(conv), age = sampleAge();
+      const m = newMember({ age, convert:conv, a:age < 20 ? .25 : pr.a, c:age < 20 ? age > 9 && rnd() < .5 : pr.c });
+      if (m) m.b = Math.min(1, .1 + .85 * m.a + .15 * m.groups.length + rnd() * .1);
+    }
+    for (let i = 0; i < 4; i++) newMember({ rel:true, age:40 + rnd() * 40, a:1, c:true, b:.9 });
+    for (let i = 0; i < Math.round(N * .004); i++) newMember({ st:'catechumen', age:22 + rnd() * 20, b:.4, a:.5, wait:30 });
+    for (let i = 0; i < 3; i++) newMember({ st:'inquirer', age:20 + rnd() * 25, b:.2, path:'digital' });
+  }
 
-  const bond = m => { if (!m.links.length) return 0; let t = 0; for (const l of m.links) t += l.s; return t / m.links.length; };
-  const groupLead = g => { let t = 0, c = 0; for (const l of rg) if (l.g === g) { t += l.s; c++; } return c ? t / c : 0; };
-  const parC = () => { let t = 0, c = 0; for (const m of members) if (m.stage === 'member') { t += bond(m); c++; } return c ? t / c : 0; };
-  const count = st => members.filter(m => m.stage === st).length;
+  /* ---------- state ---------- */
+  const newYear = () => ({ infant:0, adult:0, deaths:0, left:0, movedIn:0, movedOut:0, path:{ relational:0, marriage:0, digital:0, liturgy:0 } });
+  const PERT = [
+    { k:'pan', n:'Pandemic', dur:1092 }, { k:'scan', n:'Scandal', dur:728 }, { k:'closed', n:'Closed leadership', dur:1092 },
+    { k:'cal', n:'Drop the shared calendar', dur:364 }, { k:'short', n:'Vocations shortage', dur:1820 } ];
+  const S = { day:84, run:!reduce, speed:7, pastor:true, wait:0, log:[], bap:1, mode:'timed', size:600, digital:1, rev:0, climate:1,
+    p:{ pan:0, scan:0, closed:0, cal:0, short:0 }, rec:0, yr:newYear(), hist:[], att:0, comm:0, n0:0 };
+  const on = k => S.p[k] > 0;
+  const count = st => members.filter(m => m.st === st).length;
+  const live = () => members.filter(m => m.st === 'member');
 
-  const S = { day:84, run:!reduce, speed:7, pastor:true, wait:0, log:[], bap:1, bapN:0, p:{ pandemic:0, scandal:0, closed:false, calOff:false, short:false } };
-
-  /* ---------- the universal Church ---------- */
-  const NP = 36, U = { pool:3, par:[] };
-  for (let i = 0; i < NP; i++) U.par.push({ p:fib(i, NP, 26), C:.5 + rnd() * .3, M:300 + rnd() * 300, priest:rnd() > .08, ph:Math.floor(rnd() * 7), flash:0 });
-  { let bi = 0; U.par.forEach((q, i) => { if (q.p.z - Math.abs(q.p.y) > U.par[bi].p.z - Math.abs(U.par[bi].p.y)) bi = i; }); const t = U.par[0].p; U.par[0].p = U.par[bi].p; U.par[bi].p = t; }
-  const orders = ['Benedictines','Franciscans','Dominicans','Carmelites'].map(n => ({ n, ps:[] }));
-  for (let i = 1; i < NP; i++) if (rnd() < .62) orders[i % 4].ps.push(i);
-  orders[1].ps.unshift(0);
-  const nbr = [];
-  U.par.forEach((q, i) => U.par.map((r, j) => [j, q.p.distanceTo(r.p)]).filter(x => x[0] > i).sort((a, b) => a[1] - b[1]).slice(0, 3).forEach(x => nbr.push([i, x[0]])));
+  /* ---------- the whole Church (2024 data) ---------- */
+  const CONT = [
+    { n:'Americas', cat:678.87, g:6.99 / 671.88, pr:118544, dpr:199, dir:[-.8,.2,.55] },
+    { n:'Africa', cat:288.31, g:7.58 / 280.73, pr:57000, dpr:1676, dir:[.25,-.4,.88] },
+    { n:'Europe', cat:287.24, g:.911 / 286.33, pr:152156, dpr:-2483, dir:[.3,.68,.66] },
+    { n:'Asia', cat:156.17, g:.968 / 155.2, pr:75121, dpr:1065, dir:[.92,.22,-.1] },
+    { n:'Oceania', cat:11.56, g:.239 / 11.32, pr:4600, dpr:-32, dir:[.6,-.62,-.5] } ];
+  CONT.forEach(c => { c.cat0 = c.cat; c.pr0 = c.pr; c.ord = .025 * c.pr + c.dpr; c.flash = 0; });
+  const W = { year:2024, inst:{ kindergartens:75448, primary:103666, secondary:51810, hospitals:5397, dispensaries:13646, care:101110 } };
+  function stepWorld(){
+    const pan = on('pan'), scan = on('scan'), sh = on('short'), cl = on('closed');
+    for (const c of CONT) {
+      let g = c.g * (.2 + .8 * S.bap);
+      if (pan) g *= .8;
+      if (scan && (c.n === 'Americas' || c.n === 'Europe')) g -= .002;
+      if (cl) g -= .002;
+      c.cat *= 1 + g;
+      const ord = c.ord * (sh ? .5 : 1) * (pan ? .8 : 1);
+      c.pr = Math.max(100, c.pr + ord - .025 * c.pr);
+    }
+    W.year++;
+  }
 
   /* ---------- one simulated day ---------- */
   const dateLabel = () => { const d = S.day % 364, se = seasonOf(d); return `Year ${Math.floor(S.day / 364) + 1}, ${se.n} week ${Math.floor((d - se.s) / 7) + 1}`; };
-  function log(t){ S.log.unshift({ t, d:dateLabel() }); S.log.length = Math.min(S.log.length, 7); renderLog(); }
-  function lapse(m){ m.stage = 'lapsed'; m.links = []; m.age = 0; m.home = m.p.clone().normalize().multiplyScalar(34); }
+  function log(t){ S.log.unshift({ t, d:dateLabel() }); S.log.length = Math.min(S.log.length, 8); renderLog(); }
+  function leave(m, kind){ m.st = kind; m.fade = 0; m.home = m.p.clone().normalize().multiplyScalar(34); }
 
   function stepDay(){
     S.day++;
-    const d = S.day % 364, P = S.p, pand = P.pandemic > 0, scan = P.scandal > 0;
+    const d = S.day % 364, P = S.p;
+    const pan = on('pan'), scan = on('scan'), closed = on('closed'), calOff = on('cal');
+    const recov = pan ? .6 : S.rec > 0 ? .6 + .4 * (1 - S.rec / 364) : 1;
+    if (S.rec > 0) S.rec--;
     for (const l of rs) l.s = Math.max(0, l.s - .004);
-    for (const l of rg) l.s = Math.max(0, l.s - .008);
-    for (const m of members) { const f = P.closed && m.links.length === 1 ? 1.35 : 1; for (const l of m.links) l.s = Math.max(0, l.s - .015 * f); }
+    for (const l of rg) l.s = Math.max(0, l.s - .006);
     if (!S.pastor) for (const l of rs) if (l.r === pastor) l.s = 0;
+
+    // group states
+    for (const g of groups) {
+      const lead = groupLead(g);
+      g.state = g.removed ? 'removed' : lead < .22 ? 'dormant' : pan && g.day >= 0 ? (g.i === G.choir ? 'paused' : 'online') : 'in person';
+    }
+    // daily: ageing, decay, religious community
+    for (const m of members) {
+      if (m.st === 'leaving' || m.st === 'moved') { m.fade++; continue; }
+      m.age += 1 / 364;
+      m.b -= m.b * K.decay;
+      if (m.st !== 'member') continue;
+      const nb = bandOf(m.age);
+      if (nb !== m.band) { if (nb === 2 && m.kid) { const pr = practice(false); m.a = pr.a; m.c = pr.c; m.kid = false; } else if (nb === 1 && m.kid) m.c = rnd() < .5; m.band = nb; if (!m.rel) { assignGroups(m); m.home = homeFor(m); } }
+      if (m.rel && groups[G.rel].state === 'in person') m.b = Math.min(1, m.b + .0015);
+    }
+    if (groups[G.rel].state === 'in person') for (const l of rg) if (l.g === groups[G.rel]) l.s = Math.min(1, l.s + (closed ? .0052 : .02));
+
+    // Sunday Mass
     if (d % 7 === 0) {
-      const pf = S.pastor ? 1 : .45, mul = groups.reduce((t, g) => t - (g.removed ? g.sun : 0), 1) * (P.calOff ? .9 : 1), amt = (pand ? .04 : .07) * mul;
-      for (const m of members) if (m.stage === 'member') { const ap = Math.min(.95, .3 + .7 * bond(m)) * (scan ? .5 : 1); if (rnd() < ap) for (const l of m.links) l.s = Math.min(1, l.s + amt * pf); }
+      const pf = S.pastor ? 1 : .6;
+      const lit = groups.reduce((t, g) => t - (g.state === 'removed' || g.state === 'dormant' || g.state === 'paused' ? g.sun : 0), 1) * (calOff ? .9 : 1) * (1 + .15 * S.rev);
+      let att = 0, comm = 0, el = 0;
+      for (const m of members) {
+        if (m.st !== 'member' && m.st !== 'catechumen') continue;
+        el++;
+        let p = m.a * recov * (scan ? .85 : 1) * (m.age >= 85 ? .35 : 1);
+        if (rnd() < p) { att++; const rc = m.c && m.st === 'member'; if (rc) comm++; m.b = Math.min(1, m.b + (rc ? .012 : .008) * pf * lit); }
+        else if (pan && m.a > .3) m.b = Math.min(1, m.b + .003);
+      }
+      S.att = el ? att / el : 0; S.comm = att ? comm / att : 0;
       for (const l of rs) if (S.pastor || l.r !== pastor) l.s = Math.min(1, l.s + .3);
       pulse(sac[0].p, COL.sac, 9);
     }
+    // Christmas and Easter
+    if ((d === 28 || d === 133) && !calOff) for (const m of members) if (m.st === 'member' && rnd() < Math.min(.95, (.25 + m.a * 2.5) * recov)) m.b = Math.min(1, m.b + .03);
+    // groups meet
     for (const g of groups) {
-      if (g.removed) { g.active = false; continue; }
-      const daily = g.day < 0, meets = daily || d % 7 === g.day, lead = groupLead(g);
-      g.active = lead > .22;
-      if (!meets) continue;
-      if (!g.active) { if (!P.closed && d % 28 === g.day) for (const l of rg) if (l.g === g) l.s += .2; continue; }
-      const online = pand && !daily, amt = (online ? .05 : daily ? .012 : .06) * (P.calOff ? g.cal : 1);
-      for (const m of members) for (const l of m.links) if (l.g === g) l.s = Math.min(1, l.s + amt);
-      if (!P.closed) for (const l of rg) if (l.g === g && (S.pastor || l.r !== pastor)) l.s = Math.min(1, l.s + (online ? .07 : daily ? .02 : .12));
+      if (g.day < 0) continue;
+      const meets = d % 7 === g.day;
+      if (g.state === 'dormant') { if (!closed && d % 28 === g.day) for (const l of rg) if (l.g === g) l.s += .2; continue; }
+      if (!meets || g.state === 'removed' || g.state === 'paused') continue;
+      const inP = g.state === 'in person', amt = (inP ? .008 : .004) * (calOff ? g.cal : 1);
+      if (g.i === G.sick) { for (const m of members) if (m.st === 'member' && m.age >= 80) m.b = Math.min(1, m.b + (inP ? .008 : .003)); }
+      for (const m of members) if (m.st === 'member' && m.groups.includes(g)) m.b = Math.min(1, m.b + amt);
+      for (const l of rg) if (l.g === g && (S.pastor || l.r !== pastor)) l.s = Math.min(1, l.s + (inP ? .12 : .06) * (closed ? .22 + .028 * g.i : 1));
     }
-    if (d % 7 === 3 && ((d >= 91 && d < 133 && !P.calOff) || scan)) {
-      for (const m of members) for (const l of m.links) if (l.s < .35) l.s += S.pastor ? .1 : .04;
-      if (scan) for (const l of rg) l.s = Math.min(1, l.s + .04);
+    // reconciliation
+    if (d % 7 === 3 && S.pastor && ((d >= 91 && d < 133 && !calOff) || scan)) {
+      for (const m of members) if (m.st === 'member' && m.a > .3 && m.b < .5) m.b += .01;
+      if (scan) for (const l of rg) l.s = Math.min(1, l.s + .03);
       pulse(sac[3].p, COL.sac, 6);
     }
+    // Easter Vigil
     if (d === 133) {
-      if (P.calOff) log('Without a shared calendar the Easter Vigil is not kept, so catechumens keep waiting.');
-      else { let n = 0; let w = 0; for (const m of members) if (m.stage === 'catechumen' && m.links[0] && m.links[0].s > .3) { if (rnd() >= S.bap) { w++; continue; } const g2 = pickGroup(); m.stage = 'member'; if (g2) { m.links.push(link(m, g2, .6)); m.home = homeNear(g2, 15); } n++; pulse(m.p, COL.cat, 3); }
-        S.bapN += n; pulse(sac[1].p, COL.sac, 8); log(`Easter Vigil: ${n} adult${n === 1 ? '' : 's'} baptised and confirmed${w ? `; ${w} wait for next year` : ''}.`); }
+      if (calOff) log('Without a shared calendar the Easter Vigil is not kept, so catechumens and candidates keep waiting.');
+      else {
+        let n = 0, w = 0;
+        for (const m of members) if (m.st === 'catechumen' && m.wait > 40) {
+          if (rnd() >= S.bap) { w++; continue; }
+          const pr = practice(true);
+          m.st = 'member'; m.convert = true; m.a = pr.a; m.c = pr.c; m.b = Math.max(m.b, .6); m.band = bandOf(m.age); assignGroups(m); m.home = homeFor(m);
+          n++; S.yr.adult++; if (m.path) S.yr.path[m.path]++; pulse(m.p, COL.cat, 3);
+        }
+        pulse(sac[1].p, COL.sac, 8); pulse(sac[2].p, COL.sac, 8);
+        log(`Easter Vigil: ${n} adult${n === 1 ? '' : 's'} baptised or received${w ? `; ${w} wait for next year` : ''}.`);
+      }
     }
-    let draw = 0, dc = 0; for (const m of members) for (const l of m.links) if (l.g === young || l.g === service) { draw += l.s; dc++; }
-    const out = (dc ? draw / dc : 0) * (P.closed ? .3 : 1) * (scan ? .3 : 1) * (pand ? .4 : 1);
-    if (rnd() < .035 * Math.min(1, out * 1.6)) addMember('inquirer', null, 0);
-    if (family.active && !pand && rnd() < .011 * S.bap) { const m = addMember('member', family, .65, sac[1].p); if (m) { S.bapN++; pulse(sac[1].p, COL.sac, 4); } }
-    if (family.active && rnd() < .004 && !pand) pulse(sac[4].p, COL.sac, 4);
-    for (const m of members) if (m.stage === 'member' && !m.links.length && !P.closed && rnd() < .03) { const g = pickGroup(); if (g && g.active) { m.links.push(link(m, g, .3)); m.home = homeNear(g, 15); } }
-    if (d === 0) { if (S.bap !== 1) { S.bap = 1; syncBap(); log('Advent: a new liturgical year begins and baptisms return to usual.'); } S.bapN = 0; }
+    // newcomers
+    const N = live().length;
+    const mb = N ? live().reduce((t, m) => t + m.b, 0) / N : 0;
+    const yaShare = N ? live().filter(m => m.band === 2).length / N : 0;
+    const choirOn = groups[G.choir].state === 'in person';
+    const wts = {
+      relational: .40 * Math.min(2, mb / .45) * (closed ? .5 : 1),
+      marriage: .25 * Math.min(2, yaShare / .15) * (groups[G.ya].state === 'in person' ? 1.2 : .8),
+      digital: .25 * S.digital,
+      liturgy: .10 * (choirOn ? 1 : .5) * (1 + S.rev) };
+    const wsum = wts.relational + wts.marriage + wts.digital + wts.liturgy;
+    const inqRate = N * K.adult * K.inq * S.climate * wsum * (scan ? .6 : 1) * (pan ? .6 : 1) * (groups[G.service].state === 'in person' ? 1 : .85) / 364;
+    if (rnd() < inqRate) {
+      let x = rnd() * wsum, path = 'digital';
+      for (const k in wts) { x -= wts[k]; if (x <= 0) { path = k; break; } }
+      newMember({ st:'inquirer', age:19 + Math.pow(rnd(), 1.4) * 40, b:.25, a:.4, path });
+    }
+    const ociaOn = groups[G.ocia].state === 'in person' || groups[G.ocia].state === 'online';
+    // births
+    const fam = live().filter(m => m.age >= 22 && m.age <= 42).length;
+    const famF = groups[G.family].state === 'in person' ? 1 : groups[G.family].state === 'online' ? .8 : .45;
+    const bRate = fam * (K.infant / .2) * famF * S.bap * (pan ? .85 : 1) * (groups[G.school].state === 'in person' ? 1.05 : 1) / 364;
+    if (rnd() < bRate) { const m = newMember({ age:0, a:.25, b:.5, at:sac[1].p }); if (m) { S.yr.infant++; pulse(sac[1].p, COL.sac, 4); if (rnd() < .3 && !pan) pulse(sac[4].p, COL.sac, 4); } }
+    // moving in
+    if (rnd() < N * K.moveIn / 364) { const pr = practice(false), ag = 22 + rnd() * 36; newMember({ age:ag, a:pr.a, c:pr.c, b:.35 }); S.yr.movedIn++; if (ag > 27 && ag < 46 && rnd() < .5) { newMember({ age:rnd() * 12, a:.25, b:.35 }); S.yr.movedIn++; } }
+    // individual events
     for (let i = members.length - 1; i >= 0; i--) {
-      const m = members[i]; m.age++;
-      if (m.stage === 'lapsed') { if (m.age > 40) members.splice(i, 1); continue; }
-      if (m.stage === 'inquirer') { if (ocia.active && rnd() < .012) { m.stage = 'catechumen'; m.links = [link(m, ocia, .5)]; m.home = homeNear(ocia, 16); m.age = 0; } else if (m.age > 150) lapse(m); continue; }
-      m.low = bond(m) < .13 ? m.low + 1 : 0;
-      if (m.low > 28) lapse(m);
-      else if (m.stage === 'member' && rnd() < 1 / (364 * 40)) { pulse(sac[6].p, COL.sac, 4); members.splice(i, 1); }
+      const m = members[i];
+      if ((m.st === 'leaving' || m.st === 'moved') && m.fade > 40) { members.splice(i, 1); continue; }
+      if (m.st === 'inquirer') { m.wait++; if (ociaOn && rnd() < .015) { m.st = 'catechumen'; m.wait = 0; m.b = .4; m.home = homeFor(m); } else if (m.wait > 250) leave(m, 'leaving'); continue; }
+      if (m.st === 'catechumen') { m.wait++; if (!ociaOn && rnd() < .002) leave(m, 'leaving'); continue; }
+      if (m.st !== 'member') continue;
+      if (rnd() < qDeath(m.age) / 364) { members.splice(i, 1); S.yr.deaths++; pulse(sac[6].p, COL.sac, 4); continue; }
+      if (m.rel) continue;
+      if (rnd() < K.moveOut / 364) { leave(m, 'moved'); S.yr.movedOut++; continue; }
+      const h = K.leave * K.leaveAge[m.band] * Math.min(4, ((1 - m.b) / .6) ** 2) * (scan ? 1.8 : 1) / 364;
+      if (rnd() < h) { leave(m, 'leaving'); S.yr.left++; }
     }
-    if (S.pastor && rnd() < 1 / (364 * 14)) { S.pastor = false; S.wait = P.short ? 160 : 40; log('The pastor retires. The parish waits for a priest to be assigned.'); }
-    if (!S.pastor && --S.wait <= 0 && U.pool >= 1) { U.pool--; S.pastor = true; for (const l of rs) if (l.r === pastor) l.s = .5; token(0); log('A newly ordained priest is assigned to the parish.'); }
-    if (P.pandemic > 0 && --P.pandemic === 0) { log('The pandemic ends. Groups that kept in touch resume quickly.'); syncButtons(); }
-    if (P.scandal > 0 && --P.scandal === 0) { log('The scandal fades from view. Reconciliation has repaired some ties, not all.'); syncButtons(); }
-    stepUni(d);
-  }
-
-  function stepUni(d){
-    const P = S.p, pand = P.pandemic > 0, scan = P.scandal > 0;
-    for (let i = 0; i < NP; i++) {
-      const q = U.par[i];
-      if (i === 0) { q.C = parC(); q.M = (count('member') + count('catechumen')) * 4; q.priest = S.pastor; if (d % 7 === 0) q.flash = 1; continue; }
-      q.C *= 1 - .008;
-      if ((d + (P.calOff ? q.ph : 0)) % 7 === 0) { q.C += (pand ? .02 : .06) * (q.priest ? 1 : .45) * (scan && i < 9 ? .5 : 1) * (1 - q.C); q.flash = 1; }
-      q.C += .0025 * (P.closed ? .25 : 1) * (pand ? .4 : 1);
-      if (P.calOff) q.C += (rnd() - .5) * .006;
-      q.C = Math.min(1, Math.max(0, q.C));
-      q.M = Math.max(20, q.M + .25 * q.C * (.3 + .7 * S.bap) * (P.closed ? .3 : 1) * (scan && i < 9 ? .3 : 1) - q.M * .0009 * (1 - q.C));
-      if (q.priest && rnd() < 1 / (364 * 14)) q.priest = false;
-      if (!q.priest && U.pool >= 1) { U.pool--; q.priest = true; token(i); }
+    // pastor
+    if (S.pastor && rnd() < 1 / (364 * 14)) { S.pastor = false; S.wait = on('short') ? 365 : 120; log('The pastor retires. The parish waits for a priest to be assigned.'); }
+    if (!S.pastor && --S.wait <= 0) { S.pastor = true; for (const l of rs) if (l.r === pastor) l.s = .5; log('A newly ordained priest is assigned to the parish.'); }
+    // perturbation clocks
+    for (const pt of PERT) if (S.p[pt.k] > 0 && S.p[pt.k] !== Infinity && --S.p[pt.k] === 0) endPert(pt);
+    // new liturgical year
+    if (d === 0) {
+      S.hist.unshift(S.yr); S.hist.length = Math.min(S.hist.length, 10); S.yr = newYear();
+      if (S.bap !== 1) { S.bap = 1; syncSeg('#bap', 1); log('Advent: a new liturgical year begins and baptisms return to usual.'); }
+      if (members.filter(m => m.rel).length < 4 && !on('short')) newMember({ rel:true, age:30, a:1, c:true, b:.8 });
+      stepWorld();
     }
-    if (d % 7 === 0) {
-      const k = P.calOff ? .02 : .1;
-      for (const o of orders) { const mean = o.ps.reduce((t, i) => t + U.par[i].C, 0) / o.ps.length; for (const i of o.ps) if (i) U.par[i].C += k * (mean - U.par[i].C); }
-      const mc = U.par.reduce((t, q) => t + q.C, 0) / NP;
-      U.pool = Math.min(12, U.pool + mc * .12 * (P.short ? .15 : 1));
-    }
+    for (const c of CONT) if ((d + (calOff ? Math.floor(c.cat) % 7 : 0)) % 7 === 0) c.flash = 1;
   }
 
   /* ---------- three.js scene ---------- */
@@ -320,21 +494,18 @@ function main(){
   stage.prepend(renderer.domElement);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(55, 1, .1, 600);
-  camera.position.set(0, 9, 46);
+  camera.position.set(0, 9, 48);
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
-  Object.assign(controls, { enableDamping:true, enablePan:false, minDistance:16, maxDistance:150, autoRotate:!reduce, autoRotateSpeed:.35 });
+  Object.assign(controls, { enableDamping:true, enablePan:false, minDistance:16, maxDistance:160, autoRotate:!reduce, autoRotateSpeed:.3 });
   scene.add(new THREE.AmbientLight(0x6a6080, .6));
   scene.add(new THREE.PointLight(0xfff1d6, 2.2, 0));
-
   const canvasTex = paint => { const c = document.createElement('canvas'); c.width = c.height = 128; paint(c.getContext('2d')); return new THREE.CanvasTexture(c); };
   const dotTex = canvasTex(g => { const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(.35, 'rgba(255,255,255,.75)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); });
   const ringTex = canvasTex(g => { g.strokeStyle = '#fff'; g.lineWidth = 6; g.beginPath(); g.arc(64, 64, 56, 0, Math.PI * 2); g.stroke(); });
   const ADD = THREE.AdditiveBlending;
   const spriteMat = (map, color, o) => { const m = new THREE.SpriteMaterial({ map, color, blending:ADD, transparent:true, depthWrite:false, opacity:o }); m.userData.o = o; return m; };
-
   const glow = new THREE.Sprite(spriteMat(dotTex, 0xfff0cc, 1)); glow.scale.setScalar(12); scene.add(glow);
   const halo = new THREE.Sprite(spriteMat(dotTex, 0xfff0cc, .25)); halo.scale.setScalar(30); scene.add(halo);
-
   const parishG = new THREE.Group(), uniG = new THREE.Group();
   scene.add(parishG, uniG);
   const ball = new THREE.SphereGeometry(1, 20, 14);
@@ -348,70 +519,70 @@ function main(){
   const ptsMat = size => { const m = new THREE.PointsMaterial({ size, map:dotTex, vertexColors:true, transparent:true, depthWrite:false, blending:ADD }); m.userData.o = 1; return m; };
   const mkPoints = (n, size, parent) => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 3), 3)); g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(n * 3), 3)); const p = new THREE.Points(g, ptsMat(size)); parent.add(p); return p; };
   const mkLines = (n, parent) => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 6), 3)); g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(n * 6), 3)); const m = new THREE.LineBasicMaterial({ vertexColors:true, transparent:true, depthWrite:false, blending:ADD }); m.userData.o = 1; const l = new THREE.LineSegments(g, m); parent.add(l); return l; };
-  const memPts = mkPoints(CAP, 1.0, parishG);
-  const lines = mkLines(CAP * 3 + 60, parishG);
-  const memb = new THREE.Mesh(new THREE.SphereGeometry(20.5, 40, 24), new THREE.MeshBasicMaterial({ color:0xa99bd0, transparent:true, opacity:.05, side:THREE.BackSide, depthWrite:false }));
+  const memPts = mkPoints(CAP, .8, parishG);
+  const lines = mkLines(CAP * 2 + 80, parishG);
+  const memb = new THREE.Mesh(new THREE.SphereGeometry(21, 40, 24), new THREE.MeshBasicMaterial({ color:0xa99bd0, transparent:true, opacity:.05, side:THREE.BackSide, depthWrite:false }));
   memb.material.userData.o = .05; parishG.add(memb);
-  const far = mkPoints(NP, 3.2, scene);
-  U.par.forEach((q, i) => far.geometry.attributes.position.setXYZ(i, ...q.p.clone().multiplyScalar(3).toArray()));
 
-  // liturgical calendar ring, shared by both scales
+  // calendar ring
   const ringG = new THREE.BufferGeometry(), RN = 364;
   ringG.setAttribute('position', new THREE.BufferAttribute(new Float32Array(RN * 3), 3));
   ringG.setAttribute('color', new THREE.BufferAttribute(new Float32Array(RN * 3), 3));
-  for (let i = 0; i < RN; i++) { const a = i / RN * Math.PI * 2; ringG.attributes.position.setXYZ(i, Math.cos(a) * 22, 0, Math.sin(a) * 22); }
+  for (let i = 0; i < RN; i++) { const a = i / RN * Math.PI * 2; ringG.attributes.position.setXYZ(i, Math.cos(a) * 23, 0, Math.sin(a) * 23); }
   const ring = new THREE.LineLoop(ringG, new THREE.LineBasicMaterial({ vertexColors:true, transparent:true, blending:ADD, depthWrite:false }));
   ring.rotation.x = .28; scene.add(ring);
   const marker = new THREE.Sprite(spriteMat(dotTex, 0xffffff, 1)); marker.scale.setScalar(2.4); ring.add(marker);
-  function paintRing(){ const c = new THREE.Color(); for (let i = 0; i < RN; i++) { c.set(S.p.calOff ? '#4a4452' : seasonOf(i).c).multiplyScalar(S.p.calOff ? .6 : .75); ringG.attributes.color.setXYZ(i, c.r, c.g, c.b); } ringG.attributes.color.needsUpdate = true; }
-  paintRing();
+  function paintRing(){ const c = new THREE.Color(), off = on('cal'); for (let i = 0; i < RN; i++) { c.set(off ? '#4a4452' : seasonOf(i).c).multiplyScalar(off ? .6 : .75); ringG.attributes.color.setXYZ(i, c.r, c.g, c.b); } ringG.attributes.color.needsUpdate = true; }
 
-  // universal scale
-  const cores = U.par.map((q, i) => { const m = new THREE.Mesh(ball, nodeMat('#d9d2e6')); m.position.copy(q.p); m.userData.par = i; uniG.add(m); pick.push(m); return m; });
-  const sats = mkPoints(NP * 4, 1.1, uniG);
-  const satOff = U.par.map(() => [0, 1, 2, 3].map(() => rv().normalize().multiplyScalar(1.5)));
-  const satCol = [COL.role, COL.group, COL.sac, COL.order].map(h => new THREE.Color(h));
-  const web = mkLines(nbr.length, uniG);
-  nbr.forEach(([i, j], k) => { web.geometry.attributes.position.setXYZ(k * 2, ...U.par[i].p.toArray()); web.geometry.attributes.position.setXYZ(k * 2 + 1, ...U.par[j].p.toArray()); });
+  // whole Church: one point per 20 million Catholics
+  const glyphs = [];
+  CONT.forEach((c, ci) => {
+    c.center = new V(...c.dir).normalize().multiplyScalar(26);
+    const n = Math.max(1, Math.round(c.cat0 / 20));
+    for (let k = 0; k < n; k++) {
+      const p = c.center.clone().add(rv().multiplyScalar(1.2 + Math.sqrt(n) * .9));
+      const m = new THREE.Mesh(ball, nodeMat('#e9e2f2')); m.position.copy(p); m.scale.setScalar(.55); m.userData.cont = ci; m.userData.k = k;
+      uniG.add(m); pick.push(m); glyphs.push({ m, c, k });
+    }
+  });
+  const yourGlyph = glyphs[0].m;
+  const you = new THREE.Sprite(spriteMat(ringTex, 0xffffff, .9)); you.position.copy(yourGlyph.position); you.scale.setScalar(3.6); uniG.add(you);
   const arcPts = [];
-  for (const o of orders) for (let k = 0; k < o.ps.length; k++) {
-    const a = U.par[o.ps[k]].p, b = U.par[o.ps[(k + 1) % o.ps.length]].p;
-    const mid = a.clone().add(b).multiplyScalar(.5).normalize().multiplyScalar(33);
-    const cv = new THREE.QuadraticBezierCurve3(a, mid, b).getPoints(16);
-    for (let t = 0; t < 16; t++) arcPts.push(cv[t], cv[t + 1]);
-  }
-  const arcMat = new THREE.LineBasicMaterial({ color:COL.order, transparent:true, opacity:.4, blending:ADD, depthWrite:false }); arcMat.userData.o = .4;
+  for (let o = 0; o < 4; o++) { const ks = glyphs.filter(() => rnd() < .12); for (let k = 0; k + 1 < ks.length; k++) { const a = ks[k].m.position, b = ks[k + 1].m.position; const mid = a.clone().add(b).multiplyScalar(.5).normalize().multiplyScalar(34); const cv = new THREE.QuadraticBezierCurve3(a, mid, b).getPoints(16); for (let t = 0; t < 16; t++) arcPts.push(cv[t], cv[t + 1]); } }
+  const arcMat = new THREE.LineBasicMaterial({ color:COL.order, transparent:true, opacity:.3, blending:ADD, depthWrite:false }); arcMat.userData.o = .3;
   uniG.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(arcPts), arcMat));
-  const seminaries = [new V(-6, 3, 5), new V(6, -3, -5)].map(p => { const m = new THREE.Mesh(ball, nodeMat(COL.sac)); m.position.copy(p); m.scale.setScalar(.8); m.userData.node = { name:'Seminary', info:'Holy Orders at the scale of the whole Church: forms priests and sends them to vacant parishes.', kind:'sac' }; uniG.add(m); pick.push(m); return p; });
-  const you = new THREE.Sprite(spriteMat(ringTex, 0xffffff, .9)); you.position.copy(U.par[0].p); you.scale.setScalar(4.2); uniG.add(you);
+  const far = mkPoints(CONT.length, 6, scene);
+  CONT.forEach((c, i) => far.geometry.attributes.position.setXYZ(i, ...c.center.clone().multiplyScalar(3).toArray()));
 
-  // pulses and priest tokens
-  const pulses = [], tokens = [];
-  function pulse(p, hex, size, parent){ if (reduce || pulses.length > 30) return; const s = new THREE.Sprite(spriteMat(ringTex, hex, .9)); s.position.copy(p); (parent || parishG).add(s); pulses.push({ s, t:0, size }); }
-  function token(i){ if (reduce) return; const s = new THREE.Sprite(spriteMat(dotTex, COL.sac, 1)); s.scale.setScalar(1.6); uniG.add(s); tokens.push({ s, a:seminaries[i % 2], b:U.par[i].p, t:0 }); }
+  // pulses
+  const pulses = [];
+  function pulse(p, hex, size, parent){ if (reduce || pulses.length > 30 || S.speed > 60) return; const s = new THREE.Sprite(spriteMat(ringTex, hex, .9)); s.position.copy(p); (parent || parishG).add(s); pulses.push({ s, t:0, size }); }
 
   // labels
   const labs = groups.map(g => { const e = document.createElement('div'); e.className = 'lab'; e.textContent = g.name; stage.append(e); return { e, o:g.mesh, dy:-22 }; });
-  { const e = document.createElement('div'); e.className = 'lab'; e.textContent = 'Your parish'; stage.append(e); labs.push({ e, o:cores[0], dy:-26, uni:true }); }
+  CONT.forEach(c => { const e = document.createElement('div'); e.className = 'lab'; e.textContent = c.n; stage.append(e); const o = new THREE.Object3D(); o.position.copy(c.center.clone().multiplyScalar(1.22)); uniG.add(o); labs.push({ e, o, dy:0, uni:true }); });
+  { const e = document.createElement('div'); e.className = 'lab'; e.textContent = 'Your parish'; stage.append(e); labs.push({ e, o:yourGlyph, dy:-40, uni:true }); }
 
-  /* ---------- view, interaction ---------- */
-  let target = 0, mix = 0, W = 1, H = 1;
-  const ro = new ResizeObserver(() => { W = stage.clientWidth; H = stage.clientHeight; renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix(); });
+  /* ---------- view and interaction ---------- */
+  let target = 0, mix = 0, Wd = 1, Hd = 1;
+  const ro = new ResizeObserver(() => { Wd = stage.clientWidth; Hd = stage.clientHeight; renderer.setSize(Wd, Hd, false); camera.aspect = Wd / Hd; camera.updateProjectionMatrix(); });
   ro.observe(stage);
-  function setView(v){ target = v; $('#v-parish').setAttribute('aria-pressed', v === 0); $('#v-uni').setAttribute('aria-pressed', v === 1); $('#stath').textContent = v ? 'All churches' : 'This parish'; renderStats(); }
+  function setView(v){ target = v; $('#v-parish').setAttribute('aria-pressed', v === 0); $('#v-uni').setAttribute('aria-pressed', v === 1); renderStats(); }
   $('#v-parish').onclick = () => setView(0);
   $('#v-uni').onclick = () => setView(1);
-
   const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
-  function hit(ev){ const r = renderer.domElement.getBoundingClientRect(); ptr.set((ev.clientX - r.left) / r.width * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(ptr, camera); const vis = pick.filter(m => mix < .5 ? m.parent === parishG : m.parent === uniG); return ray.intersectObjects(vis)[0]; }
+  ray.params.Points.threshold = .5;
+  function hit(ev){ const r = renderer.domElement.getBoundingClientRect(); ptr.set((ev.clientX - r.left) / r.width * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(ptr, camera); const vis = pick.filter(m => mix < .5 ? m.parent === parishG : m.parent === uniG); if (mix < .5) vis.push(memPts); return ray.intersectObjects(vis)[0]; }
+  const fmt = n => Math.round(n).toLocaleString('en-GB');
   renderer.domElement.addEventListener('pointermove', ev => {
     const h = hit(ev); if (!h) { tip.style.display = 'none'; return; }
     const r = stage.getBoundingClientRect(), u = h.object.userData;
     let html;
-    if (u.par !== undefined) { const q = U.par[u.par]; html = `<b>${u.par ? 'Parish ' + (u.par + 1) : 'Your parish'}</b>Cohesion ${Math.round(q.C * 100)}%, ${Math.round(q.M)} simulated members, ${q.priest ? 'priest present' : 'no priest'}.${u.par ? '' : ' Click to enter.'}`; }
-    else { const n = u.node; html = `<b>${n.name}</b>${n.info}${n.kind === 'group' || n.kind === 'order' ? (n.removed ? ' Removed.' : n.active ? ' Meeting now.' : ' Dormant.') : ''}${n === pastor && !S.pastor ? ' Vacant.' : ''}`; }
+    if (h.object === memPts) { const m = members[h.index]; if (!m) return; html = `<b>${m.rel ? 'Member of the religious community' : m.st === 'member' ? (m.convert ? 'Convert' : 'Member') : m.st === 'catechumen' ? 'Catechumen or candidate' : m.st === 'inquirer' ? 'Inquirer' : 'Leaving'}, age ${Math.floor(m.age)}</b>Bond ${Math.round(m.b * 100)}%. ${m.groups.length ? 'In ' + m.groups.map(g => g.name.toLowerCase()).join(' and ') + '.' : 'In no group.'}${m.path ? ' Came through ' + ({ relational:'family and friends', marriage:'marriage or dating', digital:'digital content', liturgy:'the liturgy' })[m.path] + '.' : ''}`; }
+    else if (u.cont !== undefined) { const c = CONT[u.cont]; html = `<b>${h.object === yourGlyph ? 'Your parish, in the ' + c.n : c.n}</b>${(c.cat).toFixed(1)} million Catholics, ${fmt(c.pr)} priests, ${fmt(c.cat * 1e6 / c.pr)} Catholics per priest. Each point stands for about 20 million Catholics.${h.object === yourGlyph ? ' Click to enter.' : ''}`; }
+    else { const n = u.node; html = `<b>${n.name}</b>${n.info}${n.kind === 'group' || n.kind === 'order' ? ' Now: ' + n.state + '.' : ''}${n === pastor && !S.pastor ? ' Vacant.' : ''}`; }
     tip.innerHTML = html; tip.style.display = 'block';
-    tip.style.left = Math.min(ev.clientX - r.left + 14, W - 270) + 'px'; tip.style.top = Math.max(8, ev.clientY - r.top - 10) + 'px';
+    tip.style.left = Math.min(ev.clientX - r.left + 14, Wd - 290) + 'px'; tip.style.top = Math.max(8, ev.clientY - r.top - 10) + 'px';
   });
   renderer.domElement.addEventListener('pointerleave', () => { tip.style.display = 'none'; });
   let down = null, lastStrike = -99;
@@ -419,153 +590,205 @@ function main(){
   renderer.domElement.addEventListener('pointerup', ev => {
     if (!down || Math.hypot(ev.clientX - down[0], ev.clientY - down[1]) > 6) return;
     const h = hit(ev);
-    if (h && h.object.userData.par === 0 && mix > .5) { setView(0); return; }
-    if (h || mix > .5) return;
+    if (h && h.object === yourGlyph && mix > .5) { setView(0); return; }
+    if ((h && h.object !== memPts) || mix > .5) return;
     const n = camera.getWorldDirection(new V()), pl = new THREE.Plane(n, 0), pt = new V();
     if (!ray.ray.intersectPlane(pl, pt)) return;
-    for (const m of members) { const dv = m.p.clone().sub(pt), d = dv.length(); if (d < 9) m.v.add(dv.normalize().multiplyScalar((9 - d) * .6)); }
+    for (const m of members) { const dv = m.p.clone().sub(pt), dd = dv.length(); if (dd < 9) m.v.add(dv.normalize().multiplyScalar((9 - dd) * .6)); }
     pulse(pt, '#ffffff', 10);
     if (S.day - lastStrike > 20) { log('A strike scatters members. Their relations draw them back: homeostasis, not yet autopoiesis.'); lastStrike = S.day; }
   });
 
   /* ---------- panel ---------- */
   $('#calbar').innerHTML = SEASONS.map(s => `<i style="width:${(s.e - s.s) / 3.64}%;background:${s.c}"></i>`).join('');
+  const SPEEDS = [1, 3, 7, 14, 30, 91, 182, 364];
   const play = $('#play');
   const syncPlay = () => { play.textContent = S.run ? 'Pause' : 'Play'; play.setAttribute('aria-pressed', !S.run); };
-  play.onclick = () => { S.run = !S.run; syncPlay(); };
-  syncPlay();
-  $('#speed').oninput = e => { S.speed = +e.target.value; $('#speedl').textContent = `${S.speed} day${S.speed === 1 ? '' : 's'} per second`; };
-  function syncButtons(){ const P = S.p; $('#p-pandemic').setAttribute('aria-pressed', P.pandemic > 0); $('#p-scandal').setAttribute('aria-pressed', P.scandal > 0); $('#p-closed').setAttribute('aria-pressed', P.closed); $('#p-cal').setAttribute('aria-pressed', P.calOff); $('#p-short').setAttribute('aria-pressed', P.short); }
-  $('#p-pandemic').onclick = () => { if (S.p.pandemic) return; S.p.pandemic = 112; syncButtons(); log('Pandemic: gatherings stop for sixteen weeks. Livestreamed Mass and phone calls slow the decay.'); };
-  $('#p-scandal').onclick = () => { if (S.p.scandal) return; S.p.scandal = 120; for (const l of rg) l.s *= .4; for (const m of members) if (m.stage === 'member' && rnd() < .08) lapse(m); S.pastor = false; S.wait = S.p.short ? 160 : 60; for (let i = 1; i < 9; i++) { U.par[i].C *= .6; if (i % 3 === 0) U.par[i].priest = false; } syncButtons(); log('Scandal: trust in leaders collapses, the pastor is removed and some members leave. Reconciliation begins weekly repair.'); };
-  $('#p-closed').onclick = () => { S.p.closed = !S.p.closed; syncButtons(); log(S.p.closed ? 'Closed leadership: leaders stop renewing their ties to groups. Watch groups fall dormant and the boundary harden.' : 'Leadership opens again. Leaders revive dormant groups month by month.'); };
-  $('#p-cal').onclick = () => { S.p.calOff = !S.p.calOff; paintRing(); syncButtons(); log(S.p.calOff ? 'The shared calendar is dropped. Churches no longer keep the same days; Lent and the Easter Vigil lapse, Bible study loses the common readings and the choir its seasonal music.' : 'The shared calendar is restored. Churches keep the same days again.'); };
-  $('#p-short').onclick = () => { S.p.short = !S.p.short; syncButtons(); log(S.p.short ? 'Vocations shortage: seminaries form far fewer priests, so vacancies last longer.' : 'Vocations recover.'); };
-  $('#p-restore').onclick = () => { Object.assign(S.p, { pandemic:0, scandal:0, closed:false, calOff:false, short:false }); for (const l of rg) l.s = Math.max(l.s, .5); paintRing(); syncButtons(); log('All perturbations removed. The body begins to recover from what it lost.'); };
+  play.onclick = () => { S.run = !S.run; syncPlay(); }; syncPlay();
+  $('#speed').oninput = e => { S.speed = SPEEDS[+e.target.value]; $('#speedl').textContent = S.speed === 364 ? 'A year per second' : `${S.speed} day${S.speed === 1 ? '' : 's'} per second`; };
+  function syncSeg(sel, v){ for (const b of document.querySelectorAll(sel + ' button')) b.setAttribute('aria-pressed', String(b.dataset.v) === String(v)); }
+  const segVal = (sel, f) => { $(sel).onclick = e => { const b = e.target.closest('button'); if (!b) return; f(b.dataset.v); syncSeg(sel, b.dataset.v); }; };
+  segVal('#bap', v => { S.bap = +v; log(S.bap === 1 ? 'Baptisms return to usual.' : S.bap ? 'A lean year: about half the usual baptisms, in every parish.' : 'No baptisms this year, in any parish. Catechumens wait for next Easter.'); });
+  segVal('#clim', v => { S.climate = +v; log(S.climate > 1 ? 'The 2026 surge: dioceses report about 38% more people entering the Church.' : 'Newcomers return to the 2023 baseline.'); });
+  segVal('#mode', v => { S.mode = v; for (const pt of PERT) if (S.p[pt.k] > 0) S.p[pt.k] = v === 'hold' ? Infinity : pt.dur; syncPert(); });
+  segVal('#size', v => { S.size = +v; initParish(S.size); S.hist = []; S.yr = newYear(); log(`The parish restarts with ${fmt(S.size)} members.`); });
+  $('#digital').oninput = e => { S.digital = +e.target.value; $('#digl').textContent = 'Reach of Catholic digital content: ' + (S.digital === 1 ? 'as in 2026' : S.digital === 0 ? 'none' : S.digital + '× the 2026 level'); };
+  $('#rev').oninput = e => { S.rev = +e.target.value; $('#revl').textContent = 'Reverent liturgy effect (hypothesis): ' + (S.rev ? '+' + Math.round(S.rev * 15) + '% Sunday renewal, ' + (1 + S.rev) + '× liturgy pathway' : 'none'); };
 
-  const GFX = ['Infant baptisms and marriages fall away, so fewer new members are produced.','Inquirers have no path to the Easter Vigil.','The music director loses their group and Sunday singing weakens, so the Eucharist renews relations less strongly.','Fewer newcomers are drawn in.','The deacon loses a group and the Sunday readings are less prepared.','Outreach falls and fewer inquirers arrive.','The parish loses its daily prayer and its tie to the Franciscans across the wider Church.'];
-  $('#gbtns').innerHTML = groups.map((g, i) => `<button data-g="${i}" aria-pressed="false">${g.name}</button>`).join('');
+  const PMSG = {
+    pan:['Pandemic: public Masses and gatherings are suspended. Attendance falls to about 60% of normal, groups move online and the choir pauses.','The pandemic ends. Attendance recovers over the following year.'],
+    scan:['Scandal: trust in leaders falls and the pastor is removed. Leaving rises for about two years; reconciliation begins weekly repair.','The scandal fades from view. Reconciliation has repaired some ties, not all.'],
+    closed:['Closed leadership: leaders stop renewing their ties to groups. Watch groups fall dormant and relational outreach shrink.','Leadership opens again. Leaders revive dormant groups month by month.'],
+    cal:['The shared calendar is dropped: no Lent, Christmas or Easter Vigil in common, and Bible study loses the shared readings.','The shared calendar is restored.'],
+    short:['Vocations shortage: half as many ordinations, so vacancies last much longer.','Vocations recover.'] };
+  $('#pbtns').innerHTML = PERT.map(pt => `<button data-k="${pt.k}" aria-pressed="false">${pt.n}<small></small></button>`).join('') + '<button id="restore">Restore all<small>Ends every perturbation</small></button>';
+  function syncPert(){ for (const b of document.querySelectorAll('#pbtns button[data-k]')) { const v = S.p[b.dataset.k]; b.setAttribute('aria-pressed', v > 0); b.querySelector('small').textContent = v === Infinity ? 'Held until switched off' : v > 0 ? `${(v / 364).toFixed(1)} years left` : S.mode === 'hold' ? 'Hold' : `${(PERT.find(p => p.k === b.dataset.k).dur / 364).toFixed(0)}-year event`; } }
+  function startPert(pt){
+    S.p[pt.k] = S.mode === 'hold' ? Infinity : pt.dur;
+    if (pt.k === 'scan') { for (const l of rg) l.s *= .5; S.pastor = false; S.wait = on('short') ? 365 : 120; for (const m of members) if (m.st === 'member' && !m.rel && m.b < .3 && rnd() < .04) { leave(m, 'leaving'); S.yr.left++; } }
+    if (pt.k === 'cal') paintRing();
+    log(PMSG[pt.k][0]);
+  }
+  function endPert(pt){ S.p[pt.k] = 0; if (pt.k === 'pan') S.rec = 364; if (pt.k === 'cal') paintRing(); if (pt.k === 'closed') for (const l of rg) l.s = Math.max(l.s, .3); log(PMSG[pt.k][1]); syncPert(); }
+  $('#pbtns').onclick = e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'restore') { for (const pt of PERT) if (S.p[pt.k] > 0) endPert(pt); for (const l of rg) l.s = Math.max(l.s, .5); return; }
+    const pt = PERT.find(p => p.k === b.dataset.k);
+    if (S.p[pt.k] > 0) endPert(pt); else startPert(pt);
+    syncPert();
+  };
+  syncPert();
+
+  const GFX = ['Infant baptisms fall, and children lose their main place of formation.','Inquirers have no path to the Easter Vigil.','The music director loses their group, Sunday renewal weakens and fewer people are drawn by the liturgy.','Young adults lose their gathering place; fewer newcomers come through friendship and marriage, and the parish begins to age.','The deacon loses a group and the Sunday readings are less prepared.','Outreach falls and fewer inquirers arrive.','Homebound older members lose their visits, and their bonds fade.','Children lose weekday formation and families a strong tie to the parish.','The parish loses its daily prayer and its tie to a religious order across the wider Church.'];
+  const low = g => g.name === 'OCIA' ? 'OCIA' : g.name.toLowerCase();
+  $('#gbtns').innerHTML = groups.map((g, i) => `<button data-g="${i}" aria-pressed="false">Remove ${low(g)}</button>`).join('');
   $('#gbtns').onclick = e => {
     const b = e.target.closest('button'); if (!b) return;
-    const g = groups[+b.dataset.g];
+    const i = +b.dataset.g, g = groups[i];
     if (!g.removed) {
       g.removed = true; let n = 0;
       for (const l of rg) if (l.g === g) l.s = 0;
-      for (const m of members) { const k = m.links.length; m.links = m.links.filter(l => l.g !== g); if (m.links.length < k) n++; }
-      log(`${g.name} removed: ${n} members lose that tie. ${GFX[+b.dataset.g]}`);
+      for (const m of members) { const k = m.groups.length; m.groups = m.groups.filter(x => x !== g); if (m.groups.length < k) { n++; if (rnd() < .5) { assignGroups(m); } m.home = homeFor(m); } }
+      log(`${g.name} removed: ${n} people lose that tie. ${GFX[i]}`);
+      b.textContent = 'Restore ' + low(g);
     } else {
       g.removed = false;
       for (const l of rg) if (l.g === g) l.s = .5;
-      for (const m of members) if (m.stage === 'member' && rnd() < .1) m.links.push(link(m, g, .35));
-      log(`${g.name} restored. It begins gathering members again.`);
+      for (const m of members) if (m.st === 'member' && !m.rel && m.groups.length < 2 && JOIN[m.band].some(([gi, p]) => gi === i && rnd() < p)) { m.groups.push(g); m.home = homeFor(m); }
+      log(`${g.name} restored. It begins gathering people again.`);
+      b.textContent = 'Remove ' + low(g);
     }
     b.setAttribute('aria-pressed', g.removed);
   };
-  function syncBap(){ for (const b of document.querySelectorAll('#bap button')) b.setAttribute('aria-pressed', +b.dataset.v === S.bap); }
-  $('#bap').onclick = e => { const b = e.target.closest('button'); if (!b) return; S.bap = +b.dataset.v; syncBap(); log(S.bap === 1 ? 'Baptisms return to usual.' : S.bap ? 'A lean year: about half the usual baptisms, across every parish.' : 'No baptisms this year, in any parish. Catechumens wait for next Easter.'); };
 
-  const row = (k, v, pct) => `<div class="row"><span>${k}</span><b>${v}</b>${pct === undefined ? '' : `<div class="meter"><i style="width:${Math.round(pct * 100)}%"></i></div>`}</div>`;
+  const row = (k, v, note, pct) => `<div class="row"><span>${k}</span><b>${v}</b>${note ? `<em>${note}</em>` : ''}${pct === undefined ? '' : `<div class="meter"><i style="width:${Math.round(Math.min(1, pct) * 100)}%"></i></div>`}</div>`;
+  const per1k = (x, n) => n ? (x / n * 1000).toFixed(1) : '0';
   function renderStats(){
-    let h;
-    if (target === 0) {
-      const ga = groups.filter(g => g.active).length;
-      h = row('Baptised members', count('member')) + row('Preparing in OCIA', count('catechumen')) + row('Inquirers', count('inquirer')) + row('Mean bond strength', Math.round(parC() * 100) + '%', parC()) + row('Groups meeting', `${ga} of 7`, ga / 7) + row('Baptisms this liturgical year', S.bapN) + row('Pastor', S.pastor ? 'Present' : 'Vacant');
-    } else {
-      const mc = U.par.reduce((t, q) => t + q.C, 0) / NP, th = U.par.filter(q => q.C > .55).length, vac = U.par.filter(q => !q.priest).length, M = U.par.reduce((t, q) => t + q.M, 0);
-      h = row('Parishes', NP) + row('Thriving (cohesion above 55%)', th, th / NP) + row('Mean cohesion', Math.round(mc * 100) + '%', mc) + row('Shared calendar', S.p.calOff ? 'Dropped' : 'Kept') + row('Priests ready to assign', Math.floor(U.pool)) + row('Parishes without a priest', vac) + row('Simulated members', Math.round(M).toLocaleString('en-GB'));
-    }
-    $('#stats').innerHTML = h;
+    let h = '';
     const d = S.day % 364, se = seasonOf(d);
     $('#season').textContent = se.n; $('#when').textContent = dateLabel(); $('#calmk').style.left = (d / 3.64) + '%';
     document.documentElement.style.setProperty('--season', se.c);
+    if (target === 0) {
+      const L = live(), N = L.length;
+      const bands = [0, 0, 0, 0, 0]; for (const m of L) bands[m.band]++;
+      const reg = bands[4] ? (bands[0] + bands[2]) / bands[4] : 0;
+      h += '<h2>This parish</h2>';
+      h += row('Members', fmt(N), `${count('catechumen')} in OCIA, ${count('inquirer')} inquirer${count('inquirer') === 1 ? '' : 's'}`);
+      h += '<div class="pyr">' + BANDS.map((b, i) => `<div><span>${b.n}</span><span class="b" style="width:${N ? bands[i] / N * 100 * 2.2 : 0}%;max-width:100%;background:${b.c}"></span><b>${N ? Math.round(bands[i] / N * 100) : 0}%</b></div>`).join('') + '</div>';
+      const ad = L.filter(m => m.age >= 18), A = ad.length || 1;
+      const pb = [[18,30],[30,50],[50,65],[65,200]].map(([a, b]) => Math.round(ad.filter(m => m.age >= a && m.age < b).length / A * 100));
+      h += `<p class="note" style="margin:0 0 6px">Adults now 18–29 ${pb[0]}% · 30–49 ${pb[1]}% · 50–64 ${pb[2]}% · 65+ ${pb[3]}%. U.S. Catholic adults (Pew 2023–24): 14 · 27 · 29 · 28.</p>`;
+      h += row('Regeneration ratio', reg.toFixed(2), 'Children and young adults for each member over 60. Below about 1, the parish is not replacing itself.', reg / 2);
+      const adl = L.filter(m => m.age >= 18 && !m.rel), cr = adl.filter(m => !m.convert), cv = adl.filter(m => m.convert), sh = (a, f) => a.length ? Math.round(a.filter(f).length / a.length * 100) : 0;
+      h += row('Weekly Mass attendance', Math.round(S.att * 100) + '%', `Share of members present last Sunday. U.S. reference: about 24% attend weekly (CARA).`, S.att);
+      h += row('Regular practice: cradle · converts', `${sh(cr, m => m.a > .5)}% · ${sh(cv, m => m.a > .5)}%`, `Usually at Sunday Mass. Pew 2025: 28% · 38%. Receive Communion at every Mass: ${sh(cr, m => m.c)}% · ${sh(cv, m => m.c)}% (Pew: 34% · 58%).`);
+      const st = { 'in person':0, online:0, paused:0, dormant:0, removed:0 }; for (const g of groups) st[g.state]++;
+      h += row('Groups', `${st['in person']} in person`, `${st.online} online, ${st.paused + st.dormant} paused or dormant, ${st.removed} removed`, st['in person'] / 9);
+      h += row('Pastor', S.pastor ? 'Present' : `Vacant (${S.wait} days)`);
+      const Y = S.hist[0];
+      if (Y) {
+        h += `<h2>Last liturgical year</h2>`;
+        h += row('Infant baptisms', Y.infant, `${per1k(Y.infant, N)} per 1,000 members (Vatican world average 7.4)`);
+        h += row('Adults received at Easter', Y.adult, `${per1k(Y.adult, N)} per 1,000 (U.S. 2023 about 1.3)`);
+        h += row('Deaths', Y.deaths, `${per1k(Y.deaths, N)} per 1,000`);
+        h += row('Left the Church', Y.left, `${(Y.left / (N || 1) * 100).toFixed(1)}% of members (target about 1.1%)`);
+        h += row('Moved in · moved out', `${Y.movedIn} · ${Y.movedOut}`);
+        const lv = S.hist.slice(0, 5).reduce((t, y) => t + y.left, 0), cv = S.hist.slice(0, 5).reduce((t, y) => t + y.adult, 0);
+        h += row('Leavers per convert (5 years)', cv ? (lv / cv).toFixed(1) : '–', 'Pew finds 8.4 people raised Catholic have left for every convert, over a lifetime; a related but different measure.');
+        const P = { relational:0, marriage:0, digital:0, liturgy:0 }; for (const y of S.hist.slice(0, 5)) for (const k in P) P[k] += y.path[k];
+        const T = Object.values(P).reduce((a, b) => a + b, 0);
+        h += `<h2>How adults came in (last 5 years)</h2><div class="pyr">` + [['relational','Family and friends','#ff9fc6'],['marriage','Marriage or dating','#f2c862'],['digital','Digital content','#7fd3ff'],['liturgy','The liturgy','#ef8a6f']].map(([k, n, c]) => `<div><span>${n}</span><span class="b" style="width:${T ? P[k] / T * 100 : 0}%;background:${c}"></span><b>${T ? Math.round(P[k] / T * 100) : 0}%</b></div>`).join('') + `</div><p class="note" style="margin:0">${T ? 'Adults received: ' + T + '.' : 'No adults were received in these years.'} The 2026 OCIA survey found people arrive through relationships and through content or experience, with two-thirds citing digital content; shares here are approximate.</p>`;
+      } else h += '<p class="note">Yearly figures appear after the first Advent. Raise the speed to see decades unfold.</p>';
+    } else {
+      const cat = CONT.reduce((t, c) => t + c.cat, 0), pr = CONT.reduce((t, c) => t + c.pr, 0);
+      h += `<h2>The whole Church, ${W.year}</h2>`;
+      h += row('Catholics', (cat / 1000).toFixed(3) + ' billion', W.year === 2024 ? 'Starting point: 2024 data' : 'Projected from 2024 growth rates');
+      h += row('Priests', fmt(pr), `${fmt(cat * 1e6 / pr)} Catholics per priest`);
+      h += `<div class="scroll"><table><thead><tr><th>Continent</th><th>Catholics (m)</th><th>Priests</th><th>Per priest</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${c.cat.toFixed(1)}</td><td>${fmt(c.pr)}</td><td>${fmt(c.cat * 1e6 / c.pr)}</td></tr>`).join('')}</tbody></table></div>`;
+      h += `<p class="note">Growth follows each continent’s 2024 change: Africa +2.7%, Oceania +2.1%, the Americas +1.0%, Asia +0.6% and Europe +0.3% a year. Priests change by 2024 ordination and loss rates, so Europe’s clergy shrinks while Africa’s and Asia’s grow.</p>`;
+      h += '<h2>Institutions (2024)</h2>' + row('Schools', fmt(W.inst.kindergartens + W.inst.primary + W.inst.secondary), `${fmt(W.inst.kindergartens)} kindergartens, ${fmt(W.inst.primary)} primary, ${fmt(W.inst.secondary)} secondary`) + row('Hospitals and dispensaries', fmt(W.inst.hospitals + W.inst.dispensaries)) + row('Healthcare and charitable facilities', fmt(W.inst.care));
+    }
+    $('#stats').innerHTML = h;
   }
-  function renderLog(){ $('#log').innerHTML = S.log.length ? S.log.map(x => `<li>${x.t}<small>${x.d}</small></li>`).join('') : '<li>The model is running. Events will appear here.<small>Easter Vigil comes after Lent</small></li>'; }
-  renderLog();
+  function renderLog(){ $('#log').innerHTML = S.log.length ? S.log.map(x => `<li>${x.t}<small>${x.d}</small></li>`).join('') : '<li>The model is running. Events will appear here.<small>The Easter Vigil comes after Lent</small></li>'; }
 
   /* ---------- frame loop ---------- */
   const clock = new THREE.Clock(); let acc = 0, ui = 0;
   const tmp = new V(), c = new THREE.Color(), mats = { p:[], u:[] };
   parishG.traverse(o => o.material && mats.p.push(o.material)); uniG.traverse(o => o.material && mats.u.push(o.material));
+  const bandCol = BANDS.map(b => new THREE.Color(b.c)), inqCol = new THREE.Color(COL.inq), catCol = new THREE.Color(COL.cat), relCol = new THREE.Color(COL.order);
   function frame(){
     requestAnimationFrame(frame);
     const dt = Math.min(.05, clock.getDelta());
-    if (S.run) { acc += dt * S.speed; let n = 0; while (acc >= 1 && n++ < 30) { stepDay(); acc--; } }
+    if (S.run) { acc += dt * S.speed; let n = 0; while (acc >= 1 && n++ < 40) { stepDay(); acc--; } }
     const was = mix; mix += (target - mix) * Math.min(1, dt * 3); if (Math.abs(target - mix) < .001) mix = target;
-    if (was !== mix) { const dist = 46 + 34 * mix; camera.position.setLength(dist); }
+    if (was !== mix) camera.position.setLength(48 + 36 * mix);
     parishG.visible = mix < .995; uniG.visible = mix > .005;
     parishG.scale.setScalar(1 - .6 * mix); uniG.scale.setScalar(.55 + .45 * mix);
     ring.scale.setScalar(1 + .55 * mix); glow.scale.setScalar(12 + 8 * mix);
-    const d = S.day % 364 + acc, a = d / 364 * Math.PI * 2;
-    marker.position.set(Math.cos(a) * 22, 0, Math.sin(a) * 22); marker.visible = !S.p.calOff; marker.material.color.set(seasonOf(S.day % 364).c);
+    const d = S.day % 364 + Math.min(acc, .99), a = d / 364 * Math.PI * 2;
+    marker.position.set(Math.cos(a) * 23, 0, Math.sin(a) * 23); marker.visible = !on('cal'); marker.material.color.set(seasonOf(S.day % 364).c);
 
-    // parish members, links, nodes
     const pos = memPts.geometry.attributes.position, col = memPts.geometry.attributes.color;
     members.forEach((m, i) => {
-      const b = bond(m), k = m.stage === 'member' || m.stage === 'catechumen' ? .6 * (.15 + b) : .25;
+      const k = m.st === 'member' || m.st === 'catechumen' ? .6 * (.15 + m.b) : .25;
       m.v.addScaledVector(tmp.copy(m.home).sub(m.p), k * dt * 3); m.v.multiplyScalar(Math.pow(.08, dt)); m.p.addScaledVector(m.v, dt * 4);
       pos.setXYZ(i, m.p.x, m.p.y, m.p.z);
-      if (m.stage === 'lapsed') c.set(COL.inq).multiplyScalar(Math.max(0, .5 - m.age / 80));
-      else c.set(m.stage === 'member' ? COL.mem : m.stage === 'catechumen' ? COL.cat : COL.inq).multiplyScalar(m.stage === 'member' ? .3 + .7 * b : .8);
+      if (m.st === 'leaving' || m.st === 'moved') c.copy(inqCol).multiplyScalar(Math.max(0, .5 - m.fade / 80));
+      else if (m.st === 'inquirer') c.copy(inqCol).multiplyScalar(.8);
+      else if (m.st === 'catechumen') c.copy(catCol);
+      else c.copy(m.rel ? relCol : bandCol[m.band]).multiplyScalar(.3 + .7 * m.b);
       col.setXYZ(i, c.r, c.g, c.b);
     });
     memPts.geometry.setDrawRange(0, members.length); pos.needsUpdate = col.needsUpdate = true;
     const lp = lines.geometry.attributes.position, lc = lines.geometry.attributes.color; let li = 0;
     const seg = (A, B, hex, s) => { lp.setXYZ(li * 2, A.x, A.y, A.z); lp.setXYZ(li * 2 + 1, B.x, B.y, B.z); c.set(hex).multiplyScalar(s); lc.setXYZ(li * 2, c.r, c.g, c.b); lc.setXYZ(li * 2 + 1, c.r, c.g, c.b); li++; };
-    for (const l of rs) seg(l.a.p, l.b.p, COL.role, l.s * .55);
-    for (const l of rg) seg(l.a.p, l.b.p, l.g.kind === 'order' ? COL.order : COL.group, l.s * .7);
-    for (const m of members) for (const l of m.links) seg(l.g.p, m.p, l.g.kind === 'order' ? COL.order : COL.group, l.s * .4);
+    for (const l of rs) seg(l.a.p, l.b.p, COL.role, l.s * .5);
+    for (const l of rg) seg(l.a.p, l.b.p, l.g.kind === 'order' ? COL.order : COL.group, l.s * .65);
+    for (const m of members) if (m.st === 'member') for (const g of m.groups) { const f = g.state === 'in person' ? 1 : g.state === 'online' ? .45 : .12; seg(g.p, m.p, g.kind === 'order' ? COL.order : COL.group, m.b * .35 * f); }
     lines.geometry.setDrawRange(0, li * 2); lp.needsUpdate = lc.needsUpdate = true;
     for (const n of nodes) {
-      const on = n.kind === 'group' || n.kind === 'order' ? n.active : n === pastor ? S.pastor : n.kind === 'role' ? (!rg.some(l => l.r === n) || rg.some(l => l.r === n && !l.g.removed)) : true;
-      n.mesh.scale.setScalar(n.size * (n.removed ? .3 : on ? 1 : .6)); n.mesh.material.emissiveIntensity = on ? .4 : .04; n.mesh.material.userData.o = on ? 1 : .45;
+      let s = 1, e = .4, o = 1;
+      if (n.kind === 'group' || n.kind === 'order') { const st = n.state; if (st === 'removed') { s = .3; e = .02; o = .3; } else if (st === 'dormant' || st === 'paused') { s = .6; e = .04; o = .5; } else if (st === 'online') { s = .85; e = .15; o = .7; } }
+      else if (n === pastor && !S.pastor) { s = .5; e = .04; o = .45; }
+      else if (n.kind === 'role' && rg.some(l => l.r === n) && !rg.some(l => l.r === n && !l.g.removed)) { s = .6; e = .04; o = .45; }
+      n.mesh.scale.setScalar(n.size * s); n.mesh.material.emissiveIntensity = e; n.mesh.material.userData.o = o;
     }
-    const coh = parC();
-    memb.material.color.set(S.p.closed ? '#e3dcef' : '#a99bd0');
-    memb.material.userData.o += ((S.p.closed ? .16 : .02 + .05 * coh) - memb.material.userData.o) * Math.min(1, dt * 2);
+    const coh = live().reduce((t, m) => t + m.b, 0) / (live().length || 1);
+    memb.material.color.set(on('closed') ? '#e3dcef' : '#a99bd0');
+    memb.material.userData.o += ((on('closed') ? .16 : .02 + .05 * coh) - memb.material.userData.o) * Math.min(1, dt * 2);
 
-    // universal parishes, web, far points
-    const sp = sats.geometry.attributes.position, sc = sats.geometry.attributes.color, fc = far.geometry.attributes.color;
-    const wc = web.geometry.attributes.color, seas = new THREE.Color(seasonOf(S.day % 364).c);
-    U.par.forEach((q, i) => {
-      q.flash *= Math.pow(.03, dt);
-      cores[i].scale.setScalar(.45 + .55 * Math.min(1, q.M / 700));
-      c.set('#6e6680').lerp(new THREE.Color('#f1ead8'), q.C); cores[i].material.color.copy(c); cores[i].material.emissive.copy(c); cores[i].material.emissiveIntensity = .12 + .5 * q.C + .5 * q.flash;
-      for (let k = 0; k < 4; k++) {
-        const o = satOff[i][k]; sp.setXYZ(i * 4 + k, q.p.x + o.x, q.p.y + o.y, q.p.z + o.z);
-        const f = k === 0 ? (q.priest ? 1 : .1) : k === 1 ? q.C : k === 2 ? .3 + .7 * q.flash : (orders.some(o2 => o2.ps.includes(i)) && !(i === 0 && groups[6].removed) ? .9 : .1);
-        c.copy(satCol[k]).multiplyScalar(f); sc.setXYZ(i * 4 + k, c.r, c.g, c.b);
-      }
-      c.set('#d9d2e6').multiplyScalar(.15 + .3 * q.C + .55 * q.flash); fc.setXYZ(i, c.r, c.g, c.b);
-    });
-    nbr.forEach(([i, j], k) => { c.copy(seas).multiplyScalar((.1 + .7 * Math.min(U.par[i].flash, U.par[j].flash)) * (S.p.calOff ? .35 : 1)); wc.setXYZ(k * 2, c.r, c.g, c.b); wc.setXYZ(k * 2 + 1, c.r, c.g, c.b); });
-    sp.needsUpdate = sc.needsUpdate = fc.needsUpdate = wc.needsUpdate = true;
-    arcMat.userData.o = S.p.calOff ? .15 : .4;
-    far.material.userData.o = 1;
+    // whole Church
+    const seas = new THREE.Color(seasonOf(S.day % 364).c), fc = far.geometry.attributes.color;
+    CONT.forEach((cn, i) => { cn.flash *= Math.pow(.03, dt); c.set('#d9d2e6').multiplyScalar(.2 + .5 * cn.flash); fc.setXYZ(i, c.r, c.g, c.b); });
+    fc.needsUpdate = true;
+    for (const gl of glyphs) {
+      const cn = gl.c, cap = Math.min(1, 1900 / (cn.cat * 1e6 / cn.pr));
+      gl.m.scale.setScalar(.45 * Math.sqrt(cn.cat / cn.cat0) + .1);
+      c.set('#7a7090').lerp(seas, .25).lerp(new THREE.Color('#f6efe0'), cap); gl.m.material.color.copy(c); gl.m.material.emissive.copy(c); gl.m.material.emissiveIntensity = .15 + .35 * cap + .5 * cn.flash;
+    }
+    arcMat.userData.o = on('cal') ? .1 : .3;
 
     for (let i = pulses.length - 1; i >= 0; i--) { const p = pulses[i]; p.t += dt / 1.2; p.s.scale.setScalar(1 + p.size * p.t); p.s.material.userData.o = .9 * (1 - p.t); if (p.t >= 1) { p.s.parent.remove(p.s); p.s.material.dispose(); pulses.splice(i, 1); } }
-    for (let i = tokens.length - 1; i >= 0; i--) { const t = tokens[i]; t.t += dt / 1.6; t.s.position.copy(t.a).lerp(t.b, t.t); if (t.t >= 1) { uniG.remove(t.s); tokens.splice(i, 1); } }
-
-    // fade the two scales
-    for (const m of mats.p) { m.opacity = (m.userData.o ?? 1) * (1 - mix); }
-    for (const m of mats.u) { m.opacity = (m.userData.o ?? 1) * mix; }
-    for (const p of pulses) p.s.material.opacity = p.s.material.userData.o * (p.s.parent === parishG ? 1 - mix : mix);
-    for (const t of tokens) t.s.material.opacity = mix;
+    for (const m of mats.p) m.opacity = (m.userData.o ?? 1) * (1 - mix);
+    for (const m of mats.u) m.opacity = (m.userData.o ?? 1) * mix;
+    for (const p of pulses) p.s.material.opacity = p.s.material.userData.o * (1 - mix);
     far.material.opacity = .9 * (1 - mix);
-
     controls.update();
     renderer.render(scene, camera);
-
     for (const L of labs) {
       const f = L.uni ? mix : 1 - mix;
       if (f < .4) { L.e.style.display = 'none'; continue; }
       L.o.getWorldPosition(tmp).project(camera);
       if (tmp.z > 1) { L.e.style.display = 'none'; continue; }
       L.e.style.display = 'block'; L.e.style.opacity = f;
-      L.e.style.transform = `translate(${(tmp.x + 1) / 2 * W}px,${(1 - tmp.y) / 2 * H + L.dy}px) translate(-50%,-100%)`;
+      L.e.style.transform = `translate(${(tmp.x + 1) / 2 * Wd}px,${(1 - tmp.y) / 2 * Hd + L.dy}px) translate(-50%,-100%)`;
     }
-    ui += dt; if (ui > .25) { ui = 0; renderStats(); }
+    ui += dt; if (ui > .3) { ui = 0; renderStats(); syncPert(); }
   }
-  renderStats(); frame();
+  initParish(S.size); paintRing(); renderLog(); renderStats();
+  window.__boc = { fast(days){ for (let i = 0; i < days; i++) stepDay(); renderStats(); }, S, K, members:() => members, live, CONT };
+  frame();
 }
 main();
 }
