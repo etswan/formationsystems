@@ -31,7 +31,11 @@ body{background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3",system-
 .fade-up{height:clamp(120px,22vh,220px);background:linear-gradient(var(--bg),#fbfaf7)}
 .site-foot{background:#fbfaf7;color:#6b6670;color-scheme:light;padding:8px 20px 40px;text-align:center;font-size:13px;line-height:1.7}
 .site-foot a{color:#4c4752}
+.site-foot .repo{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:10px 20px;border:1px solid #2b2a2f;border-radius:999px;color:#211f25;text-decoration:none;font-size:15px;font-weight:600;background:#fff}
+.site-foot .repo:hover{background:#211f25;color:#fbfaf7}
+.site-foot .repo:focus-visible{outline:2px solid #5b3e8c;outline-offset:3px}
 .zoomhint{position:absolute;left:50%;top:16px;transform:translateX(-50%);background:rgba(18,14,24,.86);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none}
+table.tight th,table.tight td{padding:5px 4px;font-size:13px}
 .refs{list-style:none;padding:0}.refs li{padding-left:1.4em;text-indent:-1.4em;margin-bottom:6px;font-size:14px}
 .stage{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 48%,#241c2f 0,var(--bg) 68%)}
 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
@@ -104,7 +108,7 @@ a{color:#c9b6ff}
   <div class="in">
     <h1>The Living System of Catholic Formation</h1>
     <p class="sub">Through the lens of autopoiesis, social neuroscience and distributed cognition</p>
-    <p class="body">This project frames Catholic spiritual formation as a non-biological autopoietic system, reinterpreting discipleship not as knowledge transfer, but as continuous participation in an operationally closed, self-producing environment. By synthesising biological autopoiesis, organisational cybernetics, relational liturgy and social neuroscience, the model demonstrates how sacramental rites, a shared liturgical calendar and physical interbrain synchrony recursively regenerate the living Body of Christ across generational member turnover. Ultimately, the framework serves as a practical model for ecclesial architecture, illustrating how replacing clerical single points of failure with distributed formational networks preserves institutional identity and systemic resilience.</p>
+    <p class="body">This project frames Catholic spiritual formation as a non-biological autopoietic system, reinterpreting discipleship not as knowledge transfer, but as continuous participation in an operationally closed, self-producing environment. By synthesising biological autopoiesis, organisational cybernetics and social neuroscience, the model demonstrates how the system recursively regenerates the living Body of Christ across generational member turnover. Ultimately, the framework serves as a practical model for ecclesial architecture, illustrating how replacing clerical single points of failure with distributed formational networks preserves institutional identity and systemic resilience.</p>
     <a class="go" href="#model">Explore the model ↓</a>
   </div>
 </header>
@@ -113,11 +117,11 @@ a{color:#c9b6ff}
   <div class="stage" id="stage">
     <div class="tip" id="tip"></div>
     <div class="zoomhint" id="zoomhint">Hold Ctrl (⌘ on a Mac) and scroll to zoom</div>
-    <p class="hint" id="hint">Drag to turn; pinch, or hold Ctrl (⌘) and scroll, to zoom. Choose an event in the panel, then tap the sphere to send it rippling through the parish. Hover a node or dot to read it.</p>
+    <p class="hint" id="hint">Drag to turn; pinch, or hold Ctrl (⌘) and scroll, to zoom. Choose an event in the panel, then tap the sphere to send it rippling outwards: through the parish, or in the whole-Church view across the space around the continents. Hover a node or dot to read it.</p>
   </div>
   <aside class="panel">
     <h1>Body of Christ Model</h1>
-    <p class="ver">Version 2.2 · each dot is one person</p>
+    <p class="ver">Version 2.3 · each dot is one person</p>
     <p class="lede">One self-renewing body at two scales. The scale you are viewing is shown in detail; the other stays simple.</p>
 
     <div class="seg" role="group" aria-label="Scale">
@@ -152,7 +156,7 @@ a{color:#c9b6ff}
 
     <h2>Bring an event</h2>
     <div class="acts" id="ebtns"></div>
-    <p class="note">Choose an event, then tap the sphere where it should land. Enthusiasm ripples outwards and fades over weeks; how much of it lasts depends on the groups and practice already there.</p>
+    <p class="note">Choose an event, then tap the sphere where it should land: on the parish, or in the whole-Church view on the space around the continents. Enthusiasm ripples outwards and fades over weeks; how much of it lasts depends on the structures already there.</p>
 
     <h2>Remove or restore a group</h2>
     <div class="acts" id="gbtns"></div>
@@ -192,6 +196,7 @@ a{color:#c9b6ff}
     <details>
       <summary>Description</summary>
       <p>Choose an event (a relic tour, a papal visit, a visiting choir, World Youth Day or a Eucharistic procession) and tap the sphere. A wave of enthusiasm ripples across the membrane and through the members it reaches, who glow gold. While it lasts they come to Mass more often, occasional attenders are more likely to return, and newcomers arrive. It fades over weeks. What remains depends on the parish: enthusiasm becomes lasting bonds only through the groups and practice that can absorb it. Six months later, the log reports how much stayed. Try the same event under closed leadership and compare.</p>
+      <p>In the whole-Church view, each region is a cluster of points, one for about every 10 million Catholics. Its size shows rooted robustness: the weight of institutions built up over generations. Its depth of green shows vitality: new life coming in. Its heartbeat shows whether it is regenerating faster than it decays, and the rings that spread from it each Sunday show how many are at Mass. Events can be brought here too: tap the space around the continents.</p>
       <p>Attendance is not fixed. Each year some regular attenders slip into occasional practice and some occasional attenders return, often at a marriage, a child’s baptism or a great feast. Formation in childhood, a parent’s practice, spiritual direction, the young adults group and, as a hypothesis, the reverence of the liturgy all shift those chances.</p>
       <p> Leave it running for decades and the parish remakes itself: people are born, age, join groups, leave, die and are replaced by births, converts and people moving in. The members change while the organisation persists: autopoiesis.</p>
       <p>Watch the age pyramid and the regeneration ratio. A parish can hold its numbers for years while ageing towards a point where it can no longer replace itself.</p>
@@ -214,7 +219,10 @@ a{color:#c9b6ff}
         <li>Returns to practice at marriage, a child’s baptism and great feasts; more slipping during scandal and pandemic <span class="tag t-part">partly grounded</span> in the direction of the effect; the rates are assumptions</li>
         <li>Events (relic tours, papal visits, visiting choirs, World Youth Day, Eucharistic processions): their reach and strength, and how quickly enthusiasm fades <span class="tag t-hyp">hypothesis</span></li>
         <li>Closed leadership, the dropped calendar, the effects of spiritual direction and of liturgical reverence on practice, and all group renewal rates <span class="tag t-hyp">hypothesis</span></li>
-        <li>Whole-Church figures: Catholics, priests and growth by continent for 2024 <span class="tag t-cal">calibrated</span> <a href="https://www.vaticannews.va/en/church/news/2026-10/fides-agency-2026-annual-church-statistics.html">Fides 2026</a>, <a href="https://www.vaticannews.va/en/vatican-city/news/2026-03/new-data-from-annuario-pontificio-2026-shows-catholics-growing.print.html">Annuarium 2024</a>; priests in Africa, Europe and Oceania derived from reported ratios <span class="tag t-part">partly grounded</span></li>
+        <li>Whole-Church figures: Catholics, priests and their 2024 change by continent <span class="tag t-cal">calibrated</span> <a href="https://www.vaticannews.va/en/church/news/2026-10/fides-agency-2026-annual-church-statistics.html">Fides 2026</a>; dioceses, schools, hospitals, charities, university students, religious, seminarians and their 2023 change <span class="tag t-cal">calibrated</span> <a href="https://www.fides.org/en/attachments/view/file/Catholic_Church_Statistics_2025.pdf">Fides 2025</a>; baptisms by continent <a href="https://www.vaticannews.va/en/vatican-city/news/2026-03/new-data-from-annuario-pontificio-2026-shows-catholics-growing.print.html">Annuarium 2024</a></li>
+        <li>Sunday Mass by continent: Africa about 70%, Asia 50%, the Americas 27%, Europe 22%, Oceania 15%, estimated from self-reported weekly attendance in 36 countries (Nigeria 94%, Kenya 73%, Philippines 56%, Poland 52%, Mexico 47%, Italy 34%, Germany 14%, Brazil 8%, France 8%) and weighted by Catholic population <span class="tag t-part">partly grounded</span> <a href="https://aleteia.org/2023/01/25/where-in-the-world-is-catholic-mass-attendance-highest/">CARA, World Values Survey</a></li>
+        <li>Rooted robustness: the average of six institutional counts relative to the largest region, weighted by the age of each region’s diocesan structure (Europe from the first centuries, the Americas from 1511, Asia from the 16th century, Oceania from the 1840s, most of Africa from the late 19th century) <span class="tag t-part">partly grounded</span>; the weighting is a hypothesis</li>
+        <li>Vitality and pulse: scored from Catholic growth, baptisms per 1,000, seminarians per 100 priests and the trends in priests, seminarians and women religious <span class="tag t-part">partly grounded</span>; how events, vitality and institutions change one another over the years <span class="tag t-hyp">hypothesis</span></li>
       </ul>
       <h2 style="margin-top:18px">References</h2>
       <ul class="refs">
@@ -229,16 +237,16 @@ a{color:#c9b6ff}
         <li>Maturana, H. R., &amp; Varela, F. J. (1992). <i>The tree of knowledge: The biological roots of human understanding</i> (Rev. ed.). Shambhala.</li>
         <li>Maximus the Confessor. <i>Ambigua ad Iohannem</i>. In J.-P. Migne (Ed.), <i>Patrologia Graeca</i> (Vol. 91).</li>
         <li>Second Vatican Council. (1964). <i>Lumen gentium: Dogmatic constitution on the Church</i>. <a href="https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19641121_lumen-gentium_en.html">vatican.va</a></li>
-        <li>Swan, E. (2026). <i>Body of Christ Model</i> (Version 2.2) [Interactive simulation model]. <a href="https://formationsystems.org">formationsystems.org</a></li>
+        <li>Swan, E. (2026). <i>Body of Christ Model</i> (Version 2.3) [Interactive simulation model]. <a href="https://formationsystems.org">formationsystems.org</a></li>
       </ul>
     </details>
-    <p class="foot">Body of Christ Model, version 2.2 (November 2026). formationsystems.org. An illustrative research model: simulated numbers are not predictions.</p>
+    <p class="foot">Body of Christ Model, version 2.3 (November 2026). formationsystems.org. An illustrative research model: simulated numbers are not predictions.</p>
   </aside>
 </main>
 <div class="fade-up" aria-hidden="true"></div>
 <footer class="site-foot">
-  <p style="margin:0">Source code: <a href="https://github.com/etswan/formationsystems">github.com/etswan/formationsystems</a></p>
-  <p style="margin:2px 0 0;font-size:12px;color:#8a8590">Model developed by Emma T. Swan</p>
+  <a class="repo" href="https://github.com/etswan/formationsystems"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View the source code on GitHub</a>
+  <p style="margin:18px 0 0;font-size:12px;color:#8a8590">Model developed by Emma T. Swan</p>
 </footer>
 
 <script src="js/three.min.js"></script>
@@ -394,30 +402,55 @@ function main(){
     { k:'pan', n:'Pandemic', dur:1092 }, { k:'scan', n:'Scandal', dur:728 }, { k:'closed', n:'Closed leadership', dur:1092 },
     { k:'cal', n:'Drop the shared calendar', dur:364 }, { k:'short', n:'Vocations shortage', dur:1820 } ];
   const S = { day:84, run:!reduce, speed:7, pastor:true, wait:0, log:[], bap:1, mode:'timed', size:600, digital:1, rev:0, climate:1,
-    p:{ pan:0, scan:0, closed:0, cal:0, short:0 }, rec:0, yr:newYear(), hist:[], att:0, comm:0, n0:0, sd:1, cohorts:[], pend:[], ev:'choir', meanE:0 };
+    p:{ pan:0, scan:0, closed:0, cal:0, short:0 }, rec:0, yr:newYear(), hist:[], att:0, comm:0, n0:0, sd:1, cohorts:[], pend:[], ev:'choir', meanE:0, swell:0, wcoh:[] };
   const on = k => S.p[k] > 0;
   const count = st => members.filter(m => m.st === st).length;
   const live = () => members.filter(m => m.st === 'member');
 
   /* ---------- the whole Church (2024 data) ---------- */
+  // 2024 Catholics and priests (Fides 2026); institutions, religious and seminarians 2023 (Fides 2025); Mass attendance estimated from WVS via CARA (2023)
   const CONT = [
-    { n:'Americas', cat:678.87, g:6.99 / 671.88, pr:118544, dpr:199, dir:[-.8,.2,.55] },
-    { n:'Africa', cat:288.31, g:7.58 / 280.73, pr:57000, dpr:1676, dir:[.25,-.4,.88] },
-    { n:'Europe', cat:287.24, g:.911 / 286.33, pr:152156, dpr:-2483, dir:[.3,.68,.66] },
-    { n:'Asia', cat:156.17, g:.968 / 155.2, pr:75121, dpr:1065, dir:[.92,.22,-.1] },
-    { n:'Oceania', cat:11.56, g:.239 / 11.32, pr:4600, dpr:-32, dir:[.6,-.62,-.5] } ];
-  CONT.forEach(c => { c.cat0 = c.cat; c.pr0 = c.pr; c.ord = .025 * c.pr + c.dpr; c.flash = 0; });
-  const W = { year:2024, inst:{ kindergartens:75448, primary:103666, secondary:51810, hospitals:5397, dispensaries:13646, care:101110 } };
+    { n:'Americas', cat:678.87, g:6.99 / 671.88, pr:118544, dpr:199, dir:[-.8,.2,.55], circ:1102, schools:48452, health:4911, charity:27997, students:2543486, rel:149836, sem:27376, semT:-.013, wrT:-.029, bap:7.8, A:.27, age:515, since:'1511 (Santo Domingo)' },
+    { n:'Africa', cat:288.31, g:7.58 / 280.73, pr:56786, dpr:1676, dir:[.25,-.4,.88], circ:554, schools:84689, health:6607, charity:7265, students:315276, rel:94265, sem:34924, semT:.011, wrT:.021, bap:14.4, A:.70, age:130, since:'mostly the late 19th and 20th centuries' },
+    { n:'Europe', cat:287.24, g:.911 / 286.33, pr:152608, dpr:-2483, dir:[.3,.68,.66], circ:759, schools:47655, health:3357, charity:35124, students:1032715, rel:199017, sem:12800, semT:-.052, wrT:-.038, bap:5.05, A:.22, age:1925, since:'the first centuries' },
+    { n:'Asia', cat:156.17, g:.968 / 155.2, pr:75121, dpr:1065, dir:[.92,.22,-.1], circ:545, schools:41962, health:3615, charity:12937, students:542898, rel:188368, sem:30436, semT:-.044, wrT:0, bap:13.0, A:.50, age:490, since:'the 16th century (Goa, Manila); older Eastern churches' },
+    { n:'Oceania', cat:11.56, g:.239 / 11.32, pr:4362, dpr:-32, dir:[.6,-.62,-.5], circ:81, schools:6332, health:782, charity:1356, students:34500, rel:6685, sem:959, semT:-.016, wrT:-.042, bap:10.2, A:.15, age:190, since:'the 1830s and 1840s (Sydney)' } ];
+  const clamp01 = x => Math.max(0, Math.min(1, x)), sc = (x, lo, hi) => clamp01((x - lo) / (hi - lo));
+  const MAXC = {}; ['circ','schools','health','charity','students'].forEach(k => MAXC[k] = Math.max(...CONT.map(c => c[k]))); MAXC.clergy = Math.max(...CONT.map(c => c.pr + c.rel));
+  function measures(c){
+    c.Rc = (c.circ / MAXC.circ + c.schools * c.inst / MAXC.schools + c.health * c.inst / MAXC.health + c.charity * c.inst / MAXC.charity + c.students * c.inst / MAXC.students + (c.pr + c.rel) / MAXC.clergy) / 6;
+    c.R = c.Rc * Math.pow(Math.log10(c.age) / Math.log10(1925), 1.5);
+    const bap = c.bap * (.2 + .8 * S.bap) * (1 + 10 * (c.gNow - c.g));
+    c.V = (sc(c.gNow, -.01, .03) + sc(c.sem / c.pr * 100, 0, 70) + sc(c.prRate, -.03, .03) + sc(bap, 0, 16) + sc(c.wrRate, -.05, .03)) / 5;
+    c.P = (sc(c.gNow, -.01, .03) + sc(c.prRate, -.03, .03) + sc(c.semRate, -.05, .03)) / 3;
+  }
+  CONT.forEach(c => { Object.assign(c, { cat0:c.cat, pr0:c.pr, sem0:c.sem, ord:.025 * c.pr + c.dpr, flash:0, inst:1, gNow:c.g, prRate:c.dpr / c.pr, semRate:c.semT, wrRate:c.wrT, E:0, Eacc:0, A0:c.A, Aeff:c.A, sun:false, lastRing:0, beat:0 }); });
+  CONT.forEach(measures);
+  const RMAX = Math.max(...CONT.map(c => c.R));
+  CONT.forEach(c => { c.V0 = c.V; c.R0 = c.R; c.P0 = c.P; });
+  const wAtt = () => CONT.reduce((t, c) => t + c.cat * c.Aeff, 0) / CONT.reduce((t, c) => t + c.cat, 0);
+  const W0 = CONT.reduce((t, c) => t + c.cat * c.A, 0) / CONT.reduce((t, c) => t + c.cat, 0);
+  const W = { year:2024 };
   function stepWorld(){
     const pan = on('pan'), scan = on('scan'), sh = on('short'), cl = on('closed');
     for (const c of CONT) {
+      const Eavg = c.Eacc / 364; c.Eacc = 0;
+      const absorb = .3 + .7 * (.5 * c.R / RMAX + .5 * c.V);
       let g = c.g * (.2 + .8 * S.bap);
       if (pan) g *= .8;
       if (scan && (c.n === 'Americas' || c.n === 'Europe')) g -= .002;
       if (cl) g -= .002;
-      c.cat *= 1 + g;
-      const ord = c.ord * (sh ? .5 : 1) * (pan ? .8 : 1);
-      c.pr = Math.max(100, c.pr + ord - .025 * c.pr);
+      g += .012 * Eavg * absorb;
+      c.cat *= 1 + g; c.gNow = g;
+      c.semRate = c.semT * .5 * Math.exp(-(W.year - 2024) / 25) + .02 * (c.V - c.V0) + .05 * Eavg * absorb - (sh ? .05 : 0) - (scan ? .02 : 0) - (cl ? .01 : 0);
+      c.sem = Math.max(10, c.sem * (1 + c.semRate));
+      const ord = c.ord * (c.sem / c.sem0) * (sh ? .5 : 1) * (pan ? .8 : 1), p0 = c.pr;
+      c.pr = Math.max(100, c.pr + ord - .025 * c.pr); c.prRate = (c.pr - p0) / p0;
+      c.wrRate = c.wrT + .5 * (c.semRate - c.semT); c.rel *= 1 + c.wrRate;
+      c.inst *= 1 + .003 + .02 * (c.V - .4) + .01 * Eavg * absorb - (cl ? .003 : 0);
+      c.A = Math.max(.03, Math.min(.95, c.A + .004 * (c.V - .45) + .02 * Eavg * absorb));
+      c.age++;
+      measures(c);
     }
     W.year++;
   }
@@ -602,7 +635,14 @@ function main(){
       if (members.filter(m => m.rel).length < 4 && !on('short')) newMember({ rel:true, age:30, a:1, c:true, b:.8, reg:true });
       stepWorld();
     }
-    for (const c of CONT) if ((d + (calOff ? Math.floor(c.cat) % 7 : 0)) % 7 === 0) c.flash = 1;
+    for (const c of CONT) {
+      if (c.E > 0) { c.E *= .99; if (c.E < .003) c.E = 0; } c.Eacc += c.E;
+      c.Aeff = Math.min(.97, c.A * recov * (scan && (c.n === 'Americas' || c.n === 'Europe') ? .9 : 1) * (1 + .5 * c.E));
+      if ((d + (calOff ? Math.floor(c.cat0) % 7 : 0)) % 7 === 0) c.sun = true;
+    }
+    if (!calOff && (d === 28 || d === 133 || d === 182)) S.swell = 1;
+    for (const k of S.wcoh) if (!k.done && S.day - k.day >= 364) { k.done = true; const c = k.c; log(`A year after ${k.after} in ${c.n}: Sunday Mass attendance there is ${Math.round(c.A * 100)}% (${Math.round(k.A * 100)}% before), vitality ${Math.round(c.V * 100)} (${Math.round(k.V * 100)}), and Catholics number ${c.cat.toFixed(1)} million (${k.cat.toFixed(1)} million).`); }
+    S.wcoh = S.wcoh.filter(k => !k.done);
   }
 
   /* ---------- three.js scene ---------- */
@@ -613,7 +653,7 @@ function main(){
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(55, 1, .1, 600);
   camera.position.set(0, 9, 48);
-  if (matchMedia('(pointer: coarse)').matches) $('#hint').textContent = 'Drag to turn, pinch to zoom. Choose an event in the panel, then tap the sphere to send it rippling through the parish. Tap a node or dot to read it.';
+  if (matchMedia('(pointer: coarse)').matches) $('#hint').textContent = 'Drag to turn, pinch to zoom. Choose an event in the panel, then tap the sphere to send it rippling outwards, in either view. Tap a node or dot to read it.';
   let zh;
   stage.addEventListener('wheel', ev => { if (ev.ctrlKey || ev.metaKey) return; ev.stopPropagation(); const z = $('#zoomhint'); z.style.opacity = 1; clearTimeout(zh); zh = setTimeout(() => { z.style.opacity = 0; }, 1400); }, { capture:true });
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -655,17 +695,23 @@ function main(){
   const marker = new THREE.Sprite(spriteMat(dotTex, 0xffffff, 1)); marker.scale.setScalar(2.4); ring.add(marker);
   function paintRing(){ const c = new THREE.Color(), off = on('cal'); for (let i = 0; i < RN; i++) { c.set(off ? '#4a4452' : seasonOf(i).c).multiplyScalar(off ? .6 : .75); ringG.attributes.color.setXYZ(i, c.r, c.g, c.b); } ringG.attributes.color.needsUpdate = true; }
 
-  // whole Church: one point per 20 million Catholics
-  const glyphs = [];
-  CONT.forEach((c, ci) => {
-    c.center = new V(...c.dir).normalize().multiplyScalar(26);
-    const n = Math.max(1, Math.round(c.cat0 / 20));
-    for (let k = 0; k < n; k++) {
-      const p = c.center.clone().add(rv().multiplyScalar(1.2 + Math.sqrt(n) * .9));
-      const m = new THREE.Mesh(ball, nodeMat('#e9e2f2')); m.position.copy(p); m.scale.setScalar(.55); m.userData.cont = ci; m.userData.k = k;
-      uniG.add(m); pick.push(m); glyphs.push({ m, c, k });
-    }
-  });
+  // whole Church: one point per 10 million Catholics
+  const glyphs = [], uRings = [], lateU = [];
+  const glyphMat = () => { const m = new THREE.MeshStandardMaterial({ color:'#cfe8d6', emissive:'#2fae5c', emissiveIntensity:.2, roughness:.45, transparent:true }); m.userData.o = 1; return m; };
+  function addGlyph(c, ci){
+    const k = glyphs.filter(g => g.c === c).length, n = Math.max(1, Math.round(c.cat / 10));
+    const p = c.center.clone().add(rv().multiplyScalar(1.4 + Math.sqrt(n) * .62));
+    const m = new THREE.Mesh(ball, glyphMat()); m.position.copy(p); m.scale.setScalar(.4); m.userData.cont = ci; m.userData.k = k;
+    uniG.add(m); pick.push(m); glyphs.push({ m, c, k, glow:0 }); lateU.push(m.material);
+  }
+  CONT.forEach((c, ci) => { c.center = new V(...c.dir).normalize().multiplyScalar(26); c.dirN = new V(...c.dir).normalize(); const n = Math.max(1, Math.round(c.cat0 / 10)); for (let k = 0; k < n; k++) addGlyph(c, ci); });
+  function syncGlyphs(){
+    CONT.forEach((c, ci) => {
+      const want = Math.max(1, Math.round(c.cat / 10)), have = glyphs.filter(g => g.c === c);
+      for (let k = have.length; k < want; k++) addGlyph(c, ci);
+      for (let k = have.length - 1; k >= want && k > 0; k--) { const g = have[k]; if (g.m === yourGlyph) continue; uniG.remove(g.m); pick.splice(pick.indexOf(g.m), 1); glyphs.splice(glyphs.indexOf(g), 1); }
+    });
+  }
   const yourGlyph = glyphs[0].m;
   const you = new THREE.Sprite(spriteMat(ringTex, 0xffffff, .9)); you.position.copy(yourGlyph.position); you.scale.setScalar(3.6); uniG.add(you);
   const arcPts = [];
@@ -700,7 +746,7 @@ function main(){
     const r = stage.getBoundingClientRect(), u = h.object.userData;
     let html;
     if (h.object === memPts) { const m = members[h.index]; if (!m) return; html = `<b>${m.rel ? 'Member of the religious community' : m.st === 'member' ? (m.convert ? 'Convert' : 'Member') : m.st === 'catechumen' ? 'Catechumen or candidate' : m.st === 'inquirer' ? 'Inquirer' : 'Leaving'}, age ${Math.floor(m.age)}</b>Bond ${Math.round(m.b * 100)}%. ${m.st !== 'member' || m.rel ? '' : m.kid ? 'Comes to Mass with family. ' : m.reg ? 'Regular at Mass. ' : 'Occasional at Mass. '}${m.e > .05 ? 'Enthusiasm ' + Math.round(m.e * 100) + '% after an event. ' : ''}${m.groups.length ? 'In ' + m.groups.map(g => g.name.toLowerCase()).join(' and ') + '.' : 'In no group.'}${m.path ? ' Came through ' + ({ relational:'family and friends', marriage:'marriage or dating', digital:'digital content', liturgy:'the liturgy', event:'an event' })[m.path] + '.' : ''}`; }
-    else if (u.cont !== undefined) { const c = CONT[u.cont]; html = `<b>${h.object === yourGlyph ? 'Your parish, in the ' + c.n : c.n}</b>${(c.cat).toFixed(1)} million Catholics, ${fmt(c.pr)} priests, ${fmt(c.cat * 1e6 / c.pr)} Catholics per priest. Each point stands for about 20 million Catholics.${h.object === yourGlyph ? ' Click to enter.' : ''}`; }
+    else if (u.cont !== undefined) { const c = CONT[u.cont]; html = `<b>${h.object === yourGlyph ? 'Your parish, in the ' + c.n : c.n}</b>${c.cat.toFixed(1)} million Catholics; Sunday Mass about ${Math.round(c.Aeff * 100)}%. Rooted ${Math.round(c.R / RMAX * 100)}, vitality ${Math.round(c.V * 100)}, pulse ${Math.round(c.P * 100)}. ${fmt(c.pr)} priests, ${fmt(c.sem)} seminarians. Dioceses since ${c.since}. Each point is about 10 million Catholics.${h.object === yourGlyph ? ' Click to enter.' : ''}`; }
     else { const n = u.node; html = `<b>${n.name}</b>${n.info}${n.kind === 'group' || n.kind === 'order' ? ' Now: ' + n.state + '.' : ''}${n === pastor && !S.pastor ? ' Vacant.' : ''}`; }
     tip.innerHTML = html; tip.style.display = 'block';
     tip.style.left = Math.min(ev.clientX - r.left + 14, Wd - 290) + 'px'; tip.style.top = Math.max(8, ev.clientY - r.top - 10) + 'px';
@@ -728,7 +774,6 @@ function main(){
     S.cohorts.push(c);
     const ni = Math.round(N * E.inq * (S.p.scan ? .6 : 1) * (.7 + rnd() * .6));
     if (ni) S.pend.push({ left:ni, days:90, path:E.path, young:E.young, c });
-    if (S.ev === 'papal') CONT[0].flash = 1;
     const rg0 = [];
     for (let i = 0; i < E.rings; i++) { const mat = new THREE.PointsMaterial({ color:GOLD, size:.9, map:dotTex, transparent:true, opacity:0, blending:ADD, depthWrite:false }); const l = new THREE.Points(waveGeo, mat); l.quaternion.setFromUnitVectors(new V(0, 0, 1), axis); parishG.add(l); rg0.push(l); }
     waves.push({ axis, t:0, E, rings:rg0 });
@@ -736,12 +781,26 @@ function main(){
     sound.event(E.bell, axis);
     log(`${E.n}: enthusiasm reaches ${reached.length} adult${reached.length === 1 ? '' : 's'}${ni ? ` and will draw about ${ni} newcomer${ni === 1 ? '' : 's'}` : ''}. Six months from now the log will show how much lasted.`);
   }
+  function bringWorldEvent(axis){
+    const E = EVENTS[S.ev];
+    const width = S.ev === 'wyd' ? 1.3 : S.ev === 'papal' ? .9 : .55;
+    let host = CONT[0], best = 9;
+    for (const c of CONT) { const ang = c.dirN.angleTo(axis); if (ang < best) { best = ang; host = c; } let w = Math.exp(-Math.pow(ang / width, 2)); if (S.ev === 'wyd') w = .25 + .75 * w; c.E = Math.min(1.5, c.E + E.s * w * 1.2); }
+    S.wcoh.push({ day:S.day, c:host, after:E.after, A:host.A, V:host.V, cat:host.cat });
+    const rg0 = [];
+    for (let i = 0; i < E.rings; i++) { const mat = new THREE.PointsMaterial({ color:GOLD, size:1.1, map:dotTex, transparent:true, opacity:0, blending:ADD, depthWrite:false }); const l = new THREE.Points(waveGeo, mat); l.quaternion.setFromUnitVectors(new V(0, 0, 1), axis); uniG.add(l); rg0.push(l); }
+    waves.push({ axis, t:0, E, rings:rg0, R:33, uni:true, done:new Set() });
+    sound.event(E.bell, axis.clone().multiplyScalar(.64));
+    log(`${E.n} in ${host.n}${S.ev === 'wyd' ? ', drawing pilgrims from every continent' : ''}: enthusiasm rises and Sunday attendance lifts. Over the next year some of it may become lasting growth, more where institutions and vitality can absorb it. The log will report back in a year.`);
+  }
   function stepWaves(dt){
     for (let w = waves.length - 1; w >= 0; w--) {
       const W = waves[w]; W.t += dt; const front = W.t * W.E.speed;
-      W.rings.forEach((l, i) => { const th = front - i * .2; if (th <= 0 || th >= Math.PI) { l.visible = false; return; } l.visible = true; l.scale.setScalar(21 * Math.sin(th)); l.position.copy(W.axis).multiplyScalar(21 * Math.cos(th)); l.material.opacity = (1 - mix) * .9 * Math.sin(Math.min(th, 1.2) / 1.2 * Math.PI / 2) * (1 - th / Math.PI) * (1 - i / W.rings.length * .7); });
-      for (const m of members) if (m.wAng !== undefined && !m.wDone && m.wAng <= front) { m.wDone = true; m.glow = 1; m.v.addScaledVector(m.p.clone().normalize(), -2.2); }
-      if (front - W.rings.length * .2 > Math.PI) { for (const l of W.rings) { parishG.remove(l); l.material.dispose(); } waves.splice(w, 1); }
+      const Rr = W.R || 21, vis = W.uni ? mix : 1 - mix;
+      W.rings.forEach((l, i) => { const th = front - i * .2; if (th <= 0 || th >= Math.PI) { l.visible = false; return; } l.visible = true; l.scale.setScalar(Rr * Math.sin(th)); l.position.copy(W.axis).multiplyScalar(Rr * Math.cos(th)); l.material.opacity = vis * .9 * Math.sin(Math.min(th, 1.2) / 1.2 * Math.PI / 2) * (1 - th / Math.PI) * (1 - i / W.rings.length * .7); });
+      if (W.uni) { for (const g of glyphs) if (!W.done.has(g) && g.m.position.clone().normalize().angleTo(W.axis) <= front) { W.done.add(g); g.glow = 1; } }
+      else for (const m of members) if (m.wAng !== undefined && !m.wDone && m.wAng <= front) { m.wDone = true; m.glow = 1; m.v.addScaledVector(m.p.clone().normalize(), -2.2); }
+      if (front - W.rings.length * .2 > Math.PI) { for (const l of W.rings) { l.parent.remove(l); l.material.dispose(); } waves.splice(w, 1); }
     }
   }
   let down = null;
@@ -750,7 +809,8 @@ function main(){
     if (!down || Math.hypot(ev.clientX - down[0], ev.clientY - down[1]) > 6) return;
     const h = hit(ev);
     if (h && h.object === yourGlyph && mix > .5) { setView(0); return; }
-    if ((h && h.object !== memPts) || mix > .5) return;
+    if (mix > .5) { const pt = new V(); if (!ray.ray.intersectSphere(new THREE.Sphere(new V(), 33), pt)) { if (!ray.ray.intersectPlane(new THREE.Plane(camera.getWorldDirection(new V()), 0), pt)) return; } bringWorldEvent(pt.normalize()); return; }
+    if (h && h.object !== memPts) return;
     const pt = new V();
     if (!ray.ray.intersectSphere(new THREE.Sphere(new V(), 21), pt)) { if (!ray.ray.intersectPlane(new THREE.Plane(camera.getWorldDirection(new V()), 0), pt)) return; }
     bringEvent(pt.normalize());
@@ -797,22 +857,27 @@ function main(){
       while (nextT < ctx.currentTime + .5) {
         const [n, b] = TUNE[idx]; idx = (idx + 1) % TUNE.length;
         voices.forEach((v, j) => {
-          const live = j < st.nV, off = st.sync ? Math.random() * .03 : Math.random() * .38, t = nextT + off;
+          const live = j < st.nV, off = st.sync ? Math.random() * .03 : Math.random() * .38, t = nextT + off, up = j >= 6 ? 12 : 0;
           const cents = st.sync ? (Math.random() * 8 - 4) : (Math.random() * 56 - 28);
-          if (n) { v.o.frequency.setTargetAtTime(hz(n), t, .045); v.o.detune.setTargetAtTime(cents, t, .1); }
-          v.env.gain.setTargetAtTime(live ? (n ? st.level * .11 : st.level * .02) : 0, t, n ? .08 : .25);
+          if (n) { v.o.frequency.setTargetAtTime(hz(n + up), t, .045); v.o.detune.setTargetAtTime(cents, t, .1); }
+          v.env.gain.setTargetAtTime(live ? (n ? st.level * (up ? .06 : .11) : st.level * .02) : 0, t, n ? .08 : .25);
         });
-        drones.forEach(v => { v.o.detune.setTargetAtTime(st.sync ? (Math.random() * 6 - 3) : (Math.random() * 40 - 20), nextT, .5); v.env.gain.setTargetAtTime(st.level * .07 * v.level, nextT, .6); });
+        drones.forEach(v => { v.o.detune.setTargetAtTime(st.sync ? (Math.random() * 6 - 3) : (Math.random() * 40 - 20), nextT, .5); v.env.gain.setTargetAtTime(Math.min(1.3, st.level) * .07 * v.level, nextT, .6); });
         nextT += b * BEAT * (st.sync ? 1 : .85 + Math.random() * .3);
       }
     }
+    const SEASON_F = { 'Advent':.55, 'Christmas':1.15, 'Ordinary Time':.45, 'Lent':.32, 'Easter':1.05, 'Pentecost':1.25 };
+    let swell = 0;
     function update(){
       if (!ctx) return;
-      const d = S.day % 364, feast = (d >= 28 && d < 35) || (d >= 133 && d < 140) || (d >= 182 && d < 189);
-      const att = Math.max(0, Math.min(1.3, S.att / .26));
-      st.nV = Math.max(1, Math.min(8, Math.round(1 + 7 * att * (feast ? 1.2 : 1) + 2 * S.meanE)));
-      st.level = (.35 + .5 * att) * (feast && !on('cal') ? 1.6 : 1) * (1 + 1.2 * S.meanE);
-      st.sync = !on('cal');
+      const uni = target >= .5, calOff = on('cal');
+      const sf = calOff ? .5 : SEASON_F[seasonOf(S.day % 364).n];
+      const rel = Math.max(.1, Math.min(1.6, uni ? wAtt() / W0 : S.att / .26));
+      const ent = uni ? (S.worldE || 0) : S.meanE;
+      const lvl = sf * Math.pow(rel, 1.3) * (1 + 1.2 * ent) + .9 * swell;
+      st.level = Math.min(2.2, lvl);
+      st.nV = Math.max(1, Math.min(8, Math.round(1 + 4.5 * sf * rel + 3 * swell + 2 * ent)));
+      st.sync = !calOff;
       chantBus.gain.setTargetAtTime(.9, ctx.currentTime, .5);
     }
     function strike(fund, pan, g, t){
@@ -832,7 +897,7 @@ function main(){
       volume(v){ vol = v; if (ctx && playing) master.gain.setTargetAtTime(vol * .6, ctx.currentTime, .2); },
       update(){ if (playing) update(); },
       event(kind, axis){ lastBell = kind; if (!playing) return; const p = panOf(axis), t0 = ctx.currentTime + .05; for (const [f, dt] of PEALS[kind]) strike(f, p, kind === 'proc' ? .5 : 1, t0 + dt); },
-      tick(dt){ if (!playing || S.meanE < .02) return; bellClock += dt; if (bellClock > .5) { bellClock = 0; if (Math.random() < Math.min(.45, S.meanE * 1.6)) { const pk = PEALS[lastBell]; strike(pk[Math.floor(Math.random() * pk.length)][0], Math.random() * 1.4 - .7, lastBell === 'proc' ? .3 : .55, ctx.currentTime + .02); } } }
+      tick(dt){ if (S.swell > 0) { swell = Math.max(swell, S.swell); S.swell = 0; } if (swell > 0) swell = Math.max(0, swell - dt / 5); const ent = target >= .5 ? (S.worldE || 0) : S.meanE; if (!playing || ent < .02) return; bellClock += dt; if (bellClock > .5) { bellClock = 0; if (Math.random() < Math.min(.45, ent * 1.6)) { const pk = PEALS[lastBell]; strike(pk[Math.floor(Math.random() * pk.length)][0], Math.random() * 1.4 - .7, lastBell === 'proc' ? .3 : .55, ctx.currentTime + .02); } } }
     };
   })();
   $('#sound').onclick = () => { const v = sound.toggle(); $('#sound').textContent = v ? 'Sound on' : 'Sound off'; $('#sound').setAttribute('aria-pressed', v); };
@@ -960,11 +1025,19 @@ function main(){
     } else {
       const cat = CONT.reduce((t, c) => t + c.cat, 0), pr = CONT.reduce((t, c) => t + c.pr, 0);
       h += `<h2>The whole Church, ${W.year}</h2>`;
-      h += row('Catholics', (cat / 1000).toFixed(3) + ' billion', W.year === 2024 ? 'Starting point: 2024 data' : 'Projected from 2024 growth rates');
-      h += row('Priests', fmt(pr), `${fmt(cat * 1e6 / pr)} Catholics per priest`);
-      h += `<div class="scroll"><table><thead><tr><th>Continent</th><th>Catholics (m)</th><th>Priests</th><th>Per priest</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${c.cat.toFixed(1)}</td><td>${fmt(c.pr)}</td><td>${fmt(c.cat * 1e6 / c.pr)}</td></tr>`).join('')}</tbody></table></div>`;
-      h += `<p class="note">Growth follows each continent’s 2024 change: Africa +2.7%, Oceania +2.1%, the Americas +1.0%, Asia +0.6% and Europe +0.3% a year. Priests change by 2024 ordination and loss rates, so Europe’s clergy shrinks while Africa’s and Asia’s grow.</p>`;
-      h += '<h2>Institutions (2024)</h2>' + row('Schools', fmt(W.inst.kindergartens + W.inst.primary + W.inst.secondary), `${fmt(W.inst.kindergartens)} kindergartens, ${fmt(W.inst.primary)} primary, ${fmt(W.inst.secondary)} secondary`) + row('Hospitals and dispensaries', fmt(W.inst.hospitals + W.inst.dispensaries)) + row('Healthcare and charitable facilities', fmt(W.inst.care));
+      h += row('Catholics', (cat / 1000).toFixed(3) + ' billion', W.year === 2024 ? 'Starting point: 2024 data' : 'Projected from 2024 rates and the model’s rules');
+      h += row('Sunday Mass, worldwide', Math.round(wAtt() * 100) + '%', 'Estimated share of Catholics at Mass in a typical week', wAtt());
+      h += `<div class="scroll"><table class="tight"><thead><tr><th>Region</th><th>Catholics (m)</th><th>Mass</th><th>Rooted</th><th>Vitality</th><th>Pulse</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${c.cat.toFixed(1)}</td><td>${Math.round(c.Aeff * 100)}%</td><td>${Math.round(c.R / RMAX * 100)}</td><td>${Math.round(c.V * 100)}</td><td>${Math.round(c.P * 100)}</td></tr>`).join('')}</tbody></table></div>`;
+      h += `<h2>Reading this view</h2><ul class="leg">
+        <li><span style="background:#cfe8d6"></span><div><b>Each point</b> is about 10 million Catholics. Regions gain points as they grow.</div></li>
+        <li><span style="background:#e9e2f2;transform:scale(1.35)"></span><div><b>Size: rooted robustness.</b> How much institutional life a region has (dioceses, schools, hospitals, charities, universities, clergy and religious) weighted by how long it has been established. Shown as 0 to 100, relative to the most rooted.</div></li>
+        <li><span style="background:#1fa855"></span><div><b>Depth of green: vitality.</b> New life coming in: growth, baptisms, seminarians for every 100 priests, and the trend in priests and religious. Pale and translucent is low; deep and opaque is high.</div></li>
+        <li><span style="background:#fff;box-shadow:0 0 8px #fff"></span><div><b>Heartbeat: pulse.</b> Regeneration against decay: whether Catholics, priests and seminarians are growing or shrinking. A strong beat is a body renewing itself; a faint one is a body in decline.</div></li>
+        <li><span style="background:transparent;border:2px solid #f1ead8"></span><div><b>Rings: Sunday Mass.</b> Each Sunday a ring spreads from each region; the larger the ring, the larger the share at Mass.</div></li>
+        <li><span style="background:#f3c46b"></span><div><b>Gold: enthusiasm</b> after an event. Tap the space around the continents to bring one.</div></li></ul>`;
+      h += `<h2>Priests and vocations</h2><div class="scroll"><table><thead><tr><th>Continent</th><th>Priests</th><th>Seminarians</th><th>Catholics per priest</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.pr)}</td><td>${fmt(c.sem)}</td><td>${fmt(c.cat * 1e6 / c.pr)}</td></tr>`).join('')}</tbody></table></div>`;
+      h += `<p class="note">Totals: ${fmt(pr)} priests, ${fmt(CONT.reduce((t, c) => t + c.sem, 0))} major seminarians.</p>`;
+      h += `<h2>Institutions (2023)</h2><div class="scroll"><table><thead><tr><th>Continent</th><th>Schools</th><th>Hospitals and clinics</th><th>Charities</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.schools * c.inst)}</td><td>${fmt(c.health * c.inst)}</td><td>${fmt(c.charity * c.inst)}</td></tr>`).join('')}</tbody></table></div><p class="note">Counts grow or shrink with each region’s vitality as the model runs.</p>`;
     }
     $('#stats').innerHTML = h;
   }
@@ -973,7 +1046,7 @@ function main(){
   /* ---------- frame loop ---------- */
   const clock = new THREE.Clock(); let acc = 0, ui = 0;
   const tmp = new V(), c = new THREE.Color(), mats = { p:[], u:[] };
-  parishG.traverse(o => o.material && mats.p.push(o.material)); uniG.traverse(o => o.material && mats.u.push(o.material));
+  parishG.traverse(o => o.material && mats.p.push(o.material)); uniG.traverse(o => o.material && !(o.isSprite && uRings.some(r => r.s === o)) && mats.u.push(o.material));
   const bandCol = BANDS.map(b => new THREE.Color(b.c)), inqCol = new THREE.Color(COL.inq), catCol = new THREE.Color(COL.cat), relCol = new THREE.Color(COL.order);
   function frame(){
     requestAnimationFrame(frame);
@@ -1018,19 +1091,32 @@ function main(){
     memb.material.userData.o += ((on('closed') ? .16 : .02 + .05 * coh) - memb.material.userData.o) * Math.min(1, dt * 2);
 
     // whole Church
-    const seas = new THREE.Color(seasonOf(S.day % 364).c), fc = far.geometry.attributes.color;
-    CONT.forEach((cn, i) => { cn.flash *= Math.pow(.03, dt); c.set('#d9d2e6').multiplyScalar(.2 + .5 * cn.flash); fc.setXYZ(i, c.r, c.g, c.b); });
+    const fc = far.geometry.attributes.color, now = clock.elapsedTime;
+    if (ui === 0) syncGlyphs();
+    CONT.forEach((cn, i) => {
+      const x = ((now + i * .37) % 1.1) / 1.1;
+      cn.beat = Math.exp(-Math.pow((x - .06) / .045, 2)) + .55 * Math.exp(-Math.pow((x - .24) / .05, 2));
+      c.set('#d9d2e6').multiplyScalar(.15 + (.1 + .6 * cn.P) * cn.beat); fc.setXYZ(i, c.r, c.g, c.b);
+      if (cn.sun) { cn.sun = false; if (now - cn.lastRing > .85 && mix > .02 && !reduce) { cn.lastRing = now; const sp = new THREE.Sprite(spriteMat(ringTex, 0xf1ead8, .8)); sp.position.copy(cn.center); uniG.add(sp); uRings.push({ s:sp, t:0, max:3 + 18 * cn.Aeff }); } }
+    });
     fc.needsUpdate = true;
+    const pale = new THREE.Color('#d9ebdf'), deep = new THREE.Color('#1c9b4e');
     for (const gl of glyphs) {
-      const cn = gl.c, cap = Math.min(1, 1900 / (cn.cat * 1e6 / cn.pr));
-      gl.m.scale.setScalar(.45 * Math.sqrt(cn.cat / cn.cat0) + .1);
-      c.set('#7a7090').lerp(seas, .25).lerp(new THREE.Color('#f6efe0'), cap); gl.m.material.color.copy(c); gl.m.material.emissive.copy(c); gl.m.material.emissiveIntensity = .15 + .35 * cap + .5 * cn.flash;
+      const cn = gl.c, b = cn.beat, sz = .2 + .62 * Math.sqrt(cn.R / RMAX);
+      gl.m.scale.setScalar(sz * (1 + .1 * cn.P * b) * (1 + .25 * gl.glow));
+      c.copy(pale).lerp(deep, clamp01(cn.V)); const gold = Math.min(.75, cn.E * .55 + gl.glow * .7); if (gold > .01) c.lerp(GOLD, gold);
+      gl.m.material.color.copy(c); gl.m.material.emissive.copy(c);
+      gl.m.material.emissiveIntensity = .08 + (.08 + 1.1 * cn.P) * b + .5 * gl.glow;
+      gl.m.material.userData.o = .28 + .72 * clamp01(cn.V);
+      if (gl.glow > 0) gl.glow = Math.max(0, gl.glow - dt * .6);
     }
+    for (let i = uRings.length - 1; i >= 0; i--) { const r = uRings[i]; r.t += dt / 1.8; r.s.scale.setScalar(1 + r.max * r.t); r.s.material.opacity = .55 * (1 - r.t) * mix; if (r.t >= 1) { uniG.remove(r.s); r.s.material.dispose(); uRings.splice(i, 1); } }
     arcMat.userData.o = on('cal') ? .1 : .3;
 
     for (let i = pulses.length - 1; i >= 0; i--) { const p = pulses[i]; p.t += dt / 1.2; p.s.scale.setScalar(1 + p.size * p.t); p.s.material.userData.o = .9 * (1 - p.t); if (p.t >= 1) { p.s.parent.remove(p.s); p.s.material.dispose(); pulses.splice(i, 1); } }
     for (const m of mats.p) m.opacity = (m.userData.o ?? 1) * (1 - mix);
     for (const m of mats.u) m.opacity = (m.userData.o ?? 1) * mix;
+    for (const m of lateU) m.opacity = (m.userData.o ?? 1) * mix;
     for (const p of pulses) p.s.material.opacity = p.s.material.userData.o * (1 - mix);
     far.material.opacity = .9 * (1 - mix);
     controls.update();
@@ -1044,11 +1130,11 @@ function main(){
       L.e.style.transform = `translate(${(tmp.x + 1) / 2 * Wd}px,${(1 - tmp.y) / 2 * Hd + L.dy}px) translate(-50%,-100%)`;
     }
     stepWaves(reduce ? 9 : dt);
-    ui += dt; if (ui > .3) { ui = 0; const L = live(); S.meanE = L.reduce((t, m) => t + m.e, 0) / (L.length || 1); renderStats(); syncPert(); sound.update(); }
+    ui += dt; if (ui > .3) { ui = 0; const L = live(); S.meanE = L.reduce((t, m) => t + m.e, 0) / (L.length || 1); S.worldE = CONT.reduce((t, cn) => t + cn.cat * cn.E, 0) / CONT.reduce((t, cn) => t + cn.cat, 0) / 1.5; renderStats(); syncPert(); sound.update(); }
     sound.tick(dt);
   }
   initParish(S.size); paintRing(); renderLog(); renderStats();
-  window.__boc = { fast(days){ for (let i = 0; i < days; i++) stepDay(); renderStats(); }, S, K, members:() => members, live, CONT };
+  window.__boc = { fast(days){ for (let i = 0; i < days; i++) stepDay(); renderStats(); }, S, K, members:() => members, live, CONT, wAtt, bringWorldEvent:v => bringWorldEvent(new V(...v).normalize()) };
   frame();
 }
 main();
