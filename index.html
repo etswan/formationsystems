@@ -81,6 +81,7 @@ th{font-weight:600;color:var(--mute)}
 .small{font-size:13px;color:var(--mute)}
 a{color:#c9b6ff}
 .chip{display:inline-block;font-size:12px;font-weight:600;padding:1px 7px;border-radius:9px;margin-right:6px}.c-in{background:#1d3b3d;color:#8fe0e4}.c-on{background:#1f2c45;color:#9cc0ff}.c-dor{background:#3a321b;color:#f0d38a}.c-rem{background:#2a2530;color:#8a849b}
+.snd{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;margin-top:12px}.snd label{font-size:14px;color:var(--mute);display:grid;gap:2px}
 .foot{margin-top:24px;border-top:1px solid var(--line);padding-top:12px;font-size:13px;color:var(--mute)}
 @media(max-width:760px){html,body{height:auto}.app{grid-template-columns:minmax(0,1fr);height:auto}.stage{height:58svh;min-height:340px}.panel{border-left:0;border-top:1px solid var(--line);padding:18px 16px 28px}h1{font-size:32px}}
 </style>
@@ -89,11 +90,11 @@ a{color:#c9b6ff}
 <div class="app">
   <div class="stage" id="stage">
     <div class="tip" id="tip"></div>
-    <p class="hint" id="hint">Drag to turn, scroll or pinch to zoom. Click near members to bring them a hardship, such as a bereavement, job loss or illness. Hover a node or dot to read it.</p>
+    <p class="hint" id="hint">Drag to turn, scroll or pinch to zoom. Choose an event in the panel, then tap the sphere to send it rippling through the parish. Hover a node or dot to read it.</p>
   </div>
   <aside class="panel">
     <h1>Body of Christ Model</h1>
-    <p class="ver">Version 2.1 · each dot is one person</p>
+    <p class="ver">Version 2.2 · each dot is one person</p>
     <p class="lede">One self-renewing body at two scales. The scale you are viewing is shown in detail; the other stays simple.</p>
 
     <div class="seg" role="group" aria-label="Scale">
@@ -110,6 +111,12 @@ a{color:#c9b6ff}
       <label for="speed"><span id="speedl">7 days per second</span><input id="speed" type="range" min="0" max="7" step="1" value="2"></label>
     </div>
 
+    <div class="snd">
+      <button id="sound" aria-pressed="false">Sound off</button>
+      <label for="vol"><span>Volume</span><input id="vol" type="range" min="0" max="1" step=".05" value=".6"></label>
+    </div>
+    <p class="note" style="margin-top:6px">Quiet chant sounds the parish’s common life: fuller when more people attend and at the great feasts, out of tune when the shared calendar is lost. Bells mark enthusiasm after an event.</p>
+
     <div id="stats"></div>
 
     <h2>Perturb the body</h2>
@@ -119,6 +126,10 @@ a{color:#c9b6ff}
     </div>
     <div class="acts" id="pbtns" style="margin-top:8px"></div>
     <p class="note" id="pnote">Timed events last a realistic length of time. In hold mode, a perturbation stays in force until you switch it off.</p>
+
+    <h2>Bring an event</h2>
+    <div class="acts" id="ebtns"></div>
+    <p class="note">Choose an event, then tap the sphere where it should land. Enthusiasm ripples outwards and fades over weeks; how much of it lasts depends on the groups and practice already there.</p>
 
     <h2>Remove or restore a group</h2>
     <div class="acts" id="gbtns"></div>
@@ -146,6 +157,7 @@ a{color:#c9b6ff}
       <li><span style="background:#ff9fc6"></span>Young adults 20–35</li>
       <li><span style="background:#f4f1ea"></span>Adults 36–60</li>
       <li><span style="background:#9aa7ff"></span>Older members 61+</li>
+      <li><span style="background:#f3c46b"></span>Gold: enthusiasm after an event, fading over weeks</li>
       <li><span style="background:#8a849b"></span>Inquirers outside; <span style="display:inline-block;background:#8fd6c0;margin:0 2px -1px"></span> catechumens and candidates</li>
       <li><span style="background:var(--sac)"></span>Sacraments, which produce and renew relations</li>
       <li><span style="background:var(--role)"></span>Roles, from pastor to school principal</li>
@@ -156,7 +168,7 @@ a{color:#c9b6ff}
 
     <details>
       <summary>How to read it</summary>
-      <p>Click near members to bring them a hardship: a bereavement, a job loss, an illness. Their bonds drop, and whether they recover depends on the relations around them: their groups, Sunday Mass, ministry to the sick and reconciliation. Six months later, the log reports how they fared. Try the same click under closed leadership and compare.</p>
+      <p>Choose an event (a relic tour, a papal visit, a visiting choir, World Youth Day or a Eucharistic procession) and tap the sphere. A wave of enthusiasm ripples across the membrane and through the members it reaches, who glow gold. While it lasts they come to Mass more often, occasional attenders are more likely to return, and newcomers arrive. It fades over weeks. What remains depends on the parish: enthusiasm becomes lasting bonds only through the groups and practice that can absorb it. Six months later, the log reports how much stayed. Try the same event under closed leadership and compare.</p>
       <p>Attendance is not fixed. Each year some regular attenders slip into occasional practice and some occasional attenders return, often at a marriage, a child’s baptism or a great feast. Formation in childhood, a parent’s practice, spiritual direction, the young adults group and, as a hypothesis, the reverence of the liturgy all shift those chances.</p>
       <p> Leave it running for decades and the parish remakes itself: people are born, age, join groups, leave, die and are replaced by births, converts and people moving in. The members change while the organisation persists: autopoiesis.</p>
       <p>Watch the age pyramid and the regeneration ratio. A parish can hold its numbers for years while ageing towards a point where it can no longer replace itself.</p>
@@ -177,11 +189,12 @@ a{color:#c9b6ff}
         <li>Scandal: raises leaving for about two years; 39% of former Catholics cite scandal as an important reason they left <span class="tag t-part">partly grounded</span> <a href="https://www.pewresearch.org/?p=282647">Pew 2025</a></li>
         <li>Adult practice is shaped by parents’ practice and childhood formation <span class="tag t-part">partly grounded</span> <a href="https://academic.oup.com/book/39513">Smith and Adamczyk, Handing Down the Faith (Oxford, 2021)</a></li>
         <li>Returns to practice at marriage, a child’s baptism and great feasts; more slipping during scandal and pandemic <span class="tag t-part">partly grounded</span> in the direction of the effect; the rates are assumptions</li>
-        <li>Closed leadership, the dropped calendar, the effects of spiritual direction and of liturgical reverence on practice, the hardship response, and all group renewal rates <span class="tag t-hyp">hypothesis</span></li>
+        <li>Events (relic tours, papal visits, visiting choirs, World Youth Day, Eucharistic processions): their reach and strength, and how quickly enthusiasm fades <span class="tag t-hyp">hypothesis</span></li>
+        <li>Closed leadership, the dropped calendar, the effects of spiritual direction and of liturgical reverence on practice, and all group renewal rates <span class="tag t-hyp">hypothesis</span></li>
         <li>Whole-Church figures: Catholics, priests and growth by continent for 2024 <span class="tag t-cal">calibrated</span> <a href="https://www.vaticannews.va/en/church/news/2026-10/fides-agency-2026-annual-church-statistics.html">Fides 2026</a>, <a href="https://www.vaticannews.va/en/vatican-city/news/2026-03/new-data-from-annuario-pontificio-2026-shows-catholics-growing.print.html">Annuarium 2024</a>; priests in Africa, Europe and Oceania derived from reported ratios <span class="tag t-part">partly grounded</span></li>
       </ul>
     </details>
-    <p class="foot">Body of Christ Model, version 2.1 (November 2026). formationsystems.org. An illustrative research model: simulated numbers are not predictions.</p>
+    <p class="foot">Body of Christ Model, version 2.2 (November 2026). formationsystems.org. An illustrative research model: simulated numbers are not predictions.</p>
   </aside>
 </div>
 
@@ -294,7 +307,7 @@ function main(){
   }
   function newMember(o){
     if (members.length >= CAP) return null;
-    const m = Object.assign({ st:'member', age:30, b:.5, a:.1, c:false, convert:false, rel:false, reg:false, aR:.5 + rnd() * .3, aO:.02 + rnd() * .1, parent:null, fd:0, cd:0, recv:-1e9, married:false, hard:0, groups:[], fade:0, wait:0, path:null, v:new V() }, o);
+    const m = Object.assign({ st:'member', age:30, b:.5, a:.1, c:false, convert:false, rel:false, reg:false, aR:.5 + rnd() * .3, aO:.02 + rnd() * .1, parent:null, fd:0, cd:0, recv:-1e9, married:false, e:0, ed:.03, glow:0, groups:[], fade:0, wait:0, path:null, v:new V() }, o);
     m.band = bandOf(m.age); if (m.age < 20 && o.kid === undefined && m.st === 'member' && !m.rel) m.kid = true;
     if (m.st === 'member') assignGroups(m);
     m.home = homeFor(m);
@@ -333,12 +346,12 @@ function main(){
   }
 
   /* ---------- state ---------- */
-  const newYear = () => ({ infant:0, adult:0, deaths:0, left:0, movedIn:0, movedOut:0, marriages:0, slipped:0, returned:0, retBap:0, retMar:0, retFeast:0, regCr:0, regCv:0, path:{ relational:0, marriage:0, digital:0, liturgy:0 } });
+  const newYear = () => ({ infant:0, adult:0, deaths:0, left:0, movedIn:0, movedOut:0, marriages:0, slipped:0, returned:0, retBap:0, retMar:0, retFeast:0, regCr:0, regCv:0, path:{ relational:0, marriage:0, digital:0, liturgy:0, event:0 } });
   const PERT = [
     { k:'pan', n:'Pandemic', dur:1092 }, { k:'scan', n:'Scandal', dur:728 }, { k:'closed', n:'Closed leadership', dur:1092 },
     { k:'cal', n:'Drop the shared calendar', dur:364 }, { k:'short', n:'Vocations shortage', dur:1820 } ];
   const S = { day:84, run:!reduce, speed:7, pastor:true, wait:0, log:[], bap:1, mode:'timed', size:600, digital:1, rev:0, climate:1,
-    p:{ pan:0, scan:0, closed:0, cal:0, short:0 }, rec:0, yr:newYear(), hist:[], att:0, comm:0, n0:0, sd:1, cohorts:[] };
+    p:{ pan:0, scan:0, closed:0, cal:0, short:0 }, rec:0, yr:newYear(), hist:[], att:0, comm:0, n0:0, sd:1, cohorts:[], pend:[], ev:'choir', meanE:0 };
   const on = k => S.p[k] > 0;
   const count = st => members.filter(m => m.st === st).length;
   const live = () => members.filter(m => m.st === 'member');
@@ -391,9 +404,9 @@ function main(){
       if (m.st === 'leaving' || m.st === 'moved') { m.fade++; continue; }
       m.age += 1 / 364;
       m.b -= m.b * K.decay;
+      if (m.e > 0) { m.e *= 1 - m.ed; if (m.e < .005) m.e = 0; }
       if (m.st !== 'member') continue;
       const nb = bandOf(m.age);
-      if (m.hard > 0) m.hard--;
       if (m.kid) { m.cd++; const fg = formingGroup(m); if (fg) m.fd += fg.state === 'in person' ? 1 : .6; }
       if (nb !== m.band) { if (nb === 2 && m.kid) { const f = m.cd ? m.fd / m.cd : .5, pr = m.parent && m.parent.st === 'member' && m.parent.reg ? 1 : 0; m.kid = false; pReg(m, rnd() < .04 + .22 * f + .32 * pr); } else if (nb === 1 && m.kid) m.c = rnd() < .5; m.band = nb; if (!m.rel) { assignGroups(m); m.home = homeFor(m); } }
       if (m.rel && groups[G.rel].state === 'in person') m.b = Math.min(1, m.b + .0015);
@@ -408,8 +421,8 @@ function main(){
       for (const m of members) {
         if (m.st !== 'member' && m.st !== 'catechumen') continue;
         el++;
-        let p = attendP(m) * recov * (scan ? .85 : 1) * (m.age >= 85 ? .35 : 1);
-        if (rnd() < p) { att++; const rc = m.c && m.st === 'member'; if (rc) comm++; m.b = Math.min(1, m.b + (rc ? .012 : .008) * pf * lit); }
+        let p = Math.min(.97, attendP(m) * recov * (scan ? .85 : 1) * (m.age >= 85 ? .35 : 1) * (1 + 1.5 * m.e));
+        if (rnd() < p) { att++; const rc = m.c && m.st === 'member'; if (rc) comm++; m.b = Math.min(1, m.b + (rc ? .012 : .008) * pf * lit + .004 * m.e); }
         else if (pan && m.a > .3) m.b = Math.min(1, m.b + .003);
       }
       S.att = el ? att / el : 0; S.comm = att ? comm / att : 0;
@@ -425,8 +438,8 @@ function main(){
       if (g.state === 'dormant') { if (!closed && d % 28 === g.day) for (const l of rg) if (l.g === g) l.s += .2; continue; }
       if (!meets || g.state === 'removed' || g.state === 'paused') continue;
       const inP = g.state === 'in person', amt = (inP ? .008 : .004) * (calOff ? g.cal : 1);
-      if (g.i === G.sick) { for (const m of members) if (m.st === 'member' && (m.age >= 80 || m.hard > 0)) m.b = Math.min(1, m.b + (inP ? .008 : .003)); }
-      for (const m of members) if (m.st === 'member' && m.groups.includes(g)) m.b = Math.min(1, m.b + amt);
+      if (g.i === G.sick) { for (const m of members) if (m.st === 'member' && m.age >= 80) m.b = Math.min(1, m.b + (inP ? .008 : .003)); }
+      for (const m of members) if (m.st === 'member' && m.groups.includes(g)) m.b = Math.min(1, m.b + amt + (inP ? .01 : .005) * m.e);
       for (const l of rg) if (l.g === g && (S.pastor || l.r !== pastor)) l.s = Math.min(1, l.s + (inP ? .12 : .06) * (closed ? .22 + .028 * g.i : 1));
     }
     // reconciliation
@@ -448,14 +461,20 @@ function main(){
       for (const m of L) {
         if (m.kid || m.rel) continue;
         if (m.reg) {
-          let s = K.slip * base * (1.35 - .35 * sdF) * Math.min(2.5, Math.max(.4, (1 - m.b) / .5));
+          let s = K.slip * (1 - .6 * m.e * (m.groups.length ? 1 : .4)) * base * (1.35 - .35 * sdF) * Math.min(2.5, Math.max(.4, (1 - m.b) / .5));
           if (m.convert) { s *= (1 - .35 * S.rev) * (1.3 - .3 * sdF); if (S.day - m.recv < 1092) s *= ociaW; }
           else { s *= 1 - .1 * S.rev; if (parents.has(m)) s *= famW; }
           if (m.band === 2) s *= yaW;
           if (rnd() < s / 52) { pReg(m, false); S.yr.slipped++; }
         } else {
-          let r = (m.convert ? K.retC * (1 + .35 * S.rev) : K.retR * (1 + .1 * S.rev)) * (.7 + .3 * sdF) * Math.min(1.5, Math.max(.5, mbw / .5)) * (scan ? .7 : 1);
+          const held = m.groups.some(g => g.state === 'in person') ? 1 : .3;
+          let r = (1 + 8 * m.e * held * (closed ? .4 : 1)) * (m.convert ? K.retC * (1 + .35 * S.rev) : K.retR * (1 + .1 * S.rev)) * (.7 + .3 * sdF) * Math.min(1.5, Math.max(.5, mbw / .5)) * (scan ? .7 : 1);
           if (rnd() < r / 52) { pReg(m, true); S.yr.returned++; }
+        }
+        // enthusiasm drawing people into a group, if one is meeting and has room for them
+        if (m.e > .2 && m.groups.length < 2 && rnd() < .05 * m.e * (closed ? .25 : 1)) {
+          const opts = JOIN[m.band].map(([gi]) => groups[gi]).filter(g => g.state === 'in person' && groupLead(g) > .4 && !m.groups.includes(g) && g.i !== G.family);
+          if (opts.length) { m.groups.push(opts[Math.floor(rnd() * opts.length)]); m.home = homeFor(m); m.joinedE = S.day; }
         }
       }
     }
@@ -464,11 +483,15 @@ function main(){
       m.married = true; S.yr.marriages++; pulse(sac[4].p, COL.sac, 4);
       if (!m.reg && rnd() < .2) { pReg(m, true); S.yr.returned++; S.yr.retMar++; }
     }
-    // hardship follow-up after six months
+    // newcomers drawn by an event arrive over the following weeks
+    for (const q of S.pend) { if (q.left > 0 && rnd() < q.left / Math.max(1, q.days)) { const m = newMember({ st:'inquirer', age:q.young ? 17 + rnd() * 15 : 19 + Math.pow(rnd(), 1.4) * 45, b:.3, a:.4, path:q.path }); if (m) { q.c.inq.push(m); q.left--; } } q.days--; }
+    S.pend = S.pend.filter(q => q.days > 0 && q.left > 0);
+    // event follow-up after six months
     for (const c of S.cohorts) if (!c.done && S.day - c.day >= 182) {
       c.done = true;
-      const still = c.ms.filter(m => m.st === 'member').length, reg = c.ms.filter(m => m.st === 'member' && m.reg).length, left = c.ms.filter(m => m.gone === 'leaving').length;
-      log(`Six months after the hardship: of ${c.ms.length} members touched, ${still} remain (${reg} attending regularly, ${c.reg0} before) and ${left} have left the Church.`);
+      const still = c.ms.filter(m => m.st === 'member'), reg = still.filter(m => m.reg).length, joined = still.filter(m => m.joinedE >= c.day).length;
+      const inOcia = c.inq.filter(m => m.st === 'catechumen' || (m.st === 'member' && m.convert)).length;
+      log(`Six months after ${c.after}: of ${c.ms.length} adults reached, ${reg} now attend regularly (${c.reg0} before) and ${joined} joined a group. ${c.inq.length} newcomer${c.inq.length === 1 ? '' : 's'} came; ${inOcia} entered OCIA.`);
     }
     S.cohorts = S.cohorts.filter(c => !c.done);
     // Easter Vigil
@@ -630,13 +653,51 @@ function main(){
     const h = hit(ev); if (!h) { tip.style.display = 'none'; return; }
     const r = stage.getBoundingClientRect(), u = h.object.userData;
     let html;
-    if (h.object === memPts) { const m = members[h.index]; if (!m) return; html = `<b>${m.rel ? 'Member of the religious community' : m.st === 'member' ? (m.convert ? 'Convert' : 'Member') : m.st === 'catechumen' ? 'Catechumen or candidate' : m.st === 'inquirer' ? 'Inquirer' : 'Leaving'}, age ${Math.floor(m.age)}</b>Bond ${Math.round(m.b * 100)}%. ${m.st !== 'member' || m.rel ? '' : m.kid ? 'Comes to Mass with family. ' : m.reg ? 'Regular at Mass. ' : 'Occasional at Mass. '}${m.hard > 0 ? 'Going through a hardship. ' : ''}${m.groups.length ? 'In ' + m.groups.map(g => g.name.toLowerCase()).join(' and ') + '.' : 'In no group.'}${m.path ? ' Came through ' + ({ relational:'family and friends', marriage:'marriage or dating', digital:'digital content', liturgy:'the liturgy' })[m.path] + '.' : ''}`; }
+    if (h.object === memPts) { const m = members[h.index]; if (!m) return; html = `<b>${m.rel ? 'Member of the religious community' : m.st === 'member' ? (m.convert ? 'Convert' : 'Member') : m.st === 'catechumen' ? 'Catechumen or candidate' : m.st === 'inquirer' ? 'Inquirer' : 'Leaving'}, age ${Math.floor(m.age)}</b>Bond ${Math.round(m.b * 100)}%. ${m.st !== 'member' || m.rel ? '' : m.kid ? 'Comes to Mass with family. ' : m.reg ? 'Regular at Mass. ' : 'Occasional at Mass. '}${m.e > .05 ? 'Enthusiasm ' + Math.round(m.e * 100) + '% after an event. ' : ''}${m.groups.length ? 'In ' + m.groups.map(g => g.name.toLowerCase()).join(' and ') + '.' : 'In no group.'}${m.path ? ' Came through ' + ({ relational:'family and friends', marriage:'marriage or dating', digital:'digital content', liturgy:'the liturgy', event:'an event' })[m.path] + '.' : ''}`; }
     else if (u.cont !== undefined) { const c = CONT[u.cont]; html = `<b>${h.object === yourGlyph ? 'Your parish, in the ' + c.n : c.n}</b>${(c.cat).toFixed(1)} million Catholics, ${fmt(c.pr)} priests, ${fmt(c.cat * 1e6 / c.pr)} Catholics per priest. Each point stands for about 20 million Catholics.${h.object === yourGlyph ? ' Click to enter.' : ''}`; }
     else { const n = u.node; html = `<b>${n.name}</b>${n.info}${n.kind === 'group' || n.kind === 'order' ? ' Now: ' + n.state + '.' : ''}${n === pastor && !S.pastor ? ' Vacant.' : ''}`; }
     tip.innerHTML = html; tip.style.display = 'block';
     tip.style.left = Math.min(ev.clientX - r.left + 14, Wd - 290) + 'px'; tip.style.top = Math.max(8, ev.clientY - r.top - 10) + 'px';
   });
   renderer.domElement.addEventListener('pointerleave', () => { tip.style.display = 'none'; });
+  const EVENTS = {
+    relic:{ after:'the relic tour', n:'Relic tour', info:'Draws older members and occasional attenders most', r:15, s:.55, ed:.035, inq:.0012, path:'event', aud:m => (m.age >= 61 ? 1.3 : 1) * (m.reg ? .8 : 1.3), rings:4, speed:1, bell:'relic' },
+    papal:{ after:'the papal visit', n:'Papal visit', info:'Reaches the whole parish; the strongest lift', r:99, s:.8, ed:.02, inq:.004, path:'event', aud:() => 1, rings:6, speed:.75, bell:'papal' },
+    choir:{ after:'the visiting choir', n:'Visiting choir', info:'A concert series; draws people through the liturgy', r:14, s:.45, ed:.04, inq:.0015, path:'liturgy', aud:m => m.groups.includes(groups[G.choir]) ? 1.4 : 1, rings:4, speed:1.15, bell:'choir' },
+    wyd:{ after:'World Youth Day', n:'World Youth Day', info:'A pilgrimage for youth and young adults', r:99, s:.85, ed:.025, inq:.002, path:'event', young:true, aud:m => m.band === 1 || m.band === 2 ? 1 : .12, rings:5, speed:.95, bell:'wyd' },
+    proc:{ after:'the Eucharistic procession', n:'Eucharistic procession', info:'Through the neighbourhood; strengthens bonds directly', r:15, s:.5, ed:.035, inq:.001, path:'event', bond:.04, aud:() => 1, rings:4, speed:1.05, bell:'proc' } };
+  const waves = [], waveGeo = new THREE.BufferGeometry().setFromPoints(Array.from({ length:160 }, (_, i) => new V(Math.cos(i / 160 * Math.PI * 2), Math.sin(i / 160 * Math.PI * 2), 0)));
+  const GOLD = new THREE.Color('#f3c46b');
+  function bringEvent(axis){
+    const E = EVENTS[S.ev], at = axis.clone().multiplyScalar(21), reached = [];
+    for (const m of members) {
+      if (m.st !== 'member' || m.rel) continue;
+      const dd = m.p.distanceTo(at); if (dd > E.r) continue;
+      const amt = E.s * E.aud(m) * (E.r > 50 ? 1 - .45 * dd / 42 : 1 - .4 * dd / E.r);
+      m.e = Math.min(1, m.e + amt); m.ed = E.ed; if (E.bond) m.b = Math.min(1, m.b + E.bond * amt);
+      m.wAng = m.p.clone().normalize().angleTo(axis); m.wDone = false;
+      if (!m.kid && amt > .15) reached.push(m);
+    }
+    const N = live().length, c = { day:S.day, name:E.n, after:E.after, ms:reached, reg0:reached.filter(m => m.reg).length, inq:[] };
+    S.cohorts.push(c);
+    const ni = Math.round(N * E.inq * (S.p.scan ? .6 : 1) * (.7 + rnd() * .6));
+    if (ni) S.pend.push({ left:ni, days:90, path:E.path, young:E.young, c });
+    if (S.ev === 'papal') CONT[0].flash = 1;
+    const rg0 = [];
+    for (let i = 0; i < E.rings; i++) { const mat = new THREE.PointsMaterial({ color:GOLD, size:.9, map:dotTex, transparent:true, opacity:0, blending:ADD, depthWrite:false }); const l = new THREE.Points(waveGeo, mat); l.quaternion.setFromUnitVectors(new V(0, 0, 1), axis); parishG.add(l); rg0.push(l); }
+    waves.push({ axis, t:0, E, rings:rg0 });
+    memb.material.userData.o = .11;
+    sound.event(E.bell, axis);
+    log(`${E.n}: enthusiasm reaches ${reached.length} adult${reached.length === 1 ? '' : 's'}${ni ? ` and will draw about ${ni} newcomer${ni === 1 ? '' : 's'}` : ''}. Six months from now the log will show how much lasted.`);
+  }
+  function stepWaves(dt){
+    for (let w = waves.length - 1; w >= 0; w--) {
+      const W = waves[w]; W.t += dt; const front = W.t * W.E.speed;
+      W.rings.forEach((l, i) => { const th = front - i * .2; if (th <= 0 || th >= Math.PI) { l.visible = false; return; } l.visible = true; l.scale.setScalar(21 * Math.sin(th)); l.position.copy(W.axis).multiplyScalar(21 * Math.cos(th)); l.material.opacity = (1 - mix) * .9 * Math.sin(Math.min(th, 1.2) / 1.2 * Math.PI / 2) * (1 - th / Math.PI) * (1 - i / W.rings.length * .7); });
+      for (const m of members) if (m.wAng !== undefined && !m.wDone && m.wAng <= front) { m.wDone = true; m.glow = 1; m.v.addScaledVector(m.p.clone().normalize(), -2.2); }
+      if (front - W.rings.length * .2 > Math.PI) { for (const l of W.rings) { parishG.remove(l); l.material.dispose(); } waves.splice(w, 1); }
+    }
+  }
   let down = null;
   renderer.domElement.addEventListener('pointerdown', ev => { down = [ev.clientX, ev.clientY]; });
   renderer.domElement.addEventListener('pointerup', ev => {
@@ -644,15 +705,92 @@ function main(){
     const h = hit(ev);
     if (h && h.object === yourGlyph && mix > .5) { setView(0); return; }
     if ((h && h.object !== memPts) || mix > .5) return;
-    const n = camera.getWorldDirection(new V()), pl = new THREE.Plane(n, 0), pt = new V();
-    if (!ray.ray.intersectPlane(pl, pt)) return;
-    const hitM = [];
-    for (const m of members) { const dv = m.p.clone().sub(pt), dd = dv.length(); if (dd < 7) { m.v.add(dv.normalize().multiplyScalar((7 - dd) * .35)); if (m.st === 'member' && !m.rel) { m.b *= .5; m.hard = 120; hitM.push(m); } } }
-    pulse(pt, '#ffffff', 8);
-    if (!hitM.length) return;
-    S.cohorts.push({ day:S.day, ms:hitM, reg0:hitM.filter(m => m.reg).length });
-    log(`A hardship touches ${hitM.length} member${hitM.length === 1 ? '' : 's'}: a bereavement, a job loss or an illness. Their bonds halve. Whether they recover depends on the relations around them.`);
+    const pt = new V();
+    if (!ray.ray.intersectSphere(new THREE.Sphere(new V(), 21), pt)) { if (!ray.ray.intersectPlane(new THREE.Plane(camera.getWorldDirection(new V()), 0), pt)) return; }
+    bringEvent(pt.normalize());
   });
+
+  /* ---------- sound: synthesised chant and bells ---------- */
+  const sound = (() => {
+    let ctx = null, master, chantBus, bellBus, voices = [], drones = [], nextT = 0, idx = 0, timer = null, playing = false, vol = .6, lastBell = 'choir', bellClock = 0;
+    const hz = n => 440 * Math.pow(2, (n - 69) / 12);
+    // a recitation formula in the manner of a psalm tone (mode 8: final G, reciting note C); 0 is a breath
+    const TUNE = [[55,1],[57,1],[60,2],[60,1],[60,1],[60,1],[60,1],[60,1],[62,1],[60,1],[59,1],[60,3],[0,1.5],[60,1],[60,1],[60,1],[60,1],[59,1],[60,1],[57,1],[55,3],[0,3]];
+    const BEAT = .62;
+    function makeVoice(note, pan, level){
+      const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = hz(note);
+      const lfo = ctx.createOscillator(), lg = ctx.createGain(); lfo.frequency.value = 4.6 + Math.random() * 1.2; lg.gain.value = 7; lfo.connect(lg); lg.connect(o.detune);
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400; o.connect(lp);
+      const sum = ctx.createGain(); sum.gain.value = .5;
+      [[520, 6, 1], [900, 8, .55], [2450, 10, .18]].forEach(([f, q, g]) => { const b = ctx.createBiquadFilter(); b.type = 'bandpass'; b.frequency.value = f * (.97 + Math.random() * .06); b.Q.value = q; const gg = ctx.createGain(); gg.gain.value = g; lp.connect(b); b.connect(gg); gg.connect(sum); });
+      const env = ctx.createGain(); env.gain.value = 0; const pn = ctx.createStereoPanner(); pn.pan.value = pan;
+      sum.connect(env); env.connect(pn); pn.connect(chantBus); o.start(); lfo.start();
+      return { o, env, level, det:0 };
+    }
+    function reverb(){
+      const len = ctx.sampleRate * 3.8, buf = ctx.createBuffer(2, len, ctx.sampleRate);
+      for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+      const cv = ctx.createConvolver(); cv.buffer = buf; return cv;
+    }
+    function init(){
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      master = ctx.createGain(); master.gain.value = 0;
+      const comp = ctx.createDynamicsCompressor(); master.connect(comp); comp.connect(ctx.destination);
+      const rv = reverb(), wet = ctx.createGain(); wet.gain.value = .55; rv.connect(wet); wet.connect(master);
+      chantBus = ctx.createGain(); chantBus.gain.value = 0; chantBus.connect(master); chantBus.connect(rv);
+      bellBus = ctx.createGain(); bellBus.gain.value = .5; bellBus.connect(master); bellBus.connect(rv);
+      for (let i = 0; i < 8; i++) voices.push(makeVoice(55, -.6 + i * .17, 1));
+      drones.push(makeVoice(43, -.2, .9), makeVoice(43, .2, .9), makeVoice(31, 0, .5));
+      nextT = ctx.currentTime + .2;
+      timer = setInterval(schedule, 120);
+      document.addEventListener('visibilitychange', () => { if (!ctx) return; if (document.hidden) ctx.suspend(); else if (playing) ctx.resume(); });
+    }
+    const st = { nV:4, level:.5, sync:true };
+    function schedule(){
+      if (!playing) return;
+      while (nextT < ctx.currentTime + .5) {
+        const [n, b] = TUNE[idx]; idx = (idx + 1) % TUNE.length;
+        voices.forEach((v, j) => {
+          const live = j < st.nV, off = st.sync ? Math.random() * .03 : Math.random() * .38, t = nextT + off;
+          const cents = st.sync ? (Math.random() * 8 - 4) : (Math.random() * 56 - 28);
+          if (n) { v.o.frequency.setTargetAtTime(hz(n), t, .045); v.o.detune.setTargetAtTime(cents, t, .1); }
+          v.env.gain.setTargetAtTime(live ? (n ? st.level * .11 : st.level * .02) : 0, t, n ? .08 : .25);
+        });
+        drones.forEach(v => { v.o.detune.setTargetAtTime(st.sync ? (Math.random() * 6 - 3) : (Math.random() * 40 - 20), nextT, .5); v.env.gain.setTargetAtTime(st.level * .07 * v.level, nextT, .6); });
+        nextT += b * BEAT * (st.sync ? 1 : .85 + Math.random() * .3);
+      }
+    }
+    function update(){
+      if (!ctx) return;
+      const d = S.day % 364, feast = (d >= 28 && d < 35) || (d >= 133 && d < 140) || (d >= 182 && d < 189);
+      const att = Math.max(0, Math.min(1.3, S.att / .26));
+      st.nV = Math.max(1, Math.min(8, Math.round(1 + 7 * att * (feast ? 1.2 : 1) + 2 * S.meanE)));
+      st.level = (.35 + .5 * att) * (feast && !on('cal') ? 1.6 : 1) * (1 + 1.2 * S.meanE);
+      st.sync = !on('cal');
+      chantBus.gain.setTargetAtTime(.9, ctx.currentTime, .5);
+    }
+    function strike(fund, pan, g, t){
+      const P = [[.5,.35,6],[1,1,4.5],[1.183,.55,3.5],[1.506,.4,3],[2,.6,2.5],[2.514,.25,1.8],[2.662,.2,1.6],[3.011,.15,1.3],[4.166,.1,1]];
+      const pn = ctx.createStereoPanner(); pn.pan.value = pan; pn.connect(bellBus);
+      for (const [r, a, dec] of P) { const o = ctx.createOscillator(); o.frequency.value = fund * r; const e = ctx.createGain(); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(a * g * .16, t + .006); e.gain.exponentialRampToValueAtTime(.0001, t + dec); o.connect(e); e.connect(pn); o.start(t); o.stop(t + dec + .1); }
+    }
+    const PEALS = {
+      papal:[[98,0],[130.8,.9],[98,1.8],[146.8,2.7],[98,3.6],[130.8,4.5]],
+      relic:[[146.8,0],[146.8,2.2],[146.8,4.4]],
+      choir:[[220,0],[261.6,.6],[329.6,1.2]],
+      wyd:[[523.3,0],[493.9,.22],[440,.44],[392,.66],[523.3,1],[440,1.22],[493.9,1.44],[392,1.66]],
+      proc:[[1046.5,0],[1046.5,.09],[1046.5,.18],[1046.5,1.2],[1046.5,1.29],[1046.5,1.38],[1046.5,2.4],[1046.5,2.49],[1046.5,2.58]] };
+    function panOf(axis){ const v = axis.clone().multiplyScalar(21).project(camera); return Math.max(-.9, Math.min(.9, v.x)); }
+    return {
+      toggle(){ if (!ctx) init(); playing = !playing; if (playing) { ctx.resume(); update(); master.gain.setTargetAtTime(vol * .6, ctx.currentTime, .4); } else master.gain.setTargetAtTime(0, ctx.currentTime, .3); return playing; },
+      volume(v){ vol = v; if (ctx && playing) master.gain.setTargetAtTime(vol * .6, ctx.currentTime, .2); },
+      update(){ if (playing) update(); },
+      event(kind, axis){ lastBell = kind; if (!playing) return; const p = panOf(axis), t0 = ctx.currentTime + .05; for (const [f, dt] of PEALS[kind]) strike(f, p, kind === 'proc' ? .5 : 1, t0 + dt); },
+      tick(dt){ if (!playing || S.meanE < .02) return; bellClock += dt; if (bellClock > .5) { bellClock = 0; if (Math.random() < Math.min(.45, S.meanE * 1.6)) { const pk = PEALS[lastBell]; strike(pk[Math.floor(Math.random() * pk.length)][0], Math.random() * 1.4 - .7, lastBell === 'proc' ? .3 : .55, ctx.currentTime + .02); } } }
+    };
+  })();
+  $('#sound').onclick = () => { const v = sound.toggle(); $('#sound').textContent = v ? 'Sound on' : 'Sound off'; $('#sound').setAttribute('aria-pressed', v); };
+  $('#vol').oninput = e => sound.volume(+e.target.value);
 
   /* ---------- panel ---------- */
   $('#calbar').innerHTML = SEASONS.map(s => `<i style="width:${(s.e - s.s) / 3.64}%;background:${s.c}"></i>`).join('');
@@ -666,7 +804,7 @@ function main(){
   segVal('#bap', v => { S.bap = +v; log(S.bap === 1 ? 'Baptisms return to usual.' : S.bap ? 'A lean year: about half the usual baptisms, in every parish.' : 'No baptisms this year, in any parish. Catechumens wait for next Easter.'); });
   segVal('#clim', v => { S.climate = +v; log(S.climate > 1 ? 'The 2026 surge: dioceses report about 38% more people entering the Church.' : 'Newcomers return to the 2023 baseline.'); });
   segVal('#mode', v => { S.mode = v; for (const pt of PERT) if (S.p[pt.k] > 0) S.p[pt.k] = v === 'hold' ? Infinity : pt.dur; syncPert(); });
-  segVal('#size', v => { S.size = +v; initParish(S.size); S.hist = []; S.cohorts = []; S.yr = newYear(); log(`The parish restarts with ${fmt(S.size)} members.`); });
+  segVal('#size', v => { S.size = +v; initParish(S.size); S.hist = []; S.cohorts = []; S.pend = []; S.yr = newYear(); log(`The parish restarts with ${fmt(S.size)} members.`); });
   $('#digital').oninput = e => { S.digital = +e.target.value; $('#digl').textContent = 'Reach of Catholic digital content: ' + (S.digital === 1 ? 'as in 2026' : S.digital === 0 ? 'none' : S.digital + '× the 2026 level'); };
   $('#rev').oninput = e => { S.rev = +e.target.value; $('#revl').textContent = 'Reverence of the liturgy (hypothesis): ' + (S.rev === 0 ? 'baseline' : (Math.abs(S.rev) >= .75 ? 'much ' : '') + (S.rev > 0 ? 'more reverent' : 'less reverent')); };
 
@@ -694,6 +832,8 @@ function main(){
   };
   syncPert();
 
+  $('#ebtns').innerHTML = Object.entries(EVENTS).map(([k, E]) => `<button data-e="${k}" aria-pressed="${k === S.ev}">${E.n}<small>${E.info}</small></button>`).join('');
+  $('#ebtns').onclick = e => { const b = e.target.closest('button'); if (!b) return; S.ev = b.dataset.e; for (const x of document.querySelectorAll('#ebtns button')) x.setAttribute('aria-pressed', x === b); };
   const GFX = ['Infant baptisms fall, and children lose their main place of formation.','Inquirers have no path to the Easter Vigil.','The music director loses their group, Sunday renewal weakens and fewer people are drawn by the liturgy.','Young adults lose their gathering place; fewer newcomers come through friendship and marriage, and the parish begins to age.','The deacon loses a group and the Sunday readings are less prepared.','Outreach falls and fewer inquirers arrive.','Homebound older members lose their visits, and their bonds fade.','Children lose weekday formation and families a strong tie to the parish.','The parish loses its daily prayer and its tie to a religious order across the wider Church.'];
   const low = g => g.name === 'OCIA' ? 'OCIA' : g.name.toLowerCase();
   $('#gbtns').innerHTML = groups.map((g, i) => `<button data-g="${i}" aria-pressed="false">Remove ${low(g)}</button>`).join('');
@@ -749,11 +889,12 @@ function main(){
       h += row('Regular practice: cradle · converts', `${rc}% · ${rv5}%`, `Usually at Sunday Mass. Pew 2025: 28% · 38%.${old ? ` Over 5 years: cradle ${pts(rc, old.regCr)}, converts ${pts(rv5, old.regCv)}.` : ''} Receive Communion at every Mass: ${sh(crA, m => m.c)}% · ${sh(cvA, m => m.c)}% (Pew: 34% · 58%).`);
       h += `<p class="note" style="margin:2px 0 6px">${down.length ? 'Pulling practice down: ' + down.join(', ') + '.' : 'Nothing is pulling practice down right now.'}${up.length ? ' Holding it up: ' + up.join(', ') + '.' : ''}</p>`;
       h += row('Spiritual direction', Math.round(S.sd * 100) + '%', 'The spiritual director’s ties to the young adults group and the religious community. When it weakens, more people slip and fewer return.', S.sd);
+      h += row('Enthusiasm', Math.round(S.meanE * 100) + '%', S.meanE > .01 ? 'Raised by a recent event. It fades over weeks; members absorb it into bonds through Mass and their groups.' : 'Bring an event to raise it.', S.meanE * 2);
       h += row('Pastor', S.pastor ? 'Present' : `Vacant (${S.wait} days)`);
       const chip = st => `<span class="chip ${st === 'in person' ? 'c-in' : st === 'online' ? 'c-on' : st === 'removed' ? 'c-rem' : 'c-dor'}">${st}</span>`;
       h += '<h2>Groups</h2>' + groups.map(g => {
         const n = g.i === G.ocia ? count('catechumen') : L.filter(m => m.groups.includes(g)).length;
-        const extra = g.i === G.sick ? ` · serves ${L.filter(m => m.age >= 80 || m.hard > 0).length}` : g.i === G.ocia ? ' in formation' : '';
+        const extra = g.i === G.sick ? ` · serves ${L.filter(m => m.age >= 80).length}` : g.i === G.ocia ? ' in formation' : '';
         return `<div class="row"><span>${g.name}</span><b>${chip(g.state)}${n}${extra}</b></div>`; }).join('');
       const Y = S.hist[0];
       if (Y) {
@@ -766,9 +907,9 @@ function main(){
         h += row('Returned to regular practice · slipped', `${Y.returned} · ${Y.slipped}`, `Returns at a child’s baptism ${Y.retBap}, at marriage ${Y.retMar}, at Christmas or Easter ${Y.retFeast}. Church marriages: ${Y.marriages}.`);
         const lv = S.hist.slice(0, 5).reduce((t, y) => t + y.left, 0), cv = S.hist.slice(0, 5).reduce((t, y) => t + y.adult, 0);
         h += row('Leavers per convert (5 years)', cv ? (lv / cv).toFixed(1) : '–', 'Pew finds 8.4 people raised Catholic have left for every convert, over a lifetime; a related but different measure.');
-        const P = { relational:0, marriage:0, digital:0, liturgy:0 }; for (const y of S.hist.slice(0, 5)) for (const k in P) P[k] += y.path[k];
+        const P = { relational:0, marriage:0, digital:0, liturgy:0, event:0 }; for (const y of S.hist.slice(0, 5)) for (const k in P) P[k] += y.path[k] || 0;
         const T = Object.values(P).reduce((a, b) => a + b, 0);
-        h += `<h2>How adults came in (last 5 years)</h2><div class="pyr">` + [['relational','Family and friends','#ff9fc6'],['marriage','Marriage or dating','#f2c862'],['digital','Digital content','#7fd3ff'],['liturgy','The liturgy','#ef8a6f']].map(([k, n, c]) => `<div><span>${n}</span><span class="b" style="width:${T ? P[k] / T * 100 : 0}%;background:${c}"></span><b>${T ? Math.round(P[k] / T * 100) : 0}%</b></div>`).join('') + `</div><p class="note" style="margin:0">${T ? 'Adults received: ' + T + '.' : 'No adults were received in these years.'} The 2026 OCIA survey found people arrive through relationships and through content or experience, with two-thirds citing digital content; shares here are approximate.</p>`;
+        h += `<h2>How adults came in (last 5 years)</h2><div class="pyr">` + [['relational','Family and friends','#ff9fc6'],['marriage','Marriage or dating','#f2c862'],['digital','Digital content','#7fd3ff'],['liturgy','The liturgy','#ef8a6f'],['event','An event','#f3c46b']].map(([k, n, c]) => `<div><span>${n}</span><span class="b" style="width:${T ? P[k] / T * 100 : 0}%;background:${c}"></span><b>${T ? Math.round(P[k] / T * 100) : 0}%</b></div>`).join('') + `</div><p class="note" style="margin:0">${T ? 'Adults received: ' + T + '.' : 'No adults were received in these years.'} The 2026 OCIA survey found people arrive through relationships and through content or experience, with two-thirds citing digital content; shares here are approximate.</p>`;
       } else h += '<p class="note">Yearly figures appear after the first Advent. Raise the speed to see decades unfold.</p>';
     } else {
       const cat = CONT.reduce((t, c) => t + c.cat, 0), pr = CONT.reduce((t, c) => t + c.pr, 0);
@@ -808,7 +949,8 @@ function main(){
       if (m.st === 'leaving' || m.st === 'moved') c.copy(inqCol).multiplyScalar(Math.max(0, .5 - m.fade / 80));
       else if (m.st === 'inquirer') c.copy(inqCol).multiplyScalar(.8);
       else if (m.st === 'catechumen') c.copy(catCol);
-      else c.copy(m.rel ? relCol : bandCol[m.band]).multiplyScalar(.3 + .7 * m.b);
+      else { c.copy(m.rel ? relCol : bandCol[m.band]).multiplyScalar(.3 + .7 * m.b); const gl = Math.min(.85, m.e * .9 + m.glow * .6); if (gl > .01) c.lerp(GOLD, gl); }
+      if (m.glow > 0) m.glow = Math.max(0, m.glow - dt * .8);
       col.setXYZ(i, c.r, c.g, c.b);
     });
     memPts.geometry.setDrawRange(0, members.length); pos.needsUpdate = col.needsUpdate = true;
@@ -855,7 +997,9 @@ function main(){
       L.e.style.display = 'block'; L.e.style.opacity = f;
       L.e.style.transform = `translate(${(tmp.x + 1) / 2 * Wd}px,${(1 - tmp.y) / 2 * Hd + L.dy}px) translate(-50%,-100%)`;
     }
-    ui += dt; if (ui > .3) { ui = 0; renderStats(); syncPert(); }
+    stepWaves(reduce ? 9 : dt);
+    ui += dt; if (ui > .3) { ui = 0; const L = live(); S.meanE = L.reduce((t, m) => t + m.e, 0) / (L.length || 1); renderStats(); syncPert(); sound.update(); }
+    sound.tick(dt);
   }
   initParish(S.size); paintRing(); renderLog(); renderStats();
   window.__boc = { fast(days){ for (let i = 0; i < days; i++) stepDay(); renderStats(); }, S, K, members:() => members, live, CONT };
