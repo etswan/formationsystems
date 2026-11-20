@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap">
 <style>
 /* VOICE everyday study tool, reverent and calm
-   IDEA a night nave: one body lit from a single light at its centre, tinted by the liturgical season
+   IDEA a night nave: one body lit from a single light at its center, tinted by the liturgical season
    PICTURE live 3D model of the body at two scales, a parish and the universal Church
-   COLOUR aubergine night ground, pale gold-white light, season colour as accent, component and age hues
+   COLOUR aubergine night ground, pale gold-white light, season color as accent, component and age hues
    TYPE EB Garamond for title and season, Source Sans 3 for text
    LAYOUT laptop: model left, panel right; phone: model 58svh on top, panel below */
 :root{color-scheme:dark;--bg:#120e18;--panel:#19141f;--ink:#ece8f2;--mute:#aaa3b8;--line:#2f2839;--btn:#231d2c;--season:#4fa36b;--sac:#ef8a6f;--role:#f2c862;--group:#62c6cc;--order:#b69cf2}
@@ -25,7 +25,11 @@ body{background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3",system-
 .intro h1{font:600 clamp(40px,6vw,68px)/1.02 "EB Garamond",Georgia,serif;letter-spacing:-.015em;color:#211f25;margin:0 0 14px;text-wrap:balance}
 .intro .sub{font:500 clamp(20px,2.4vw,26px)/1.3 "EB Garamond",Georgia,serif;color:#5a5560;margin:0 0 32px;text-wrap:balance}
 .intro .body{font-size:clamp(17px,1.5vw,19px);line-height:1.65;color:#2b2a2f;margin:0;max-width:68ch;text-wrap:pretty}
-.intro .go{display:inline-block;margin-top:36px;font-size:15px;color:#5a5560;text-decoration:none;border-bottom:1px solid #c9c4cf;padding-bottom:2px}
+.intro-acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:36px}
+.intro .paper{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:10px 20px;border-radius:999px;background:#a89a8c;color:#fff;text-decoration:none;font-size:15px;font-weight:600}
+.intro .paper:hover{background:#978879}
+.intro .paper:focus-visible,.intro .go:focus-visible{outline:2px solid #5b3e8c;outline-offset:3px}
+.intro .go{display:inline-block;font-size:15px;color:#5a5560;text-decoration:none;border-bottom:1px solid #c9c4cf;padding-bottom:2px}
 .intro .go:hover{color:#211f25;border-color:#211f25}
 .fade-down{height:clamp(120px,22vh,220px);background:linear-gradient(#fbfaf7,var(--bg))}
 .fade-up{height:clamp(120px,22vh,220px);background:linear-gradient(var(--bg),#fbfaf7)}
@@ -108,8 +112,11 @@ a{color:#c9b6ff}
   <div class="in">
     <h1>The Living System of Catholic Formation</h1>
     <p class="sub">Through the lens of autopoiesis, social neuroscience and distributed cognition</p>
-    <p class="body">This project frames Catholic spiritual formation as a non-biological autopoietic system, reinterpreting discipleship not as knowledge transfer, but as continuous participation in an operationally closed, self-producing environment. By synthesising biological autopoiesis, organisational cybernetics and social neuroscience, the model demonstrates how the system recursively regenerates the living Body of Christ across generational member turnover. Ultimately, the framework serves as a practical model for ecclesial architecture, illustrating how replacing clerical single points of failure with distributed formational networks preserves institutional identity and systemic resilience.</p>
-    <a class="go" href="#model">Explore the model ↓</a>
+    <p class="body">This project frames Catholic spiritual formation as a non-biological autopoietic system, reinterpreting discipleship not as knowledge transfer, but as continuous participation in an operationally closed, self-producing environment. By synthesizing biological autopoiesis, organizational cybernetics and social neuroscience, the model demonstrates how the system recursively regenerates the living Body of Christ across generational member turnover. Ultimately, the framework serves as a practical model for ecclesial architecture, illustrating how replacing clerical single points of failure with distributed formational networks preserves institutional identity and systemic resilience.</p>
+    <div class="intro-acts">
+      <a class="paper" href="papers/Body_of_Christ_Model.pdf"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M4 1h5.6L13 4.4V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1.2V5h2.8L9 2.2ZM5 7.5v1h6v-1H5Zm0 2.2v1h6v-1H5Zm0 2.2v1h4v-1H5Z"/></svg>Read how the model works</a>
+      <a class="go" href="#model">Explore the model ↓</a>
+    </div>
   </div>
 </header>
 <div class="fade-down" aria-hidden="true"></div>
@@ -200,10 +207,10 @@ a{color:#c9b6ff}
       <h2 style="margin-top:16px">Three lenses</h2>
       <p><b>Autopoiesis.</b> The parish is read as a system that produces itself. Over a few decades most members are replaced through births, deaths, converts and moves, yet the pattern of relations persists. Sacraments produce specific relations, roles and groups hold the body’s shape, and the calendar orders when the parts come together. Events trigger change, but the body’s own structure decides what lasts, which is why the same papal visit leaves a mark in one parish and passes through another.</p>
       <p><b>Distributed cognition.</b> Faith here is not held in any one head. It is carried across people, practices and shared artefacts: the rite, the readings, the calendar, the habits of a choir or a Bible study. Formation happens as the community performs these together, what Friedrich and colleagues call the competent performance of the community as a whole. In the model, no single member holds the parish’s life; it lives in the network of ties, which is why losing a group affects people who never belonged to it.</p>
-      <p><b>Organisational cybernetics.</b> In Beer’s Viable System Model, the liturgical calendar is the coordinating function: it keeps every group in step without anyone giving orders. Internal regulation sits with the pastor and bishop, but by Ashby’s law no single regulator can match a whole community’s variety. Where one role carries a function on which much else depends, as the pastor, the spiritual director and OCIA do here, the model shows a single point of failure. The remedy is distribution and subsidiarity, so the hierarchy serves identity and coordination rather than acting as a bottleneck.</p>
+      <p><b>Organizational cybernetics.</b> In Beer’s Viable System Model, the liturgical calendar is the coordinating function: it keeps every group in step without anyone giving orders. Internal regulation sits with the pastor and bishop, but by Ashby’s law no single regulator can match a whole community’s variety. Where one role carries a function on which much else depends, as the pastor, the spiritual director and OCIA do here, the model shows a single point of failure. The remedy is distribution and subsidiarity, so the hierarchy serves identity and coordination rather than acting as a bottleneck.</p>
       <p>Attendance is not fixed. Each year some regular attenders slip into occasional practice and some occasional attenders return, often at a marriage, a child’s baptism or a great feast. Formation in childhood, a parent’s practice, spiritual direction, the young adults group and, as a hypothesis, the reverence of the liturgy all shift those chances.</p>
-      <p> Leave it running for decades and the parish remakes itself: people are born, age, join groups, leave, die and are replaced by births, converts and people moving in. The members change while the organisation persists: autopoiesis.</p>
-      <p>Watch the age pyramid and the regeneration ratio. A parish can hold its numbers for years while ageing towards a point where it can no longer replace itself.</p>
+      <p> Leave it running for decades and the parish remakes itself: people are born, age, join groups, leave, die and are replaced by births, converts and people moving in. The members change while the organization persists: autopoiesis.</p>
+      <p>Watch the age pyramid and the regeneration ratio. A parish can hold its numbers for years while aging toward a point where it can no longer replace itself.</p>
     </details>
 
     <details>
@@ -222,7 +229,7 @@ a{color:#c9b6ff}
         <li>Adult practice is shaped by parents’ practice and childhood formation <span class="tag t-part">partly grounded</span> <a href="https://academic.oup.com/book/39513">Smith and Adamczyk, Handing Down the Faith (Oxford, 2021)</a></li>
         <li>Returns to practice at marriage, a child’s baptism and great feasts; more slipping during scandal and pandemic <span class="tag t-part">partly grounded</span> in the direction of the effect; the rates are assumptions</li>
         <li>Events (relic tours, papal visits, visiting choirs, World Youth Day, Eucharistic processions): their reach and strength, and how quickly enthusiasm fades <span class="tag t-hyp">hypothesis</span></li>
-        <li>The three lenses: autopoiesis, distributed cognition and organisational cybernetics <span class="tag t-hyp">interpretive framework</span> Maturana &amp; Varela (1980); Hutchins (1995); Friedrich et al. (2020); Beer (1972, 1979); Ashby (1956); Schwaninger &amp; Ott (2023); Espinosa (2025)</li>
+        <li>The three lenses: autopoiesis, distributed cognition and organizational cybernetics <span class="tag t-hyp">interpretive framework</span> Maturana &amp; Varela (1980); Hutchins (1995); Friedrich et al. (2020); Beer (1972, 1979); Ashby (1956); Schwaninger &amp; Ott (2023); Espinosa (2025)</li>
         <li>Closed leadership, the dropped calendar, the effects of spiritual direction and of liturgical reverence on practice, and all group renewal rates <span class="tag t-hyp">hypothesis</span></li>
         <li>Whole-Church figures: Catholics, priests and their 2024 change by continent <span class="tag t-cal">calibrated</span> <a href="https://www.vaticannews.va/en/church/news/2026-10/fides-agency-2026-annual-church-statistics.html">Fides 2026</a>; dioceses, schools, hospitals, charities, university students, religious, seminarians and their 2023 change <span class="tag t-cal">calibrated</span> <a href="https://www.fides.org/en/attachments/view/file/Catholic_Church_Statistics_2025.pdf">Fides 2025</a>; baptisms by continent <a href="https://www.vaticannews.va/en/vatican-city/news/2026-03/new-data-from-annuario-pontificio-2026-shows-catholics-growing.print.html">Annuarium 2024</a></li>
         <li>Sunday Mass by continent: Africa about 70%, Asia 50%, the Americas 27%, Europe 22%, Oceania 15%, estimated from self-reported weekly attendance in 36 countries (Nigeria 94%, Kenya 73%, Philippines 56%, Poland 52%, Mexico 47%, Italy 34%, Germany 14%, Brazil 8%, France 8%) and weighted by Catholic population <span class="tag t-part">partly grounded</span> <a href="https://aleteia.org/2023/01/25/where-in-the-world-is-catholic-mass-attendance-highest/">CARA, World Values Survey</a></li>
@@ -314,7 +321,7 @@ function main(){
     ['Anointing of the Sick','Accompanies members at the end of life.'] ];
   const ROLES = [
     ['Pastor','Celebrates the sacraments and calls the assembly into its own priesthood.'],
-    ['Deacon','Baptises, marries, leads Bible study and helps with OCIA and the sick.'],
+    ['Deacon','Baptizes, marries, leads Bible study and helps with OCIA and the sick.'],
     ['Catechist','Leads family faith formation and OCIA.'],
     ['Music director','Leads the choir and the assembly’s singing.'],
     ['Spiritual director','Accompanies young adults and the religious community.'],
@@ -596,7 +603,7 @@ function main(){
           n++; S.yr.adult++; if (m.path) S.yr.path[m.path]++; pulse(m.p, COL.cat, 3);
         }
         pulse(sac[1].p, COL.sac, 8); pulse(sac[2].p, COL.sac, 8);
-        log(`Easter Vigil: ${n} adult${n === 1 ? '' : 's'} baptised or received${w ? `; ${w} wait for next year` : ''}.`);
+        log(`Easter Vigil: ${n} adult${n === 1 ? '' : 's'} baptized or received${w ? `; ${w} wait for next year` : ''}.`);
       }
     }
     // newcomers
@@ -772,7 +779,7 @@ function main(){
     papal:{ after:'the papal visit', n:'Papal visit', info:'Reaches the whole parish; the strongest lift', r:99, s:.8, ed:.02, inq:.004, path:'event', aud:() => 1, rings:6, speed:.75, bell:'papal' },
     choir:{ after:'the visiting choir', n:'Visiting choir', info:'A concert series; draws people through the liturgy', r:14, s:.45, ed:.04, inq:.0015, path:'liturgy', aud:m => m.groups.includes(groups[G.choir]) ? 1.4 : 1, rings:4, speed:1.15, bell:'choir' },
     wyd:{ after:'World Youth Day', n:'World Youth Day', info:'A pilgrimage for youth and young adults', r:99, s:.85, ed:.025, inq:.002, path:'event', young:true, aud:m => m.band === 1 || m.band === 2 ? 1 : .12, rings:5, speed:.95, bell:'wyd' },
-    proc:{ after:'the Eucharistic procession', n:'Eucharistic procession', info:'Through the neighbourhood; strengthens bonds directly', r:15, s:.5, ed:.035, inq:.001, path:'event', bond:.04, aud:() => 1, rings:4, speed:1.05, bell:'proc' } };
+    proc:{ after:'the Eucharistic procession', n:'Eucharistic procession', info:'Through the neighborhood; strengthens bonds directly', r:15, s:.5, ed:.035, inq:.001, path:'event', bond:.04, aud:() => 1, rings:4, speed:1.05, bell:'proc' } };
   const waves = [], waveGeo = new THREE.BufferGeometry().setFromPoints(Array.from({ length:160 }, (_, i) => new V(Math.cos(i / 160 * Math.PI * 2), Math.sin(i / 160 * Math.PI * 2), 0)));
   const GOLD = new THREE.Color('#f3c46b');
   function bringEvent(axis){
