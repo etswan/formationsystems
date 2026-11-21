@@ -190,7 +190,7 @@ a{color:#c9b6ff}
     <h2>What happened</h2>
     <ul class="log" id="log"></ul>
 
-    <h2>Key</h2>
+    <h2>Node key</h2>
     <ul class="leg">
       <li><span style="background:#a8e6a1"></span>Children 0–12</li>
       <li><span style="background:#7fd3ff"></span>Youth 13–19</li>
@@ -236,7 +236,9 @@ a{color:#c9b6ff}
         <li>Returns to practice at marriage, a child’s baptism and great feasts; more slipping during scandal and pandemic <span class="tag t-part">partly grounded</span> in the direction of the effect; the rates are assumptions</li>
         <li>Events (relic tours, papal visits, visiting choirs, World Youth Day, Eucharistic processions): their reach and strength, and how quickly enthusiasm fades <span class="tag t-hyp">hypothesis</span></li>
         <li>The three lenses: autopoiesis, distributed cognition and organizational cybernetics <span class="tag t-hyp">interpretive framework</span> Maturana &amp; Varela (1980); Hutchins (1995); Friedrich et al. (2020); Beer (1972, 1979); Ashby (1956); Schwaninger &amp; Ott (2023); Espinosa (2025)</li>
-        <li>Closed leadership, the dropped calendar, the effects of spiritual direction and of liturgical reverence on practice, and all group renewal rates <span class="tag t-hyp">hypothesis</span></li>
+        <li>Group participation: about one in five U.S. Catholics take part in parish life beyond Mass, and about half of weekly attenders do; 15% of young adult Catholics have belonged to a young adult group, 34% of those who attend weekly. The model’s joining rates fall within this range <span class="tag t-part">partly grounded</span> <a href="https://www.pewresearch.org/religion/2025/06/16/catholic-parish-life-culture-and-community/">Pew 2025</a>, <a href="https://www.americamagazine.org/faith/2021/11/10/cara-survey-young-american-catholics-241803">CARA 2020 via America</a></li>
+        <li>Spiritual direction and accompaniment: young people with more adult mentors report more meaning and less loneliness, and weak attachment to the Church comes before leaving it <span class="tag t-part">partly grounded</span> in the direction of the effect; the rates are assumptions <a href="https://www.ncronline.org/news/parish/study-increasingly-isolated-youth-connect-faith-through-relationship">Springtide Research Institute via NCR</a>, <a href="https://www.ncronline.org/news/people/study-shows-young-adults-leaving-church-start-down-path-age-13">Going, Going, Gone (Saint Mary’s Press, 2018) via NCR</a></li>
+        <li>Closed leadership, the dropped calendar, the effect of liturgical reverence on practice, and all group renewal rates <span class="tag t-hyp">hypothesis</span></li>
         <li>Whole-Church figures: Catholics, priests and their 2024 change by continent <span class="tag t-cal">calibrated</span> <a href="https://www.vaticannews.va/en/church/news/2026-10/fides-agency-2026-annual-church-statistics.html">Fides 2026</a>; dioceses, schools, hospitals, charities, university students, religious, seminarians and their 2023 change <span class="tag t-cal">calibrated</span> <a href="https://www.fides.org/en/attachments/view/file/Catholic_Church_Statistics_2025.pdf">Fides 2025</a>; baptisms by continent <a href="https://www.vaticannews.va/en/vatican-city/news/2026-03/new-data-from-annuario-pontificio-2026-shows-catholics-growing.print.html">Annuarium 2024</a></li>
         <li>Sunday Mass by continent: Africa about 70%, Asia 50%, the Americas 27%, Europe 22%, Oceania 15%, estimated from self-reported weekly attendance in 36 countries (Nigeria 94%, Kenya 73%, Philippines 56%, Poland 52%, Mexico 47%, Italy 34%, Germany 14%, Brazil 8%, France 8%) and weighted by Catholic population <span class="tag t-part">partly grounded</span> <a href="https://aleteia.org/2023/01/25/where-in-the-world-is-catholic-mass-attendance-highest/">CARA, World Values Survey</a></li>
         <li>Rooted robustness: the average of six institutional counts relative to the largest region, weighted by the age of each region’s diocesan structure (Europe from the first centuries, the Americas from 1511, Asia from the 16th century, Oceania from the 1840s, most of Africa from the late 19th century) <span class="tag t-part">partly grounded</span>; the weighting is a hypothesis</li>
@@ -356,7 +358,8 @@ function main(){
     'Holy Orders':[['Vacancy effects', 'hyp']],
     'Anointing of the Sick':[['Deaths by age', 'part']],
     'Family faith formation':[['Childhood formation', 'part'], ['Renewal rate', 'hyp']],
-    'OCIA':[['Adults received', 'part'], ['Renewal rate', 'hyp']] };
+    'OCIA':[['Adults received', 'part'], ['Renewal rate', 'hyp']],
+    'Spiritual director':[['Effect on practice', 'part']] };
 
   const nodes = [];
   const mk = (name, kind, p, info, size) => { const n = { name, kind, p, info, size, state:'in person' }; nodes.push(n); return n; };
@@ -787,7 +790,7 @@ function main(){
     let html;
     if (h.object === memPts) { const m = members[h.index]; if (!m) return; html = `<b>${m.rel ? 'Member of the religious community' : m.st === 'member' ? (m.convert ? 'Convert' : 'Member') : m.st === 'catechumen' ? 'Catechumen or candidate' : m.st === 'inquirer' ? 'Inquirer' : 'Leaving'}, age ${Math.floor(m.age)}</b>Bond ${Math.round(m.b * 100)}%. ${m.st !== 'member' || m.rel ? '' : m.kid ? 'Comes to Mass with family. ' : m.reg ? 'Regular at Mass. ' : 'Occasional at Mass. '}${m.e > .05 ? 'Enthusiasm ' + Math.round(m.e * 100) + '% after an event. ' : ''}${m.groups.length ? 'In ' + m.groups.map(g => g.name.toLowerCase()).join(' and ') + '.' : 'In no group.'}${m.path ? ' Came through ' + ({ relational:'family and friends', marriage:'marriage or dating', digital:'digital content', liturgy:'the liturgy', event:'an event' })[m.path] + '.' : ''}${evl([['Mass and Communion', 'cal'], ['Leaving', 'part'], ['Bond decay', 'hyp']])}`; }
     else if (u.cont !== undefined) { const c = CONT[u.cont]; html = `<b>${h.object === yourGlyph ? 'Your parish, in the ' + c.n : c.n}</b>${c.cat.toFixed(1)} million Catholics; Sunday Mass about ${Math.round(c.Aeff * 100)}%. Rooted ${Math.round(c.R / RMAX * 100)}, vitality ${Math.round(c.V * 100)}, pulse ${Math.round(c.P * 100)}. ${fmt(c.pr)} priests, ${fmt(c.sem)} seminarians. Dioceses since ${c.since}. Each point is about 10 million Catholics.${h.object === yourGlyph ? ' Click to enter.' : ''}${evl([['Catholics and priests', 'cal'], ['Mass, robustness, vitality', 'part'], ['Change over time', 'hyp']])}`; }
-    else { const n = u.node; html = `<b>${n.name}</b>${n.info}${n.kind === 'group' || n.kind === 'order' ? ' Now: ' + n.state + '.' : ''}${n === pastor && !S.pastor ? ' Vacant.' : ''}${evl(EVID[n.name] || (n.kind === 'role' ? [['Effects', 'hyp']] : [['Renewal rate', 'hyp']]))}`; }
+    else { const n = u.node; html = `<b>${n.name}</b>${n.info}${n.kind === 'group' || n.kind === 'order' ? ' Now: ' + n.state + '.' : ''}${n === pastor && !S.pastor ? ' Vacant.' : ''}${evl(EVID[n.name] || (n.kind === 'role' ? [['Effects', 'hyp']] : n.kind === 'group' ? [['Participation', 'part'], ['Renewal rate', 'hyp']] : [['Renewal rate', 'hyp']]))}`; }
     tip.innerHTML = html; tip.style.display = 'block';
     tip.style.left = Math.min(ev.clientX - r.left + 14, Wd - 290) + 'px'; tip.style.top = Math.max(8, ev.clientY - r.top - 10) + 'px';
   });
@@ -1007,7 +1010,8 @@ function main(){
     b.setAttribute('aria-pressed', g.removed);
   };
 
-  const row = (k, v, note, pct) => `<div class="row"><span>${k}</span><b>${v}</b>${note ? `<em>${note}</em>` : ''}${pct === undefined ? '' : `<div class="meter"><i style="width:${Math.round(Math.min(1, pct) * 100)}%"></i></div>`}</div>`;
+  const tg = (k, e) => `<span class="ev-${e}">${k}</span>`;
+  const row = (k, v, note, pct, e) => `<div class="row"><span>${e ? tg(k, e) : k}</span><b>${v}</b>${note ? `<em>${note}</em>` : ''}${pct === undefined ? '' : `<div class="meter"><i style="width:${Math.round(Math.min(1, pct) * 100)}%"></i></div>`}</div>`;
   const per1k = (x, n) => n ? (x / n * 1000).toFixed(1) : '0';
   function renderStats(){
     let h = '';
@@ -1019,14 +1023,14 @@ function main(){
       const bands = [0, 0, 0, 0, 0]; for (const m of L) bands[m.band]++;
       const reg = bands[4] ? (bands[0] + bands[2]) / bands[4] : 0;
       h += '<h2>This parish</h2>';
-      h += row('Members', fmt(N), `${count('catechumen')} in OCIA, ${count('inquirer')} inquirer${count('inquirer') === 1 ? '' : 's'}`);
+      h += row('Members', fmt(N), `${count('catechumen')} in OCIA, ${count('inquirer')} inquirer${count('inquirer') === 1 ? '' : 's'}`, undefined, 'part');
       h += '<div class="pyr">' + BANDS.map((b, i) => `<div><span>${b.n}</span><span class="b" style="width:${N ? bands[i] / N * 100 * 2.2 : 0}%;max-width:100%;background:${b.c}"></span><b>${N ? Math.round(bands[i] / N * 100) : 0}%</b></div>`).join('') + '</div>';
       const ad = L.filter(m => m.age >= 18), A = ad.length || 1;
       const pb = [[18,30],[30,50],[50,65],[65,200]].map(([a, b]) => Math.round(ad.filter(m => m.age >= a && m.age < b).length / A * 100));
       h += `<p class="note" style="margin:0 0 6px">Adults now 18–29 ${pb[0]}% · 30–49 ${pb[1]}% · 50–64 ${pb[2]}% · 65+ ${pb[3]}%. U.S. Catholic adults (Pew 2023–24): 14 · 27 · 29 · 28.</p>`;
-      h += row('Regeneration ratio', reg.toFixed(2), 'Children and young adults for each member over 60. Below about 1, the parish is not replacing itself.', reg / 2);
+      h += row('Regeneration ratio', reg.toFixed(2), 'Children and young adults for each member over 60. Below about 1, the parish is not replacing itself.', reg / 2, 'part');
       const adl = L.filter(m => m.age >= 18 && !m.rel), cr = adl.filter(m => !m.convert), cv = adl.filter(m => m.convert), sh = (a, f) => a.length ? Math.round(a.filter(f).length / a.length * 100) : 0;
-      h += row('Weekly Mass attendance', Math.round(S.att * 100) + '%', `Share of members present last Sunday. U.S. reference: about 24% attend weekly (CARA).`, S.att);
+      h += row('Weekly Mass attendance', Math.round(S.att * 100) + '%', `Share of members present last Sunday. U.S. reference: about 24% attend weekly (CARA).`, S.att, 'cal');
       const crA = cr.filter(m => !m.kid), cvA = cv.filter(m => !m.kid), rc = sh(crA, m => m.reg), rv5 = sh(cvA, m => m.reg), old = S.hist[4];
       const pts = (now, then) => { const d = Math.round(now - then * 100); return d === 0 ? 'no change' : (d > 0 ? '+' : '−') + Math.abs(d) + ' points'; };
       const down = [], up = [];
@@ -1037,37 +1041,37 @@ function main(){
       if (S.sd < .6) down.push('spiritual direction weak');
       if (S.rev < 0) down.push('less reverent liturgy'); if (S.rev > 0) up.push('more reverent liturgy');
       if (on('scan')) down.push('scandal'); if (on('pan')) down.push('pandemic'); if (on('closed')) down.push('closed leadership'); if (!S.pastor) down.push('no pastor');
-      h += row('Regular practice: cradle · converts', `${rc}% · ${rv5}%`, `Usually at Sunday Mass. Pew 2025: 28% · 38%.${old ? ` Over 5 years: cradle ${pts(rc, old.regCr)}, converts ${pts(rv5, old.regCv)}.` : ''} Receive Communion at every Mass: ${sh(crA, m => m.c)}% · ${sh(cvA, m => m.c)}% (Pew: 34% · 58%).`);
+      h += row('Regular practice: cradle · converts', `${rc}% · ${rv5}%`, `Usually at Sunday Mass. Pew 2025: 28% · 38%.${old ? ` Over 5 years: cradle ${pts(rc, old.regCr)}, converts ${pts(rv5, old.regCv)}.` : ''} Receive Communion at every Mass: ${sh(crA, m => m.c)}% · ${sh(cvA, m => m.c)}% (Pew: 34% · 58%).`, undefined, 'cal');
       h += `<p class="note" style="margin:2px 0 6px">${down.length ? 'Pulling practice down: ' + down.join(', ') + '.' : 'Nothing is pulling practice down right now.'}${up.length ? ' Holding it up: ' + up.join(', ') + '.' : ''}</p>`;
-      h += row('Spiritual direction', Math.round(S.sd * 100) + '%', 'The spiritual director’s ties to the young adults group and the religious community. When it weakens, more people slip and fewer return.', S.sd);
-      h += row('Enthusiasm', Math.round(S.meanE * 100) + '%', S.meanE > .01 ? 'Raised by a recent event. It fades over weeks; members absorb it into bonds through Mass and their groups.' : 'Bring an event to raise it.', S.meanE * 2);
-      h += row('Pastor', S.pastor ? 'Present' : `Vacant (${S.wait} days)`);
+      h += row('Spiritual direction', Math.round(S.sd * 100) + '%', 'The spiritual director’s ties to the young adults group and the religious community. When it weakens, more people slip and fewer return.', S.sd, 'part');
+      h += row('Enthusiasm', Math.round(S.meanE * 100) + '%', S.meanE > .01 ? 'Raised by a recent event. It fades over weeks; members absorb it into bonds through Mass and their groups.' : 'Bring an event to raise it.', S.meanE * 2, 'hyp');
+      h += row('Pastor', S.pastor ? 'Present' : `Vacant (${S.wait} days)`, '', undefined, 'hyp');
       const chip = st => `<span class="chip ${st === 'in person' ? 'c-in' : st === 'online' ? 'c-on' : st === 'removed' ? 'c-rem' : 'c-dor'}">${st}</span>`;
-      h += '<h2>Groups</h2>' + groups.map(g => {
+      h += '<h2><span class="ev-part">Groups</span></h2>' + groups.map(g => {
         const n = g.i === G.ocia ? count('catechumen') : L.filter(m => m.groups.includes(g)).length;
         const extra = g.i === G.sick ? ` · serves ${L.filter(m => m.age >= 80).length}` : g.i === G.ocia ? ' in formation' : '';
         return `<div class="row"><span>${g.name}</span><b>${chip(g.state)}${n}${extra}</b></div>`; }).join('');
       const Y = S.hist[0];
       if (Y) {
         h += `<h2>Last liturgical year</h2>`;
-        h += row('Infant baptisms', Y.infant, `${per1k(Y.infant, N)} per 1,000 members (Vatican world average 7.4)`);
-        h += row('Adults received at Easter', Y.adult, `${per1k(Y.adult, N)} per 1,000 (U.S. 2023 about 1.3)`);
-        h += row('Deaths', Y.deaths, `${per1k(Y.deaths, N)} per 1,000`);
-        h += row('Left the Church', Y.left, `${(Y.left / (N || 1) * 100).toFixed(1)}% of members (target about 1.1%)`);
-        h += row('Moved in · moved out', `${Y.movedIn} · ${Y.movedOut}`);
-        h += row('Returned to regular practice · slipped', `${Y.returned} · ${Y.slipped}`, `Returns at a child’s baptism ${Y.retBap}, at marriage ${Y.retMar}, at Christmas or Easter ${Y.retFeast}. Church marriages: ${Y.marriages}.`);
+        h += row('Infant baptisms', Y.infant, `${per1k(Y.infant, N)} per 1,000 members (Vatican world average 7.4)`, undefined, 'cal');
+        h += row('Adults received at Easter', Y.adult, `${per1k(Y.adult, N)} per 1,000 (U.S. 2023 about 1.3)`, undefined, 'part');
+        h += row('Deaths', Y.deaths, `${per1k(Y.deaths, N)} per 1,000`, undefined, 'part');
+        h += row('Left the Church', Y.left, `${(Y.left / (N || 1) * 100).toFixed(1)}% of members (target about 1.1%)`, undefined, 'part');
+        h += row('Moved in · moved out', `${Y.movedIn} · ${Y.movedOut}`, '', undefined, 'hyp');
+        h += row('Returned to regular practice · slipped', `${Y.returned} · ${Y.slipped}`, `Returns at a child’s baptism ${Y.retBap}, at marriage ${Y.retMar}, at Christmas or Easter ${Y.retFeast}. Church marriages: ${Y.marriages}.`, undefined, 'part');
         const lv = S.hist.slice(0, 5).reduce((t, y) => t + y.left, 0), cv = S.hist.slice(0, 5).reduce((t, y) => t + y.adult, 0);
-        h += row('Leavers per convert (5 years)', cv ? (lv / cv).toFixed(1) : '–', 'Pew finds 8.4 people raised Catholic have left for every convert, over a lifetime; a related but different measure.');
+        h += row('Leavers per convert (5 years)', cv ? (lv / cv).toFixed(1) : '–', 'Pew finds 8.4 people raised Catholic have left for every convert, over a lifetime; a related but different measure.', undefined, 'part');
         const P = { relational:0, marriage:0, digital:0, liturgy:0, event:0 }; for (const y of S.hist.slice(0, 5)) for (const k in P) P[k] += y.path[k] || 0;
         const T = Object.values(P).reduce((a, b) => a + b, 0);
-        h += `<h2>How adults came in (last 5 years)</h2><div class="pyr">` + [['relational','Family and friends','#ff9fc6'],['marriage','Marriage or dating','#f2c862'],['digital','Digital content','#7fd3ff'],['liturgy','The liturgy','#ef8a6f'],['event','An event','#f3c46b']].map(([k, n, c]) => `<div><span>${n}</span><span class="b" style="width:${T ? P[k] / T * 100 : 0}%;background:${c}"></span><b>${T ? Math.round(P[k] / T * 100) : 0}%</b></div>`).join('') + `</div><p class="note" style="margin:0">${T ? 'Adults received: ' + T + '.' : 'No adults were received in these years.'} The 2026 OCIA survey found people arrive through relationships and through content or experience, with two-thirds citing digital content; shares here are approximate.</p>`;
+        h += `<h2><span class="ev-part">How adults came in (last 5 years)</span></h2><div class="pyr">` + [['relational','Family and friends','#ff9fc6'],['marriage','Marriage or dating','#f2c862'],['digital','Digital content','#7fd3ff'],['liturgy','The liturgy','#ef8a6f'],['event','An event','#f3c46b']].map(([k, n, c]) => `<div><span>${n}</span><span class="b" style="width:${T ? P[k] / T * 100 : 0}%;background:${c}"></span><b>${T ? Math.round(P[k] / T * 100) : 0}%</b></div>`).join('') + `</div><p class="note" style="margin:0">${T ? 'Adults received: ' + T + '.' : 'No adults were received in these years.'} The 2026 OCIA survey found people arrive through relationships and through content or experience, with two-thirds citing digital content; shares here are approximate.</p>`;
       } else h += '<p class="note">Yearly figures appear after the first Advent. Raise the speed to see decades unfold.</p>';
     } else {
       const cat = CONT.reduce((t, c) => t + c.cat, 0), pr = CONT.reduce((t, c) => t + c.pr, 0);
       h += `<h2>The whole Church, ${W.year}</h2>`;
-      h += row('Catholics', (cat / 1000).toFixed(3) + ' billion', W.year === 2024 ? 'Starting point: 2024 data' : 'Projected from 2024 rates and the model’s rules');
-      h += row('Sunday Mass, worldwide', Math.round(wAtt() * 100) + '%', 'Estimated share of Catholics at Mass in a typical week', wAtt());
-      h += `<div class="scroll"><table class="tight"><thead><tr><th>Region</th><th>Catholics (m)</th><th>Mass</th><th>Rooted</th><th>Vitality</th><th>Pulse</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${c.cat.toFixed(1)}</td><td>${Math.round(c.Aeff * 100)}%</td><td>${Math.round(c.R / RMAX * 100)}</td><td>${Math.round(c.V * 100)}</td><td>${Math.round(c.P * 100)}</td></tr>`).join('')}</tbody></table></div>`;
+      h += row('Catholics', (cat / 1000).toFixed(3) + ' billion', W.year === 2024 ? 'Starting point: 2024 data' : 'Projected from 2024 rates and the model’s rules', undefined, 'cal');
+      h += row('Sunday Mass, worldwide', Math.round(wAtt() * 100) + '%', 'Estimated share of Catholics at Mass in a typical week', wAtt(), 'part');
+      h += `<div class="scroll"><table class="tight"><thead><tr><th>Region</th><th>${tg('Catholics (m)', 'cal')}</th><th>${tg('Mass', 'part')}</th><th>${tg('Rooted', 'part')}</th><th>${tg('Vitality', 'part')}</th><th>${tg('Pulse', 'part')}</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${c.cat.toFixed(1)}</td><td>${Math.round(c.Aeff * 100)}%</td><td>${Math.round(c.R / RMAX * 100)}</td><td>${Math.round(c.V * 100)}</td><td>${Math.round(c.P * 100)}</td></tr>`).join('')}</tbody></table></div>`;
       h += `<h2>Reading this view</h2><ul class="leg">
         <li><span style="background:#cfe8d6"></span><div><b>Each point</b> is about 10 million Catholics. Regions gain points as they grow.</div></li>
         <li><span style="background:#e9e2f2;transform:scale(1.35)"></span><div><b>Size: rooted robustness.</b> How much institutional life a region has (dioceses, schools, hospitals, charities, universities, clergy and religious) weighted by how long it has been established. Shown as 0 to 100, relative to the most rooted.</div></li>
@@ -1075,9 +1079,9 @@ function main(){
         <li><span style="background:#fff;box-shadow:0 0 8px #fff"></span><div><b>Slow heartbeat: pulse.</b> Regeneration against decay: whether Catholics, priests and seminarians are growing or shrinking. Each region brightens and dims gently over about five seconds; a strong swell is a body renewing itself, a faint one a body in decline.</div></li>
         <li><span style="background:transparent;border:2px solid #f1ead8"></span><div><b>Rings: Sunday Mass.</b> Each Sunday a ring spreads from each region; the larger the ring, the larger the share at Mass.</div></li>
         <li><span style="background:#f3c46b"></span><div><b>Gold: enthusiasm</b> after an event. Tap the space around the continents to bring one.</div></li></ul>`;
-      h += `<h2>Priests and vocations</h2><div class="scroll"><table><thead><tr><th>Continent</th><th>Priests</th><th>Seminarians</th><th>Catholics per priest</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.pr)}</td><td>${fmt(c.sem)}</td><td>${fmt(c.cat * 1e6 / c.pr)}</td></tr>`).join('')}</tbody></table></div>`;
+      h += `<h2>${tg('Priests and vocations', 'cal')}</h2><div class="scroll"><table><thead><tr><th>Continent</th><th>Priests</th><th>Seminarians</th><th>Catholics per priest</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.pr)}</td><td>${fmt(c.sem)}</td><td>${fmt(c.cat * 1e6 / c.pr)}</td></tr>`).join('')}</tbody></table></div>`;
       h += `<p class="note">Totals: ${fmt(pr)} priests, ${fmt(CONT.reduce((t, c) => t + c.sem, 0))} major seminarians.</p>`;
-      h += `<h2>Institutions (2023)</h2><div class="scroll"><table><thead><tr><th>Continent</th><th>Schools</th><th>Hospitals and clinics</th><th>Charities</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.schools * c.inst)}</td><td>${fmt(c.health * c.inst)}</td><td>${fmt(c.charity * c.inst)}</td></tr>`).join('')}</tbody></table></div><p class="note">Counts grow or shrink with each region’s vitality as the model runs.</p>`;
+      h += `<h2>${tg('Institutions (2023)', 'cal')}</h2><div class="scroll"><table><thead><tr><th>Continent</th><th>Schools</th><th>Hospitals and clinics</th><th>Charities</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.schools * c.inst)}</td><td>${fmt(c.health * c.inst)}</td><td>${fmt(c.charity * c.inst)}</td></tr>`).join('')}</tbody></table></div><p class="note">Counts grow or shrink with each region’s vitality as the model runs.</p>`;
     }
     $('#stats').innerHTML = h;
   }
