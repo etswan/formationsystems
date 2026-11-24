@@ -133,7 +133,7 @@ a{color:#c9b6ff}
   </div>
   <aside class="panel">
     <h1>Body of Christ Model</h1>
-    <p class="ver">Version 2.6 · each dot is one person</p>
+    <p class="ver">Version 2.7 · each dot is one person</p>
     <p class="lede">One self-renewing body at two scales. The scale you are viewing is shown in detail; the other stays simple.</p>
     <p class="evkey">Dots show how each element is grounded: <span class="ev-cal">calibrated</span> &nbsp;<span class="ev-part">partly grounded</span> &nbsp;<span class="ev-hyp">hypothesis</span>. Hover the model for details.</p>
 
@@ -157,6 +157,7 @@ a{color:#c9b6ff}
     </div>
     <p class="note" style="margin-top:6px">Quiet chant sounds the parish’s common life: fuller when more people attend and at the great feasts, out of tune when the shared calendar is lost. Bells mark enthusiasm after an event.</p>
 
+    <div class="seg" role="group" aria-label="Count Catholics as" id="layer" hidden style="margin:2px 0 10px"><button data-v="id" aria-pressed="true">Self-identified</button><button data-v="liv" aria-pressed="false">Living baptized</button></div>
     <div id="stats"></div>
 
     <h2>Perturb the body</h2>
@@ -213,7 +214,8 @@ a{color:#c9b6ff}
     <details>
       <summary>Description</summary>
       <p>Choose an event (a relic tour, a papal visit, a visiting choir, World Youth Day or a Eucharistic procession) and tap the sphere. A wave of enthusiasm ripples across the membrane and through the members it reaches, who glow gold. While it lasts they come to Mass more often, occasional attenders are more likely to return, and newcomers arrive. It fades over weeks. What remains depends on the parish: enthusiasm becomes lasting bonds only through the groups and practice that can absorb it. Six months later, the log reports how much stayed. Try the same event under closed leadership and compare.</p>
-      <p>In the whole-Church view, each region is a cluster of points, one for about every 10 million Catholics. Its size shows rooted robustness: the weight of institutions built up over generations. Its depth of green shows vitality: new life coming in. Its slow heartbeat, a gentle brightening and dimming, shows whether it is regenerating faster than it decays, and the rings that spread from it each Sunday show how many are at Mass. Events can be brought here too: tap the space around the continents.</p>
+      <p>The whole Church is modeled in six regions: North America, Latin America, Africa, Europe, Asia and Oceania. Each region’s Catholics are carried by five-year age group and change every year through infant baptisms (UN births to Catholic parents, times a fitted rate of baptism), deaths (UN life tables), adult and child baptisms of people not raised Catholic, people who stop identifying as Catholic, and migration (UN net migration, weighted by the Catholic share of immigrants from each origin). The model keeps two counts: self-identified Catholics, and living baptized Catholics, who include those who no longer identify. A third, the count in Vatican-style records, is larger because records rarely remove people who have died or emigrated. Priests and women religious are carried by age too, entering from young self-identified Catholics and leaving through death and departure. The rates were fitted to Vatican, survey and census data from 1978 to 2024 and tested on 2000 to 2024 after fitting to the years before; projections hold them at their 2024 levels.</p>
+      <p>In the whole-Church view, each region is a cluster of points, one for about every 10 million Catholics, counted either way. Its size shows rooted robustness: the weight of institutions built up over generations. Its depth of green shows vitality: new life coming in. Its slow heartbeat, a gentle brightening and dimming, shows whether it is regenerating faster than it decays, and the rings that spread from it each Sunday show how many are at Mass. Events can be brought here too: tap the space around the continents.</p>
       <h2 style="margin-top:16px">Three lenses</h2>
       <p><b>Autopoiesis.</b> The parish is read as a system that produces itself. Over a few decades most members are replaced through births, deaths, converts and moves, yet the pattern of relations persists. Sacraments produce specific relations, roles and groups hold the body’s shape, and the calendar orders when the parts come together. Events trigger change, but the body’s own structure decides what lasts, which is why the same papal visit leaves a mark in one parish and passes through another.</p>
       <p><b>Distributed cognition.</b> Faith here is not held in any one head. It is carried across people, practices and shared artefacts: the rite, the readings, the calendar, the habits of a choir or a Bible study. Formation happens as the community performs these together, what Friedrich and colleagues call the competent performance of the community as a whole. In the model, no single member holds the parish’s life; it lives in the network of ties, which is why losing a group affects people who never belonged to it.</p>
@@ -245,9 +247,11 @@ a{color:#c9b6ff}
         <li>Spiritual direction and accompaniment: young people with more adult mentors report more meaning and less loneliness, and weak attachment to the Church comes before leaving it <span class="tag t-part">partly grounded</span> in the direction of the effect; the rates are assumptions <a href="https://www.ncronline.org/news/parish/study-increasingly-isolated-youth-connect-faith-through-relationship">Springtide Research Institute via NCR</a>, <a href="https://www.ncronline.org/news/people/study-shows-young-adults-leaving-church-start-down-path-age-13">Going, Going, Gone (Saint Mary’s Press, 2018) via NCR</a></li>
         <li>Closed leadership, the dropped calendar, the effect of liturgical reverence on practice, and all group renewal rates <span class="tag t-hyp">hypothesis</span></li>
         <li>Production of ministers from formed members, training by existing ministers, terms of service, the number each function needs, self-leadership of groups, organizational closure and the participation boundary <span class="tag t-hyp">hypothesis</span></li>
-        <li>Whole-Church figures: Catholics, priests and their 2024 change by continent <span class="tag t-cal">calibrated</span> <a href="https://www.vaticannews.va/en/church/news/2026-10/fides-agency-2026-annual-church-statistics.html">Fides 2026</a>; dioceses, schools, hospitals, charities, university students, religious, seminarians and their 2023 change <span class="tag t-cal">calibrated</span> <a href="https://www.fides.org/en/attachments/view/file/Catholic_Church_Statistics_2025.pdf">Fides 2025</a>; baptisms by continent <a href="https://www.vaticannews.va/en/vatican-city/news/2026-03/new-data-from-annuario-pontificio-2026-shows-catholics-growing.print.html">Annuarium 2024</a></li>
-        <li>Sunday Mass by continent: Africa about 70%, Asia 50%, the Americas 27%, Europe 22%, Oceania 15%, estimated from self-reported weekly attendance in 36 countries (Nigeria 94%, Kenya 73%, Philippines 56%, Poland 52%, Mexico 47%, Italy 34%, Germany 14%, Brazil 8%, France 8%) and weighted by Catholic population <span class="tag t-part">partly grounded</span> <a href="https://aleteia.org/2023/01/25/where-in-the-world-is-catholic-mass-attendance-highest/">CARA, World Values Survey</a></li>
-        <li>Rooted robustness: the average of six institutional counts relative to the largest region, weighted by the age of each region’s diocesan structure (Europe from the first centuries, the Americas from 1511, Asia from the 16th century, Oceania from the 1840s, most of Africa from the late 19th century) <span class="tag t-part">partly grounded</span>; the weighting is a hypothesis</li>
+        <li>Whole-Church population: births, deaths, net migration and age structure by region, 1950 to 2100 <span class="tag t-cal">calibrated</span> <a href="https://population.un.org/wpp/">UN World Population Prospects 2024</a>; origins of immigrants <a href="https://www.un.org/development/desa/pd/content/international-migrant-stock">UN International Migrant Stock 2024</a></li>
+        <li>Rates of baptism, conversion, leaving, ordination and religious vocations by region, fitted to Vatican statistics since 1978 (Annuarium Statisticum Ecclesiae via L’Osservatore Romano; Vatican press office; Fides), CARA’s worldwide and United States series since 1970, Canadian censuses, Latinobarómetro, Pew (2010, 2015–17, 2024) and the European Social Survey <span class="tag t-part">partly grounded</span>; the split of the Americas before 2022, the ages of priests and women religious, and the share of deaths missing from records are estimates <span class="tag t-part">partly grounded</span></li>
+        <li>Starting figures: Catholics, priests and their 2024 change by continent <span class="tag t-cal">calibrated</span> <a href="https://www.vaticannews.va/en/church/news/2026-10/fides-agency-2026-annual-church-statistics.html">Fides 2026</a>; dioceses, schools, hospitals, charities, university students, religious, seminarians and their 2023 change <span class="tag t-cal">calibrated</span> <a href="https://www.fides.org/en/attachments/view/file/Catholic_Church_Statistics_2025.pdf">Fides 2025</a>; baptisms by continent <a href="https://www.vaticannews.va/en/vatican-city/news/2026-03/new-data-from-annuario-pontificio-2026-shows-catholics-growing.print.html">Annuarium 2024</a></li>
+        <li>Sunday Mass by region: Africa about 70%, Asia 50%, Latin America 28%, North America 24%, Europe 22%, Oceania 15%, estimated from self-reported weekly attendance in 36 countries (Nigeria 94%, Kenya 73%, Philippines 56%, Poland 52%, Mexico 47%, Italy 34%, Germany 14%, Brazil 8%, France 8%) and weighted by Catholic population <span class="tag t-part">partly grounded</span> <a href="https://aleteia.org/2023/01/25/where-in-the-world-is-catholic-mass-attendance-highest/">CARA, World Values Survey</a></li>
+        <li>Rooted robustness: the average of six institutional counts relative to the largest region, weighted by the age of each region’s diocesan structure (Europe from the first centuries, Latin America from 1511, North America from 1674, Asia from the 16th century, Oceania from the 1840s, most of Africa from the late 19th century) <span class="tag t-part">partly grounded</span>; the weighting is a hypothesis</li>
         <li>Vitality and pulse: scored from Catholic growth, baptisms per 1,000, seminarians per 100 priests and the trends in priests, seminarians and women religious <span class="tag t-part">partly grounded</span>; how events, vitality and institutions change one another over the years <span class="tag t-hyp">hypothesis</span></li>
       </ul>
       <h2 style="margin-top:18px">References</h2>
@@ -273,10 +277,10 @@ a{color:#c9b6ff}
         <li>Mingers, J. (1992). The problems of social autopoiesis. <i>International Journal of General Systems, 21</i>(2), 229–236.</li>
         <li>Schwaninger, M., &amp; Ott, S. (2023). What is variety engineering and why do we need it? <i>Systems Research and Behavioral Science</i>. <a href="https://doi.org/10.1002/sres.2964">doi.org/10.1002/sres.2964</a></li>
         <li>Second Vatican Council. (1964). <i>Lumen gentium: Dogmatic constitution on the Church</i>. <a href="https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19641121_lumen-gentium_en.html">vatican.va</a></li>
-        <li>Swan, E. (2026). <i>Body of Christ Model</i> (Version 2.6) [Interactive simulation model]. <a href="https://formationsystems.org">formationsystems.org</a></li>
+        <li>Swan, E. (2026). <i>Body of Christ Model</i> (Version 2.7) [Interactive simulation model]. <a href="https://formationsystems.org">formationsystems.org</a></li>
       </ul>
     </details>
-    <p class="foot">Body of Christ Model, version 2.6 (November 2026). formationsystems.org. An illustrative research model: simulated numbers are not predictions.</p>
+    <p class="foot">Body of Christ Model, version 2.7 (November 2026). formationsystems.org. An illustrative research model: simulated numbers are not predictions.</p>
   </aside>
 </main>
 <div class="fade-up" aria-hidden="true"></div>
@@ -287,6 +291,7 @@ a{color:#c9b6ff}
 
 <script src="../js/three.min.js"></script>
 <script src="../js/OrbitControls.js"></script>
+<script src="world-data.js"></script>
 <script>
 {
 const $ = s => document.querySelector(s);
@@ -489,53 +494,104 @@ function main(){
     { k:'pan', n:'Pandemic', dur:1092, ev:'cal' }, { k:'scan', n:'Scandal', dur:728, ev:'part' }, { k:'closed', n:'Closed leadership', dur:1092, ev:'hyp' },
     { k:'cal', n:'Drop the shared calendar', dur:364, ev:'hyp' }, { k:'short', n:'Vocations shortage', dur:1820, ev:'hyp' } ];
   const S = { day:84, run:!reduce, speed:7, pastor:true, wait:0, log:[], bap:1, mode:'timed', size:600, digital:1, rev:0, climate:1,
-    p:{ pan:0, scan:0, closed:0, cal:0, short:0 }, off:{ train:false, form:false, call:false }, bnd:1, inside:0, clos:7, rec:0, yr:newYear(), hist:[], att:0, comm:0, n0:0, sd:1, cohorts:[], pend:[], ev:'choir', meanE:0, swell:0, wcoh:[] };
+    p:{ pan:0, scan:0, closed:0, cal:0, short:0 }, off:{ train:false, form:false, call:false }, layer:'id', wvar:'med', bnd:1, inside:0, clos:7, rec:0, yr:newYear(), hist:[], att:0, comm:0, n0:0, sd:1, cohorts:[], pend:[], ev:'choir', meanE:0, swell:0, wcoh:[] };
   const on = k => S.p[k] > 0;
   const count = st => members.filter(m => m.st === st).length;
   const live = () => members.filter(m => m.st === 'member');
 
-  /* ---------- the whole Church (2024 data) ---------- */
-  // 2024 Catholics and priests (Fides 2026); institutions, religious and seminarians 2023 (Fides 2025); Mass attendance estimated from WVS via CARA (2023)
+  /* ---------- the whole Church: an age-structured regional model from 2024 ---------- */
+  // Regions start from 2024 Vatican figures (Fides 2026; Fides 2025; CARA country profiles 2022 for the split of the Americas).
+  // Catholics, priests and women religious are carried by five-year age group; population, births, mortality and migration are UN WPP 2024.
+  const WD = window.WORLD_DATA, NG = 21;
   const CONT = [
-    { n:'Americas', cat:678.87, g:6.99 / 671.88, pr:118544, dpr:199, dir:[-.8,.2,.55], circ:1102, schools:48452, health:4911, charity:27997, students:2543486, rel:149836, sem:27376, semT:-.013, wrT:-.029, bap:7.8, A:.27, age:515, since:'1511 (Santo Domingo)' },
-    { n:'Africa', cat:288.31, g:7.58 / 280.73, pr:56786, dpr:1676, dir:[.25,-.4,.88], circ:554, schools:84689, health:6607, charity:7265, students:315276, rel:94265, sem:34924, semT:.011, wrT:.021, bap:14.4, A:.70, age:130, since:'mostly the late 19th and 20th centuries' },
-    { n:'Europe', cat:287.24, g:.911 / 286.33, pr:152608, dpr:-2483, dir:[.3,.68,.66], circ:759, schools:47655, health:3357, charity:35124, students:1032715, rel:199017, sem:12800, semT:-.052, wrT:-.038, bap:5.05, A:.22, age:1925, since:'the first centuries' },
-    { n:'Asia', cat:156.17, g:.968 / 155.2, pr:75121, dpr:1065, dir:[.92,.22,-.1], circ:545, schools:41962, health:3615, charity:12937, students:542898, rel:188368, sem:30436, semT:-.044, wrT:0, bap:13.0, A:.50, age:490, since:'the 16th century (Goa, Manila); older Eastern churches' },
-    { n:'Oceania', cat:11.56, g:.239 / 11.32, pr:4362, dpr:-32, dir:[.6,-.62,-.5], circ:81, schools:6332, health:782, charity:1356, students:34500, rel:6685, sem:959, semT:-.016, wrT:-.042, bap:10.2, A:.15, age:190, since:'the 1830s and 1840s (Sydney)' } ];
+    { k:'NA', n:'North America', dir:[-.5,.78,.38], circ:265, schools:11628, health:1179, charity:6719, students:610437, A:.24, age:350, since:'1674 (Quebec)' },
+    { k:'LA', n:'Latin America', dir:[-.74,-.22,.6], circ:837, schools:36824, health:3732, charity:21278, students:1933049, A:.28, age:513, since:'1511 (Santo Domingo)' },
+    { k:'AF', n:'Africa', dir:[.25,-.4,.88], circ:554, schools:84689, health:6607, charity:7265, students:315276, A:.70, age:130, since:'mostly the late 19th and 20th centuries' },
+    { k:'EU', n:'Europe', dir:[.3,.68,.66], circ:759, schools:47655, health:3357, charity:35124, students:1032715, A:.22, age:1925, since:'the first centuries' },
+    { k:'AS', n:'Asia', dir:[.92,.22,-.1], circ:545, schools:41962, health:3615, charity:12937, students:542898, A:.50, age:490, since:'the 16th century (Goa, Manila); older Eastern churches' },
+    { k:'OC', n:'Oceania', dir:[.6,-.62,-.5], circ:81, schools:6332, health:782, charity:1356, students:34500, A:.15, age:190, since:'the 1830s and 1840s (Sydney)' } ];
+  const AGEW = [0, 0, 0, .5, 1, 1, 1, 1, .4, .4, .4, .4, .4, .15, .15, .15, .15, .15, .15, .15, .15];
+  const ORDA = [0, 0, 0, 0, 0, .45, .35, .2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ENTA = [0, 0, 0, 0, .6, .4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const sum = a => { let t = 0; for (const x of a) t += x; return t; };
+  const shift = X => { for (let a = NG - 2; a >= 0; a--) { const mv = X[a] / 5; X[a] -= mv; X[a + 1] += mv; } };
+  const medAge = X => { const h = sum(X) / 2; let t = 0; for (let a = 0; a < NG; a++) { if (t + X[a] >= h) return a * 5 + 5 * (h - t) / X[a]; t += X[a]; } return 0; };
+  function regionStep(c, y, m){
+    const d = WD.regions[c.k], t = Math.min(y - 2024, d.births.length - 1), o = t * NG, I = c.I, L = c.L;
+    const N = new Float64Array(NG), q = new Float64Array(NG), fM = new Float64Array(NG);
+    let I3 = 0, L3 = 0, N3 = 0;
+    for (let a = 0; a < NG; a++) {
+      const Mn = d.M[o + a], Fn = d.F[o + a]; N[a] = Mn + Fn; fM[a] = N[a] > 0 ? Mn / N[a] : .5;
+      q[a] = 1 - Math.exp(-(N[a] > 0 ? (d.mxM[o + a] * Mn + d.mxF[o + a] * Fn) / N[a] : d.mxF[o + a]));
+      if (a >= 3 && a < 10) { I3 += I[a]; L3 += L[a]; N3 += N[a]; }
+    }
+    const births = (S.wvar === 'lo' ? d.birthsLo : S.wvar === 'hi' ? d.birthsHi : d.births)[t];
+    const inf = births * (I3 + c.lapsedBap * L3) / Math.max(N3, 1e-9) * Math.min(.98, c.kap) * m.bap, sh = d.mshare[t];
+    let adult = 0, gone = 0;
+    for (let a = 0; a < NG; a++) {
+      const ad = a >= 1 && a < 13 ? c.alpha * Math.max(0, N[a] - I[a] - L[a]) * m.adult : 0;
+      const dis = I[a] * Math.min(.2, c.dis * m.dis) * AGEW[a], mg = d.mig[o + a];
+      const mI = mg > 0 ? mg * sh * c.migI : mg * I[a] / Math.max(N[a], 1e-9), mL = mg > 0 ? mg * sh * (1 - c.migI) : mg * L[a] / Math.max(N[a], 1e-9);
+      gone += (I[a] + L[a]) * q[a] - Math.min(mI + mL, 0);
+      I[a] = I[a] * (1 - q[a]) - dis + ad + mI; L[a] = L[a] * (1 - q[a]) + dis + mL; adult += ad;
+    }
+    c.D += c.phi * gone; I[0] += inf;
+    for (let a = 0; a < NG; a++) { I[a] = Math.max(0, I[a]); L[a] = Math.max(0, L[a]); }
+    shift(I); shift(L);
+    const ordn = c.omega * (I[5] * fM[5] + I[6] * fM[6]) * m.ord;
+    for (let a = 0; a < NG; a++) c.Pr[a] = c.Pr[a] * (1 - (1 - Math.exp(-d.mxM[o + a] * c.mortP)) - (a < 12 ? c.leaveP : 0)) + ordn * ORDA[a];
+    shift(c.Pr);
+    const ent = c.ups * (I[4] * (1 - fM[4]) + I[5] * (1 - fM[5]) + I[6] * (1 - fM[6])) * m.ent;
+    for (let a = 0; a < NG; a++) c.Wr[a] = c.Wr[a] * (1 - (1 - Math.exp(-d.mxF[o + a] * c.mortW)) - (a < 10 ? c.leaveW : 0)) + ent * ENTA[a];
+    shift(c.Wr);
+    return { inf, adult, ordn };
+  }
+  function derive(c, f){
+    const idf = sum(c.I) / 1000, liv = (sum(c.I) + sum(c.L)) / 1000, pr = sum(c.Pr), rel = sum(c.Wr), sem = f.ordn / c.rho;
+    if (c.idf) { c.gNow = idf / c.idf - 1; c.prRate = pr / c.pr - 1; c.semRate = sem / c.sem - 1; c.wrRate = rel / c.rel - 1; }
+    Object.assign(c, { idf, liv, rep:liv + c.D / 1000, pr, rel, sem, bapRate:(f.inf + f.adult) / (liv * 1000 + c.D) * 1000, prAge:medAge(c.Pr), wrAge:medAge(c.Wr) });
+    c.cat = S.layer === 'liv' ? c.liv : c.idf;
+  }
+  const NOMOD = { bap:1, adult:1, dis:1, ord:1, ent:1 };
+  CONT.forEach(c => {
+    const d = WD.regions[c.k];
+    Object.assign(c, { I:Float64Array.from(d.I), L:Float64Array.from(d.L), D:d.D, Pr:Float64Array.from(d.Pr), Wr:Float64Array.from(d.Wr),
+      kap:d.kap, alpha:d.alpha, dis:d.dis, lapsedBap:d.lapsedBap, migI:d.migI, phi:d.phi, omega:d.omega, mortP:d.mortP, leaveP:d.leaveP, ups:d.ups, mortW:d.mortW, leaveW:d.leaveW, rho:d.rho });
+    const keep = { I:c.I.slice(), L:c.L.slice(), D:c.D, Pr:c.Pr.slice(), Wr:c.Wr.slice() };
+    c.idf = 0; derive(c, regionStep(Object.assign({}, c, { I:c.I.slice(), L:c.L.slice(), Pr:c.Pr.slice(), Wr:c.Wr.slice() }), 2023, NOMOD));
+    const f0 = regionStep(c, 2024, NOMOD); const next = { idf:sum(c.I) / 1000, pr:sum(c.Pr), rel:sum(c.Wr), sem:f0.ordn / c.rho };
+    Object.assign(c, keep); c.idf = 0; derive(c, f0);
+    c.gNow = next.idf / c.idf - 1; c.prRate = next.pr / c.pr - 1; c.semRate = 0; c.wrRate = next.rel / c.rel - 1;
+    Object.assign(c, { cat0:c.cat, liv0:c.liv, idf0:c.idf, pr0:c.pr, sem0:c.sem, flash:0, inst:1, E:0, Eacc:0, A0:c.A, Aeff:c.A, sun:false, lastRing:0, beat:0 });
+  });
   const clamp01 = x => Math.max(0, Math.min(1, x)), sc = (x, lo, hi) => clamp01((x - lo) / (hi - lo));
   const MAXC = {}; ['circ','schools','health','charity','students'].forEach(k => MAXC[k] = Math.max(...CONT.map(c => c[k]))); MAXC.clergy = Math.max(...CONT.map(c => c.pr + c.rel));
   function measures(c){
     c.Rc = (c.circ / MAXC.circ + c.schools * c.inst / MAXC.schools + c.health * c.inst / MAXC.health + c.charity * c.inst / MAXC.charity + c.students * c.inst / MAXC.students + (c.pr + c.rel) / MAXC.clergy) / 6;
     c.R = c.Rc * Math.pow(Math.log10(c.age) / Math.log10(1925), 1.5);
-    const bap = c.bap * (.2 + .8 * S.bap) * (1 + 10 * (c.gNow - c.g));
-    c.V = (sc(c.gNow, -.01, .03) + sc(c.sem / c.pr * 100, 0, 70) + sc(c.prRate, -.03, .03) + sc(bap, 0, 16) + sc(c.wrRate, -.05, .03)) / 5;
+    c.V = (sc(c.gNow, -.01, .03) + sc(c.sem / c.pr * 100, 0, 70) + sc(c.prRate, -.03, .03) + sc(c.bapRate, 0, 16) + sc(c.wrRate, -.05, .03)) / 5;
     c.P = (sc(c.gNow, -.01, .03) + sc(c.prRate, -.03, .03) + sc(c.semRate, -.05, .03)) / 3;
   }
-  CONT.forEach(c => { Object.assign(c, { cat0:c.cat, pr0:c.pr, sem0:c.sem, ord:.025 * c.pr + c.dpr, flash:0, inst:1, gNow:c.g, prRate:c.dpr / c.pr, semRate:c.semT, wrRate:c.wrT, E:0, Eacc:0, A0:c.A, Aeff:c.A, sun:false, lastRing:0, beat:0 }); });
   CONT.forEach(measures);
   const RMAX = Math.max(...CONT.map(c => c.R));
   CONT.forEach(c => { c.V0 = c.V; c.R0 = c.R; c.P0 = c.P; });
-  const wAtt = () => CONT.reduce((t, c) => t + c.cat * c.Aeff, 0) / CONT.reduce((t, c) => t + c.cat, 0);
-  const W0 = CONT.reduce((t, c) => t + c.cat * c.A, 0) / CONT.reduce((t, c) => t + c.cat, 0);
+  const wAtt = () => CONT.reduce((t, c) => t + c.idf * c.Aeff, 0) / CONT.reduce((t, c) => t + c.idf, 0);
+  const W0 = CONT.reduce((t, c) => t + c.idf * c.A, 0) / CONT.reduce((t, c) => t + c.idf, 0);
   const W = { year:2024 };
+  const setLayer = v => { S.layer = v; CONT.forEach(c => { c.cat = v === 'liv' ? c.liv : c.idf; }); };
   function stepWorld(){
     const pan = on('pan'), scan = on('scan'), sh = on('short'), cl = on('closed');
     for (const c of CONT) {
       const Eavg = c.Eacc / 364; c.Eacc = 0;
-      const absorb = .3 + .7 * (.5 * c.R / RMAX + .5 * c.V);
-      let g = c.g * (.2 + .8 * S.bap);
-      if (pan) g *= .8;
-      if (scan && (c.n === 'Americas' || c.n === 'Europe')) g -= .002;
-      if (cl) g -= .002;
-      g += .012 * Eavg * absorb;
-      c.cat *= 1 + g; c.gNow = g;
-      c.semRate = c.semT * .5 * Math.exp(-(W.year - 2024) / 25) + .02 * (c.V - c.V0) + .05 * Eavg * absorb - (sh ? .05 : 0) - (scan ? .02 : 0) - (cl ? .01 : 0);
-      c.sem = Math.max(10, c.sem * (1 + c.semRate));
-      const ord = c.ord * (c.sem / c.sem0) * (sh ? .5 : 1) * (pan ? .8 : 1), p0 = c.pr;
-      c.pr = Math.max(100, c.pr + ord - .025 * c.pr); c.prRate = (c.pr - p0) / p0;
-      c.wrRate = c.wrT + .5 * (c.semRate - c.semT); c.rel *= 1 + c.wrRate;
-      c.inst *= 1 + .003 + .02 * (c.V - .4) + .01 * Eavg * absorb - (cl ? .003 : 0);
-      c.A = Math.max(.03, Math.min(.95, c.A + .004 * (c.V - .45) + .02 * Eavg * absorb));
+      const absorb = .3 + .7 * (.5 * c.R / RMAX + .5 * c.V), ev = Eavg * absorb, sR = scan && (c.k === 'NA' || c.k === 'LA' || c.k === 'EU');
+      const f = regionStep(c, W.year, {
+        bap:(.2 + .8 * S.bap) * (pan ? .8 : 1),
+        adult:(pan ? .8 : 1) * (1 + 2 * ev),
+        dis:(sR ? 1.5 : 1) * (cl ? 1.2 : 1) * (1 - .5 * Math.min(1, ev)),
+        ord:(sh ? .5 : 1) * (pan ? .8 : 1) * (sR ? .85 : 1) * (cl ? .9 : 1) * (1 + .5 * ev),
+        ent:(pan ? .8 : 1) * (sR ? .85 : 1) * (cl ? .9 : 1) });
+      derive(c, f);
+      c.inst *= 1 + .003 + .02 * (c.V - .4) + .01 * ev - (cl ? .003 : 0);
+      c.A = Math.max(.03, Math.min(.95, c.A0 + (c.A - c.A0) * .8 + .02 * ev));
       c.age++;
       measures(c);
     }
@@ -785,11 +841,11 @@ function main(){
     }
     for (const c of CONT) {
       if (c.E > 0) { c.E *= .99; if (c.E < .003) c.E = 0; } c.Eacc += c.E;
-      c.Aeff = Math.min(.97, c.A * recov * (scan && (c.n === 'Americas' || c.n === 'Europe') ? .9 : 1) * (1 + .5 * c.E));
+      c.Aeff = Math.min(.97, c.A * recov * (scan && (c.k === 'NA' || c.k === 'LA' || c.k === 'EU') ? .9 : 1) * (1 + .5 * c.E));
       if ((d + (calOff ? Math.floor(c.cat0) % 7 : 0)) % 7 === 0) c.sun = true;
     }
     if (!calOff && (d === 28 || d === 133 || d === 182)) S.swell = 1;
-    for (const k of S.wcoh) if (!k.done && S.day - k.day >= 364) { k.done = true; const c = k.c; log(`A year after ${k.after} in ${c.n}: Sunday Mass attendance there is ${Math.round(c.A * 100)}% (${Math.round(k.A * 100)}% before), vitality ${Math.round(c.V * 100)} (${Math.round(k.V * 100)}), and Catholics number ${c.cat.toFixed(1)} million (${k.cat.toFixed(1)} million).`); }
+    for (const k of S.wcoh) if (!k.done && S.day - k.day >= 364) { k.done = true; const c = k.c; log(`A year after ${k.after} in ${c.n}: Sunday Mass attendance there is ${Math.round(c.A * 100)}% (${Math.round(k.A * 100)}% before), vitality ${Math.round(c.V * 100)} (${Math.round(k.V * 100)}), and self-identified Catholics number ${c.idf.toFixed(1)} million (${k.cat.toFixed(1)} million).`); }
     S.wcoh = S.wcoh.filter(k => !k.done);
   }
 
@@ -894,7 +950,7 @@ function main(){
     const r = stage.getBoundingClientRect(), u = h.object.userData;
     let html;
     if (h.object === memPts) { const m = members[h.index]; if (!m) return; html = `<b>${m.rel ? 'Member of the religious community' : m.st === 'member' ? (m.convert ? 'Convert' : 'Member') : m.st === 'catechumen' ? 'Catechumen or candidate' : m.st === 'inquirer' ? 'Inquirer' : 'Leaving'}, age ${Math.floor(m.age)}</b>Bond ${Math.round(m.b * 100)}%. ${m.st !== 'member' || m.rel ? '' : m.kid ? 'Comes to Mass with family. ' : m.reg ? 'Regular at Mass. ' : 'Occasional at Mass. '}${m.e > .05 ? 'Enthusiasm ' + Math.round(m.e * 100) + '% after an event. ' : ''}${m.groups.length ? 'In ' + m.groups.map(g => g.name.toLowerCase()).join(' and ') + '.' : 'In no group.'}${m.path ? ' Came through ' + ({ relational:'family and friends', marriage:'marriage or dating', digital:'digital content', liturgy:'the liturgy', event:'an event' })[m.path] + '.' : ''}${evl([['Mass and Communion', 'cal'], ['Leaving', 'part'], ['Bond decay', 'hyp']])}`; }
-    else if (u.cont !== undefined) { const c = CONT[u.cont]; html = `<b>${h.object === yourGlyph ? 'Your parish, in the ' + c.n : c.n}</b>${c.cat.toFixed(1)} million Catholics; Sunday Mass about ${Math.round(c.Aeff * 100)}%. Rooted ${Math.round(c.R / RMAX * 100)}, vitality ${Math.round(c.V * 100)}, pulse ${Math.round(c.P * 100)}. ${fmt(c.pr)} priests, ${fmt(c.sem)} seminarians. Dioceses since ${c.since}. Each point is about 10 million Catholics.${h.object === yourGlyph ? ' Click to enter.' : ''}${evl([['Catholics and priests', 'cal'], ['Mass, robustness, vitality', 'part'], ['Change over time', 'hyp']])}`; }
+    else if (u.cont !== undefined) { const c = CONT[u.cont]; html = `<b>${h.object === yourGlyph ? 'Your parish, in ' + c.n : c.n}</b>${c.idf.toFixed(1)} million self-identified Catholics; ${c.liv.toFixed(1)} million living baptized; ${c.rep.toFixed(1)} million in Vatican-style records${W.year > 2024 ? ' if record-keeping continues as now' : ''}. Sunday Mass about ${Math.round(c.Aeff * 100)}% of self-identified Catholics. Rooted ${Math.round(c.R / RMAX * 100)}, vitality ${Math.round(c.V * 100)}, pulse ${Math.round(c.P * 100)}. ${fmt(c.pr)} priests (median age about ${Math.round(c.prAge)}), ${fmt(c.sem)} seminarians, ${fmt(c.rel)} women religious. Dioceses since ${c.since}. Each point is about 10 million ${S.layer === 'liv' ? 'living baptized' : 'self-identified'} Catholics.${h.object === yourGlyph ? ' Click to enter.' : ''}${evl([['2024 starting figures', 'cal'], ['Births, deaths, migration (UN)', 'cal'], ['Rates of baptism, leaving and vocations, fitted 1978 to 2024', 'part'], ['Living baptized and Vatican-record estimates', 'part'], ['Mass, robustness, vitality', 'part'], ['Responses to events and perturbations', 'hyp']])}`; }
     else { const n = u.node; html = `<b>${n.name}</b>${n.info}${n.kind === 'group' || n.kind === 'order' ? ' Now: ' + n.state + '.' : ''}${n === pastor && !S.pastor ? ' Vacant.' : ''}${n.kind === 'role' && n !== pastor ? (f => ` Now: ${f.H} of ${f.n} needed${f.T ? `, ${f.T} in training` : ''}; capacity ${Math.round(f.cap * 100)}%; ${f.status}. New ${f.nm.toLowerCase()} come from members formed in ${f.form ? f.form.map(gi => groups[gi].name.toLowerCase()).join(', ') : 'any group'}, trained by ${f.mentors.map(([r]) => r === 0 ? 'the pastor' : r === -1 ? 'the religious community' : ROLES[r][0].toLowerCase() + 's').join(', ')}.`)(FN[FR[roles.indexOf(n)]]) : ''}${evl(EVID[n.name] || (n.kind === 'role' ? [['Effects', 'hyp']] : n.kind === 'group' ? [['Participation', 'part'], ['Renewal rate', 'hyp']] : [['Renewal rate', 'hyp']]))}`; }
     tip.innerHTML = html; tip.style.display = 'block';
     tip.style.left = Math.min(ev.clientX - r.left + 14, Wd - 290) + 'px'; tip.style.top = Math.max(8, ev.clientY - r.top - 10) + 'px';
@@ -934,7 +990,7 @@ function main(){
     const width = S.ev === 'wyd' ? 1.3 : S.ev === 'papal' ? .9 : .55;
     let host = CONT[0], best = 9;
     for (const c of CONT) { const ang = c.dirN.angleTo(axis); if (ang < best) { best = ang; host = c; } let w = Math.exp(-Math.pow(ang / width, 2)); if (S.ev === 'wyd') w = .25 + .75 * w; c.E = Math.min(1.5, c.E + E.s * w * 1.2); }
-    S.wcoh.push({ day:S.day, c:host, after:E.after, A:host.A, V:host.V, cat:host.cat });
+    S.wcoh.push({ day:S.day, c:host, after:E.after, A:host.A, V:host.V, cat:host.idf });
     const rg0 = [];
     for (let i = 0; i < E.rings; i++) { const mat = new THREE.PointsMaterial({ color:GOLD, size:1.1, map:dotTex, transparent:true, opacity:0, blending:ADD, depthWrite:false }); const l = new THREE.Points(waveGeo, mat); l.quaternion.setFromUnitVectors(new V(0, 0, 1), axis); uniG.add(l); rg0.push(l); }
     waves.push({ axis, t:0, E, rings:rg0, R:33, uni:true, done:new Set() });
@@ -1060,6 +1116,7 @@ function main(){
   $('#speed').oninput = e => { S.speed = SPEEDS[+e.target.value]; $('#speedl').textContent = S.speed === 364 ? 'A year per second' : `${S.speed} day${S.speed === 1 ? '' : 's'} per second`; };
   function syncSeg(sel, v){ for (const b of document.querySelectorAll(sel + ' button')) b.setAttribute('aria-pressed', String(b.dataset.v) === String(v)); }
   const segVal = (sel, f) => { $(sel).onclick = e => { const b = e.target.closest('button'); if (!b) return; f(b.dataset.v); syncSeg(sel, b.dataset.v); }; };
+  segVal('#layer', v => { setLayer(v); renderStats(); });
   segVal('#bap', v => { S.bap = +v; log(S.bap === 1 ? 'Baptisms return to usual.' : S.bap ? 'A lean year: about half the usual baptisms, in every parish.' : 'No baptisms this year, in any parish. Catechumens wait for next Easter.'); });
   segVal('#clim', v => { S.climate = +v; log(S.climate > 1 ? 'The 2026 surge: dioceses report about 38% more people entering the Church.' : 'Newcomers return to the 2023 baseline.'); });
   segVal('#mode', v => { S.mode = v; for (const pt of PERT) if (S.p[pt.k] > 0) S.p[pt.k] = v === 'hold' ? Infinity : pt.dur; syncPert(); });
@@ -1137,6 +1194,7 @@ function main(){
     const d = S.day % 364, se = seasonOf(d);
     $('#season').textContent = se.n; $('#when').textContent = dateLabel(); $('#calmk').style.left = (d / 3.64) + '%';
     document.documentElement.style.setProperty('--season', se.c);
+    $('#layer').hidden = target === 0;
     if (target === 0) {
       const L = live(), N = L.length;
       const bands = [0, 0, 0, 0, 0]; for (const m of L) bands[m.band]++;
@@ -1193,21 +1251,25 @@ function main(){
         h += `<h2><span class="ev-part">How adults came in (last 5 years)</span></h2><div class="pyr">` + [['relational','Family and friends','#ff9fc6'],['marriage','Marriage or dating','#f2c862'],['digital','Digital content','#7fd3ff'],['liturgy','The liturgy','#ef8a6f'],['event','An event','#f3c46b']].map(([k, n, c]) => `<div><span>${n}</span><span class="b" style="width:${T ? P[k] / T * 100 : 0}%;background:${c}"></span><b>${T ? Math.round(P[k] / T * 100) : 0}%</b></div>`).join('') + `</div><p class="note" style="margin:0">${T ? 'Adults received: ' + T + '.' : 'No adults were received in these years.'} The 2026 OCIA survey found people arrive through relationships and through content or experience, with two-thirds citing digital content; shares here are approximate.</p>`;
       } else h += '<p class="note">Yearly figures appear after the first Advent. Raise the speed to see decades unfold.</p>';
     } else {
-      const cat = CONT.reduce((t, c) => t + c.cat, 0), pr = CONT.reduce((t, c) => t + c.pr, 0);
+      const tot = k => CONT.reduce((t, c) => t + c[k], 0), pr = tot('pr'), yb = W.year - 2024, B = WD.world_band;
+      const band = k => yb <= 50 ? ` Without perturbations or events, the projection for ${W.year} ranges from ${(B[k].lo[yb] / 1e6).toFixed(2)} to ${(B[k].hi[yb] / 1e6).toFixed(2)} billion across UN population variants and whether recent trends ease, hold or continue.` : '';
       h += `<h2>The whole Church, ${W.year}</h2>`;
-      h += row('Catholics', (cat / 1000).toFixed(3) + ' billion', W.year === 2024 ? 'Starting point: 2024 data' : 'Projected from 2024 rates and the model’s rules', undefined, 'cal');
-      h += row('Sunday Mass, worldwide', Math.round(wAtt() * 100) + '%', 'Estimated share of Catholics at Mass in a typical week', wAtt(), 'part');
-      h += `<div class="scroll"><table class="tight"><thead><tr><th>Region</th><th>${tg('Catholics (m)', 'cal')}</th><th>${tg('Mass', 'part')}</th><th>${tg('Rooted', 'part')}</th><th>${tg('Vitality', 'part')}</th><th>${tg('Pulse', 'part')}</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${c.cat.toFixed(1)}</td><td>${Math.round(c.Aeff * 100)}%</td><td>${Math.round(c.R / RMAX * 100)}</td><td>${Math.round(c.V * 100)}</td><td>${Math.round(c.P * 100)}</td></tr>`).join('')}</tbody></table></div>`;
+      h += row('Self-identified Catholics', (tot('idf') / 1000).toFixed(3) + ' billion', (W.year === 2024 ? 'Model estimate for 2024: people who say they are Catholic.' : 'Projection: UN medium population, rates of baptism, leaving and vocations held at their 2024 levels.') + band('I'), undefined, 'part');
+      h += row('Living baptized Catholics', (tot('liv') / 1000).toFixed(3) + ' billion', 'Baptized Catholics still alive, whether or not they identify as Catholic.' + band('B'), undefined, 'part');
+      h += row('In Vatican-style records', (tot('rep') / 1000).toFixed(3) + ' billion', W.year === 2024 ? 'The 2024 Vatican count. It exceeds the living baptized because records rarely remove people who have died or emigrated.' : 'Projected as if record-keeping continues as now.', undefined, W.year === 2024 ? 'cal' : 'part');
+      h += row('Sunday Mass, worldwide', Math.round(wAtt() * 100) + '%', 'Estimated share of self-identified Catholics at Mass in a typical week', wAtt(), 'part');
+      h += `<div class="scroll"><table class="tight"><thead><tr><th>Region</th><th>${tg('Self-identified (m)', 'part')}</th><th>${tg('Living baptized (m)', 'part')}</th><th>${tg('Vatican count (m)', W.year === 2024 ? 'cal' : 'part')}</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${c.idf.toFixed(1)}</td><td>${c.liv.toFixed(1)}</td><td>${c.rep.toFixed(1)}</td></tr>`).join('')}</tbody></table></div>`;
+      h += `<div class="scroll"><table class="tight"><thead><tr><th>Region</th><th>${tg('Mass', 'part')}</th><th>${tg('Rooted', 'part')}</th><th>${tg('Vitality', 'part')}</th><th>${tg('Pulse', 'part')}</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${Math.round(c.Aeff * 100)}%</td><td>${Math.round(c.R / RMAX * 100)}</td><td>${Math.round(c.V * 100)}</td><td>${Math.round(c.P * 100)}</td></tr>`).join('')}</tbody></table></div>`;
       h += `<h2>Reading this view</h2><ul class="leg">
-        <li><span style="background:#cfe8d6"></span><div><b>Each point</b> is about 10 million Catholics. Regions gain points as they grow.</div></li>
+        <li><span style="background:#cfe8d6"></span><div><b>Each point</b> is about 10 million Catholics, counted as ${S.layer === 'liv' ? 'living baptized' : 'self-identified'}. Switch the count with the buttons above the figures. Regions gain or lose points as they change.</div></li>
         <li><span style="background:#e9e2f2;transform:scale(1.35)"></span><div><b>Size: rooted robustness.</b> How much institutional life a region has (dioceses, schools, hospitals, charities, universities, clergy and religious) weighted by how long it has been established. Shown as 0 to 100, relative to the most rooted.</div></li>
         <li><span style="background:#1fa855"></span><div><b>Depth of green: vitality.</b> New life coming in: growth, baptisms, seminarians for every 100 priests, and the trend in priests and religious. Pale and translucent is low; deep and opaque is high.</div></li>
-        <li><span style="background:#fff;box-shadow:0 0 8px #fff"></span><div><b>Slow heartbeat: pulse.</b> Regeneration against decay: whether Catholics, priests and seminarians are growing or shrinking. Each region brightens and dims gently over about five seconds; a strong swell is a body renewing itself, a faint one a body in decline.</div></li>
+        <li><span style="background:#fff;box-shadow:0 0 8px #fff"></span><div><b>Slow heartbeat: pulse.</b> Regeneration against decay: whether self-identified Catholics, priests and seminarians are growing or shrinking. Each region brightens and dims gently over about five seconds; a strong swell is a body renewing itself, a faint one a body in decline.</div></li>
         <li><span style="background:transparent;border:2px solid #f1ead8"></span><div><b>Rings: Sunday Mass.</b> Each Sunday a ring spreads from each region; the larger the ring, the larger the share at Mass.</div></li>
         <li><span style="background:#f3c46b"></span><div><b>Gold: enthusiasm</b> after an event. Tap the space around the continents to bring one.</div></li></ul>`;
-      h += `<h2>${tg('Priests and vocations', 'cal')}</h2><div class="scroll"><table><thead><tr><th>Continent</th><th>Priests</th><th>Seminarians</th><th>Catholics per priest</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.pr)}</td><td>${fmt(c.sem)}</td><td>${fmt(c.cat * 1e6 / c.pr)}</td></tr>`).join('')}</tbody></table></div>`;
-      h += `<p class="note">Totals: ${fmt(pr)} priests, ${fmt(CONT.reduce((t, c) => t + c.sem, 0))} major seminarians.</p>`;
-      h += `<h2>${tg('Institutions (2023)', 'cal')}</h2><div class="scroll"><table><thead><tr><th>Continent</th><th>Schools</th><th>Hospitals and clinics</th><th>Charities</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.schools * c.inst)}</td><td>${fmt(c.health * c.inst)}</td><td>${fmt(c.charity * c.inst)}</td></tr>`).join('')}</tbody></table></div><p class="note">Counts grow or shrink with each region’s vitality as the model runs.</p>`;
+      h += `<h2>${tg('Priests and vocations', 'part')}</h2><div class="scroll"><table><thead><tr><th>Region</th><th>Priests</th><th>Median age</th><th>Seminarians</th><th>Self-identified Catholics per priest</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.pr)}</td><td>${Math.round(c.prAge)}</td><td>${fmt(c.sem)}</td><td>${fmt(c.idf * 1e6 / c.pr)}</td></tr>`).join('')}</tbody></table></div>`;
+      h += `<p class="note">Totals: ${fmt(pr)} priests, ${fmt(tot('sem'))} major seminarians, ${fmt(tot('rel'))} women religious.${yb <= 50 ? ` Projected priests for ${W.year} without perturbations: ${fmt(B.P.lo[yb])} to ${fmt(B.P.hi[yb])}.` : ''} Priests’ ages are reconstructed from ordination trends, not observed.</p>`;
+      h += `<h2>${tg('Institutions', 'part')}</h2><div class="scroll"><table><thead><tr><th>Region</th><th>Schools</th><th>Hospitals and clinics</th><th>Charities</th></tr></thead><tbody>${CONT.map(c => `<tr><td>${c.n}</td><td>${fmt(c.schools * c.inst)}</td><td>${fmt(c.health * c.inst)}</td><td>${fmt(c.charity * c.inst)}</td></tr>`).join('')}</tbody></table></div><p class="note">2023 counts (Fides 2025). The split of the Americas between North and Latin America is an estimate. Counts grow or shrink with each region’s vitality as the model runs.</p>`;
     }
     $('#stats').innerHTML = h;
   }
