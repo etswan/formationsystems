@@ -47,7 +47,8 @@ table.tight th,table.tight td{padding:5px 4px;font-size:13px}
 .tip{position:absolute;z-index:5;max-width:280px;font-size:14px;line-height:1.35;background:#1f1927;border:1px solid #453c52;padding:8px 10px;border-radius:7px;pointer-events:none;display:none}
 .tip b{display:block;font-weight:600;margin-bottom:2px}
 .hint{position:absolute;left:16px;right:16px;bottom:12px;font-size:13px;color:var(--mute);pointer-events:none;margin:0}
-.panel{background:var(--panel);border-left:1px solid var(--line);overflow-y:auto;padding:22px 20px 28px}
+.panel{background:var(--panel);border-left:1px solid var(--line);overflow-y:auto;padding:68px 20px 28px}
+.proclink{display:block;margin:4px 0 14px;padding:12px 14px;border:1px solid #5a4a78;border-radius:10px;background:#231b30;color:var(--ink);text-decoration:none}.proclink:hover{border-color:#c9b6ff}.proclink b{display:block;font-weight:600}.proclink span{display:block;font-size:13px;color:var(--mute);margin-top:2px}
 h1{font:600 36px/1.05 "EB Garamond",Georgia,serif;letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance}
 h2{font-size:15px;font-weight:600;margin:24px 0 8px}
 .ver{font-size:13px;color:var(--mute);margin:0 0 8px}
@@ -120,6 +121,7 @@ a{color:#c9b6ff}
     <p class="body">This project frames Catholic spiritual formation as a non-biological autopoietic system, reinterpreting discipleship not as knowledge transfer, but as continuous participation in an operationally closed, self-producing environment. By synthesizing biological autopoiesis, organizational cybernetics and social neuroscience, the model demonstrates how the system recursively regenerates the living Body of Christ across generational member turnover. Ultimately, the framework serves as a practical model for ecclesial architecture, illustrating how replacing clerical single points of failure with distributed formational networks preserves institutional identity and systemic resilience.</p>
     <div class="intro-acts">
       <a class="paper" href="../papers/Body_of_Christ_Model.pdf"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M4 1h5.6L13 4.4V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm5 1.2V5h2.8L9 2.2ZM5 7.5v1h6v-1H5Zm0 2.2v1h6v-1H5Zm0 2.2v1h4v-1H5Z"/></svg>Read how the model works</a>
+      <a class="paper" href="process/" style="background:#5b3e8c">Explore the processual lens</a>
       <a class="go" href="#model">Explore the model ↓</a>
     </div>
   </div>
@@ -135,6 +137,7 @@ a{color:#c9b6ff}
     <h1>Body of Christ Model</h1>
     <p class="ver">Version 2.7 · each dot is one person</p>
     <p class="lede">One self-renewing body at two scales. The scale you are viewing is shown in detail; the other stays simple.</p>
+    <a class="proclink" href="process/"><b>See this parish as a process</b><span>The same parish through a processual lens: gatherings that form, fade and arise, shared rhythms, and enthusiasm you bring by touch</span></a>
     <p class="evkey">Dots show how each element is grounded: <span class="ev-cal">calibrated</span> &nbsp;<span class="ev-part">partly grounded</span> &nbsp;<span class="ev-hyp">hypothesis</span>. Hover the model for details.</p>
 
     <div class="seg" role="group" aria-label="Scale">
@@ -1373,5 +1376,6 @@ function main(){
 main();
 }
 </script>
+<script src="../js/nav.js"></script>
 </body>
 </html>
