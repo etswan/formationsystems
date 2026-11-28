@@ -36,6 +36,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .badge{position:absolute;left:16px;top:70px;font-size:14px;color:var(--mute);pointer-events:none}
 .badge b{display:block;font:600 26px/1.1 "EB Garamond",Georgia,serif;color:var(--season)}
 .lab{position:absolute;left:0;top:0;font-size:12.5px;line-height:1.2;background:rgba(255,255,255,.86);border:1px solid var(--line);color:var(--ink);padding:2px 7px;border-radius:5px;pointer-events:none;white-space:nowrap;transform:translate(-50%,-140%)}
+.tip{position:absolute;z-index:5;max-width:290px;font-size:14px;line-height:1.4;background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 4px 16px rgba(20,16,28,.12);padding:8px 11px;border-radius:8px;pointer-events:none;display:none}
+.tip b{display:block;font-weight:600;margin-bottom:2px}.tip span{display:block;color:var(--mute);font-size:13px}
 .lab.new{border-color:#9fd1d4}.lab.ghost{background:transparent;border-style:dashed;color:var(--mute)}
 .panel{background:var(--card);border-left:1px solid var(--line);overflow-y:auto;padding:68px 20px 28px}
 .panel h1{font:600 30px/1.05 "EB Garamond",Georgia,serif;margin:0 0 4px}
@@ -96,12 +98,13 @@ details p{font-size:15px}
 
 <div class="app" id="model">
   <div class="stage" id="stage">
+    <div class="tip" id="tip"></div>
     <div class="badge" aria-live="polite"><b id="season">Advent</b><span id="when">Year 1</span></div>
-    <p class="hint" id="hint">Tap the parish to bring the event chosen in the panel to that spot. Stroke across people to lift them; a faster stroke lifts more. Drag the space around the parish to turn it; pinch or scroll to zoom.</p>
+    <p class="hint" id="hint">Hover a person or a gathering to read it. Tap the parish to bring the event chosen in the panel to that spot. Stroke across people to lift them; a faster stroke lifts more. Drag the space around the parish to turn it; pinch or scroll to zoom.</p>
   </div>
   <aside class="panel">
     <h1>The Parish as Process</h1>
-    <p class="ver">Processual lens · Version 1.2 · each dot is one person · Model developed by Emma T. Swan</p>
+    <p class="ver">Processual lens · Version 1.3 · each dot is one person · Model developed by Emma T. Swan</p>
     <div class="run">
       <button id="play" type="button" aria-pressed="true">Pause</button>
       <label>Speed: <span id="spd">1 year in 6 seconds</span><input id="speed" type="range" min="1" max="6" value="3" step="1" aria-label="Speed"></label>
@@ -384,6 +387,51 @@ const sound = (() => {
 })();
 $('#sound').onclick = () => { const v = sound.toggle(); $('#sound').textContent = v ? 'Sound on' : 'Sound off'; $('#sound').setAttribute('aria-pressed', v); };
 $('#vol').oninput = e => sound.volume(+e.target.value);
+
+
+/* ---------- hover: read a person or a gathering ---------- */
+const tip = $('#tip'), BANDN = ['Child', 'Youth', 'Young adult', 'Adult', 'Older member'];
+const yearOf = day => Math.floor((day - 83) / 364) + 1;
+function personHtml(m) {
+  const gn = m.gs.filter(g => !g.removed), carries = g => !m.kid && m.tgt && m.b > .6 && P.day - (m.since[g.id] || P.day) >= 728;
+  const step = Math.cos(m.ph), rhythm = step > .9 ? 'in step with the liturgical year' : step > .5 ? 'roughly in step with the liturgical year' : 'out of step with the liturgical year';
+  let h = `<b>${m.rel ? 'Member of the religious community' : BANDN[m.band]}, ${Math.floor(m.age)}</b>`;
+  if (m.kid) { const par = m.parent && P.members.includes(m.parent) ? (m.parent.tgt ? 'a parent who takes part regularly' : 'a parent who takes part occasionally') : 'no parent in the parish';
+    h += `<span>${m.born > 83 && m.age < (P.day - m.born) / 364 + .1 ? 'Baptized here' : 'Raised in the parish'}, with ${par}. Formed in a group for ${Math.round((m.cd ? m.fd / m.cd : 0) * 100)}% of childhood so far.</span>`; }
+  else if (!m.rel) h += `<span>${m.convert ? (m.recv > 0 ? `Received at the Easter Vigil in year ${yearOf(m.recv)}` : 'Received as an adult') : 'Raised Catholic'}. Takes part ${m.x > .5 ? 'regularly' : 'occasionally'}${m.x > .08 && m.x < .92 ? (m.tgt ? ', and is drawing closer' : ', and is drifting away') : ''}.</span>`;
+  h += `<span>Bond to the parish ${m.b.toFixed(2)}. ${gn.length ? 'Gathers with ' + gn.map(g => g.n + (carries(g) ? ' (helps carry it)' : '')).join(' and ') : 'In no gathering'}.</span>`;
+  h += `<span>${rhythm[0].toUpperCase() + rhythm.slice(1)}${m.e > .05 ? `; enthusiasm ${Math.round(m.e * 100)}%` : ''}.</span>`;
+  return h;
+}
+function gatherHtml(g) {
+  const s = P.state(g), coh = g.coh || 0;
+  let h = `<b>${g.n}</b><span>${s === 'meeting' ? 'Meeting in person' : s === 'online' ? 'Meeting online' : s === 'paused' ? 'Paused' : 'Dormant'}. ${g.members} ${g.members === 1 ? 'person' : 'people'}${g.kinds.includes('ocia') ? '' : `, ${g.carriers || 0} of them carrying it`}.</span>`;
+  h += `<span>${g.base ? 'Present since the parish began' : g.reformed ? `Formed again in year ${yearOf(g.born)}` : `Arose in year ${yearOf(g.born)} from two other gatherings`}.</span>`;
+  if (g.kinds.includes('ocia')) h += '<span>Inquirers and catechumens preparing for the Easter Vigil.</span>';
+  else if (g.members) h += `<span>Its members keep ${coh > .85 ? 'one rhythm together' : coh > .6 ? 'a loose rhythm together' : 'little shared rhythm'} (${Math.round(coh * 100)}).</span>`;
+  return h;
+}
+function pick(ev) {
+  const r = renderer.domElement.getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top, camDir = camera.position.clone().normalize(), q = new V();
+  let best = null, bd = 12 * 12;
+  P.members.forEach((m, i) => { if (i >= NMAX) return; q.set(aPos[i * 3], aPos[i * 3 + 1], aPos[i * 3 + 2]).applyMatrix4(world.matrixWorld); if (q.clone().normalize().dot(camDir) < .1) return;
+    q.project(camera); const dx = (q.x + 1) / 2 * r.width - x, dy = (1 - q.y) / 2 * r.height - y, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = { m }; } });
+  if (best) return best;
+  // otherwise the gathering whose label or center is nearest
+  for (const g of P.gs) { if (g.removed) continue; q.set(...g.pos).multiplyScalar(RAD + .6).applyMatrix4(world.matrixWorld); if (q.clone().normalize().dot(camDir) < .05) continue;
+    q.project(camera); const dx = (q.x + 1) / 2 * r.width - x, dy = (1 - q.y) / 2 * r.height - y - 14, d = dx * dx + dy * dy; if (d < 30 * 30 && (!best || d < best.d)) best = { g, d }; }
+  return best;
+}
+let hoverT = 0;
+renderer.domElement.addEventListener('pointermove', ev => {
+  if (gest || ev.pointerType === 'touch' || ev.buttons) { tip.style.display = 'none'; return; }
+  const now = performance.now(); if (now - hoverT < 40) return; hoverT = now;
+  const h = pick(ev); if (!h) { tip.style.display = 'none'; renderer.domElement.style.cursor = ''; return; }
+  tip.innerHTML = h.m ? personHtml(h.m) : gatherHtml(h.g); tip.style.display = 'block'; renderer.domElement.style.cursor = 'pointer';
+  const r = renderer.domElement.getBoundingClientRect();
+  tip.style.left = Math.min(ev.clientX - r.left + 14, r.width - 300) + 'px'; tip.style.top = Math.max(8, Math.min(ev.clientY - r.top - 10, r.height - tip.offsetHeight - 8)) + 'px';
+});
+renderer.domElement.addEventListener('pointerleave', () => { tip.style.display = 'none'; });
 
 /* ---------- panel ---------- */
 $('#events').innerHTML = Object.entries(PP.EVENTS).map(([k, e]) => `<button type="button" data-k="${k}" aria-pressed="${k === S.ev}">${e.n}</button>`).join('');
