@@ -101,11 +101,16 @@ details p{font-size:15px}
   </div>
   <aside class="panel">
     <h1>The Parish as Process</h1>
-    <p class="ver">Processual lens · Version 1.1 · each dot is one person · Model developed by Emma T. Swan</p>
+    <p class="ver">Processual lens · Version 1.2 · each dot is one person · Model developed by Emma T. Swan</p>
     <div class="run">
       <button id="play" type="button" aria-pressed="true">Pause</button>
       <label>Speed: <span id="spd">1 year in 6 seconds</span><input id="speed" type="range" min="1" max="6" value="3" step="1" aria-label="Speed"></label>
     </div>
+    <div class="run" style="margin-top:12px">
+      <button id="sound" type="button" aria-pressed="false">Sound off</button>
+      <label>Volume<input id="vol" type="range" min="0" max="1" step=".05" value=".6" aria-label="Volume"></label>
+    </div>
+    <p class="note">Quiet chant sounds the parish's common life, fuller when more people come to Mass and at the great feasts. Each gathering that meets adds its own voice, louder the more people it holds and carry it, so the sound grows richer as more gatherings meet. Voices drift out of tune and out of time when the parish loses its shared rhythm. Bells answer enthusiasm, and a high, bright peal greets a new gathering arising from others.</p>
     <h2>Bring enthusiasm <span class="tag t-hyp">hypothesis</span></h2>
     <div class="grid2" id="events"></div>
     <p class="note">Choose an event, then tap the parish where it should land. Its reach spreads from that spot; a papal visit and World Youth Day reach everyone.</p>
@@ -242,14 +247,143 @@ addEventListener('pointerup', ev => {
   const g = gest; gest = null; const dt = (performance.now() - g.t0) / 1000;
   let len = 0; for (let i = 1; i < g.pts.length; i++) len += g.pts[i].angleTo(g.pts[i - 1]);
   if (len < .12 || Math.hypot(ev.clientX - g.x, ev.clientY - g.y) < 8) {
-    const at = g.pts[0]; P.event(S.ev, [at.x, at.y, at.z]); ripple(at, 0xe0a326, PP.EVENTS[S.ev].r > 3 ? 6 : 4, PP.EVENTS[S.ev].r > 3 ? 2.6 : PP.EVENTS[S.ev].r);
+    const at = g.pts[0]; P.event(S.ev, [at.x, at.y, at.z]); sound.event(S.ev, [at.x, at.y, at.z]); ripple(at, 0xe0a326, PP.EVENTS[S.ev].r > 3 ? 6 : 4, PP.EVENTS[S.ev].r > 3 ? 2.6 : PP.EVENTS[S.ev].r);
   } else {
     const speed = Math.min(1, len / Math.max(.12, dt) / 2.5);
-    const n = P.stroke(g.pts.map(q => [q.x, q.y, q.z]), speed);
+    const n = P.stroke(g.pts.map(q => [q.x, q.y, q.z]), speed); sound.stroke(g.pts, speed);
     for (const q of g.pts.filter((_, i) => i % 4 === 0)) ripple(q, 0xe0a326, 1, .25);
   }
   render(true);
 });
+
+
+/* ---------- sound: chant for the common life, a voice for each gathering, bells for enthusiasm ---------- */
+const sound = (() => {
+  let ctx = null, master, chantBus, bellBus, voices = [], drones = [], gv = new Map(), nextT = 0, idx = 0, timer = null, playing = false, vol = .6, lastBell = 'papal', bellClock = 0, swell = 0, lastArisen = P.arisen;
+  const hz = n => 440 * Math.pow(2, (n - 69) / 12);
+  // a recitation formula in the manner of a psalm tone (mode 8: final G, reciting note C); 0 is a breath
+  const TUNE = [[55,1],[57,1],[60,2],[60,1],[60,1],[60,1],[60,1],[60,1],[62,1],[60,1],[59,1],[60,3],[0,1.5],[60,1],[60,1],[60,1],[60,1],[59,1],[60,1],[57,1],[55,3],[0,3]];
+  const BEAT = .62;
+  // each kind of gathering sings the chant at its own interval, as in organum: fifths, fourths and octaves around the melody
+  const INT = { fam: 12, ocia: -5, choir: 7, ya: 12, bible: 0, service: -5, sick: -12, school: 19, rel: -12 }, VOW = { fam: 1.08, ocia: .94, choir: 1.0, ya: 1.12, bible: .9, service: .96, sick: .86, school: 1.15, rel: .88 };
+  function makeVoice(note, pan, level, vowel, bus){
+    const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = hz(note);
+    const lfo = ctx.createOscillator(), lg = ctx.createGain(); lfo.frequency.value = 4.6 + Math.random() * 1.2; lg.gain.value = 7; lfo.connect(lg); lg.connect(o.detune);
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400; o.connect(lp);
+    const sum = ctx.createGain(), vw = vowel || 1; sum.gain.value = .5;
+    [[520, 6, 1], [900, 8, .55], [2450, 10, .18]].forEach(([f, q, g]) => { const b = ctx.createBiquadFilter(); b.type = 'bandpass'; b.frequency.value = f * vw * (.97 + Math.random() * .06); b.Q.value = q; const gg = ctx.createGain(); gg.gain.value = g; lp.connect(b); b.connect(gg); gg.connect(sum); });
+    const env = ctx.createGain(); env.gain.value = 0; const pn = ctx.createStereoPanner(); pn.pan.value = pan;
+    sum.connect(env); env.connect(pn); pn.connect(bus || chantBus); o.start(); lfo.start();
+    return { o, lfo, env, pn, level };
+  }
+  function reverb(){
+    const len = ctx.sampleRate * 3.8, buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    const cv = ctx.createConvolver(); cv.buffer = buf; return cv;
+  }
+  let rv;
+  function init(){
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain(); master.gain.value = 0;
+    const comp = ctx.createDynamicsCompressor(); master.connect(comp); comp.connect(ctx.destination);
+    rv = reverb(); const wet = ctx.createGain(); wet.gain.value = .55; rv.connect(wet); wet.connect(master);
+    chantBus = ctx.createGain(); chantBus.gain.value = .9; chantBus.connect(master); chantBus.connect(rv);
+    bellBus = ctx.createGain(); bellBus.gain.value = .5; bellBus.connect(master); bellBus.connect(rv);
+    for (let i = 0; i < 6; i++) voices.push(makeVoice(55, -.6 + i * .24, 1));
+    drones.push(makeVoice(43, -.2, .9), makeVoice(43, .2, .9), makeVoice(31, 0, .5));
+    nextT = ctx.currentTime + .2;
+    timer = setInterval(schedule, 120);
+    document.addEventListener('visibilitychange', () => { if (!ctx) return; if (document.hidden) ctx.suspend(); else if (playing) ctx.resume(); });
+  }
+  const st = { nV: 3, level: .5, base: 1, ent: 0 };
+  // how out of step the parish is: 0 at its usual coherence, rising as the rhythm breaks or the calendar is dropped
+  const outOfStep = () => Math.max(P.on('cal') ? .8 : 0, Math.min(1, Math.max(0, (.78 - P.R) / .45)));
+  function syncGathers(){
+    const live = new Set();
+    for (const g of P.gs) {
+      if (g.removed) continue; live.add(g.id);
+      let v = gv.get(g.id);
+      if (!v) { const k = g.kinds[0], iv = g.kinds.length > 1 ? 19 : INT[k] || 0; v = makeVoice(55 + iv, 0, 1, g.kinds.length > 1 ? 1.2 : VOW[k], chantBus); v.iv = iv; v.g = g; gv.set(g.id, v); }
+    }
+    for (const [id, v] of gv) if (!live.has(id)) { v.env.gain.setTargetAtTime(0, ctx.currentTime, 1.5); const t = ctx.currentTime + 8; v.o.stop(t); v.lfo.stop(t); gv.delete(id); }
+  }
+  function gLevel(g){
+    // louder the more people it holds and the more of them carry it; silent when it does not meet
+    const s = P.state(g), on = s === 'meeting' ? 1 : s === 'online' ? .45 : 0;
+    return on * Math.min(1.3, .25 + .09 * Math.sqrt(g.members) + .08 * Math.sqrt(g.carriers || 0)) * Math.min(1, g.L + .1);
+  }
+  function schedule(){
+    if (!playing) return;
+    syncGathers();
+    const oos = outOfStep();
+    while (nextT < ctx.currentTime + .5) {
+      const [n, b] = TUNE[idx]; idx = (idx + 1) % TUNE.length;
+      voices.forEach((v, j) => {
+        const live = j < st.nV, t = nextT + Math.random() * (.03 + .35 * oos), cents = (Math.random() - .5) * (8 + 48 * oos);
+        if (n) { v.o.frequency.setTargetAtTime(hz(n), t, .045); v.o.detune.setTargetAtTime(cents, t, .1); }
+        v.env.gain.setTargetAtTime(live ? (n ? st.level * .1 : st.level * .02) : 0, t, n ? .08 : .25);
+      });
+      for (const v of gv.values()) {
+        const g = v.g, lvl = gLevel(g), off = (1 - (g.coh || 0)) * .25 + oos * .3, t = nextT + Math.random() * (.02 + off), cents = (Math.random() - .5) * (6 + 60 * Math.max(oos, 1 - (g.coh || 0)));
+        if (n) { v.o.frequency.setTargetAtTime(hz(n + v.iv), t, .05); v.o.detune.setTargetAtTime(cents, t, .12); }
+        v.env.gain.setTargetAtTime(n ? lvl * st.base * (v.iv > 12 ? .035 : .055) : lvl * st.base * .01, t, n ? .1 : .3);
+      }
+      drones.forEach(v => { v.o.detune.setTargetAtTime((Math.random() - .5) * (6 + 34 * oos), nextT, .5); v.env.gain.setTargetAtTime(Math.min(1.3, st.level) * .07 * v.level, nextT, .6); });
+      nextT += b * BEAT * (.95 + Math.random() * (.1 + .3 * oos));
+    }
+  }
+  const SEASON_F = { 'Advent': .55, 'Christmas': 1.15, 'Ordinary Time': .45, 'Lent': .32, 'Easter': 1.05, 'Pentecost': 1.25 };
+  function update(){
+    if (!ctx) return;
+    const d = P.day % 364, se = SEASONS.find(s => d >= s[1] && d < s[2])[0], sf = P.on('cal') ? .5 : SEASON_F[se];
+    const att = P.attW && P.attW.length ? P.attW.slice(-4).reduce((t, x) => t + x, 0) / Math.min(4, P.attW.length) : .25;
+    let ent = 0; for (const m of P.members) ent += m.e; ent /= P.members.length || 1;
+    const rel = Math.max(.1, Math.min(1.6, att / .25));
+    st.base = Math.max(.2, Math.min(1.6, rel)) * (1 + .6 * ent);
+    st.level = Math.min(2.2, sf * Math.pow(rel, 1.3) * (1 + 1.2 * ent) + .9 * swell);
+    st.nV = Math.max(1, Math.min(6, Math.round(1 + 3 * sf * rel + 2 * swell + 2 * ent)));
+    st.ent = ent;
+    // gatherings are panned to where they sit on the parish as you see it
+    for (const v of gv.values()) { const p = new V(...v.g.pos).multiplyScalar(RAD).applyMatrix4(world.matrixWorld).project(camera); v.pn.pan.setTargetAtTime(Math.max(-.85, Math.min(.85, p.x)), ctx.currentTime, .3); }
+  }
+  function strike(fund, pan, g, t, decayScale){
+    const P_ = [[.5, .35, 6], [1, 1, 4.5], [1.183, .55, 3.5], [1.506, .4, 3], [2, .6, 2.5], [2.514, .25, 1.8], [2.662, .2, 1.6], [3.011, .15, 1.3], [4.166, .1, 1]];
+    const pn = ctx.createStereoPanner(); pn.pan.value = pan; pn.connect(bellBus);
+    for (const [r, a, dec0] of P_) { const dec = dec0 * (decayScale || 1), o = ctx.createOscillator(); o.frequency.value = fund * r; const e = ctx.createGain(); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(a * g * .16, t + .006); e.gain.exponentialRampToValueAtTime(.0001, t + dec); o.connect(e); e.connect(pn); o.start(t); o.stop(t + dec + .1); }
+  }
+  // a pure, glassy bell: sine partials in simple ratios, long and soft, for the angelic peal
+  function glass(f, pan, g, t){
+    const pn = ctx.createStereoPanner(); pn.pan.value = pan; pn.connect(bellBus);
+    for (const [r, a, dec] of [[1, 1, 7], [2, .45, 5], [3, .18, 3.5], [4.2, .08, 2.5]]) { const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f * r; o.detune.value = (Math.random() - .5) * 6; const e = ctx.createGain(); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(a * g * .12, t + .02); e.gain.exponentialRampToValueAtTime(.0001, t + dec); o.connect(e); e.connect(pn); o.start(t); o.stop(t + dec + .1); }
+  }
+  const PEALS = {
+    papal: [[98, 0], [130.8, .9], [98, 1.8], [146.8, 2.7], [98, 3.6], [130.8, 4.5]],
+    relic: [[146.8, 0], [146.8, 2.2], [146.8, 4.4]],
+    choir: [[220, 0], [261.6, .6], [329.6, 1.2]],
+    wyd: [[523.3, 0], [493.9, .22], [440, .44], [392, .66], [523.3, 1], [440, 1.22], [493.9, 1.44], [392, 1.66]],
+    proc: [[1046.5, 0], [1046.5, .09], [1046.5, .18], [1046.5, 1.2], [1046.5, 1.29], [1046.5, 1.38], [1046.5, 2.4], [1046.5, 2.49], [1046.5, 2.58]] };
+  const panAt = v => { const p = new V(v[0], v[1], v[2]).multiplyScalar(RAD).applyMatrix4(world.matrixWorld).project(camera); return Math.max(-.9, Math.min(.9, p.x)); };
+  return {
+    toggle(){ if (!ctx) init(); playing = !playing; if (playing) { ctx.resume(); update(); master.gain.setTargetAtTime(vol * .6, ctx.currentTime, .4); } else master.gain.setTargetAtTime(0, ctx.currentTime, .3); return playing; },
+    volume(v){ vol = v; if (ctx && playing) master.gain.setTargetAtTime(vol * .6, ctx.currentTime, .2); },
+    event(kind, at){ lastBell = kind; if (!playing) return; const p = panAt(at), t0 = ctx.currentTime + .05; for (const [f, dt] of PEALS[kind]) strike(f, p, kind === 'proc' ? .5 : 1, t0 + dt); },
+    // a stroke leaves a bright shimmer: quick high bells rising along its path, brighter for a faster stroke
+    stroke(pts, s){ if (!playing || !pts.length) return; const t0 = ctx.currentTime + .03, n = Math.min(10, 3 + Math.round(7 * s)), scale = [784, 880, 1046.5, 1174.7, 1318.5, 1568, 1760, 2093];
+      for (let i = 0; i < n; i++) { const q = pts[Math.floor(i / n * pts.length)]; strike(scale[Math.min(scale.length - 1, Math.floor(i * scale.length / n))] / 2, panAt([q.x, q.y, q.z]), .25 + .35 * s, t0 + i * .07, .45); } },
+    // a new gathering arising from others: a high, soft, glassy peal climbing a major chord, answered from above
+    arise(at){ if (!playing) return; const p = at ? panAt(at) : 0, t0 = ctx.currentTime + .1, ch = [1046.5, 1318.5, 1568, 2093, 2637, 3136];
+      ch.forEach((f, i) => glass(f, p + (i % 2 ? .25 : -.25), .9, t0 + i * .32)); [2093, 2637, 3136].forEach((f, i) => glass(f, -p * .5, .5, t0 + 2.4 + i * .18)); },
+    tick(dt){
+      if (!ctx || !playing) return;
+      const d = P.day % 364; if (!P.on('cal') && (d === 28 || d === 133 || d === 182 || (d > 28 && d < 35) || (d > 133 && d < 140))) swell = Math.max(swell, .8);
+      if (swell > 0) swell = Math.max(0, swell - dt / 5);
+      bellClock += dt; if (bellClock > .5) { bellClock = 0; update(); if ((st.ent || 0) > .02 && Math.random() < Math.min(.45, st.ent * 1.6)) { const pk = PEALS[lastBell]; strike(pk[Math.floor(Math.random() * pk.length)][0], Math.random() * 1.4 - .7, lastBell === 'proc' ? .3 : .55, ctx.currentTime + .02); } }
+      if (P.arisen > lastArisen) { lastArisen = P.arisen; const g = P.gs.filter(x => !x.base && !x.removed).slice(-1)[0]; this.arise(g ? g.pos : null); }
+    }
+  };
+})();
+$('#sound').onclick = () => { const v = sound.toggle(); $('#sound').textContent = v ? 'Sound on' : 'Sound off'; $('#sound').setAttribute('aria-pressed', v); };
+$('#vol').oninput = e => sound.volume(+e.target.value);
 
 /* ---------- panel ---------- */
 $('#events').innerHTML = Object.entries(PP.EVENTS).map(([k, e]) => `<button type="button" data-k="${k}" aria-pressed="${k === S.ev}">${e.n}</button>`).join('');
@@ -341,7 +475,7 @@ let last = performance.now();
 function frame(t) {
   const dt = Math.min(.1, (t - last) / 1000); last = t;
   if (S.run) { S.acc += dt * SPEEDS[S.speed - 1][0]; const t0 = performance.now(); while (S.acc >= 1 && performance.now() - t0 < 20) { P.step(); S.acc -= 1; } if (S.acc > 3) S.acc = 3; }
-  controls.update(); draw(dt); renderer.render(scene, camera); render(false);
+  controls.update(); draw(dt); renderer.render(scene, camera); render(false); sound.tick(dt);
   requestAnimationFrame(frame);
 }
 resize(); P.track(); render(true); requestAnimationFrame(frame);
